@@ -1,0 +1,19 @@
+@media (max-width: 576px) {
+  .coin-tokens {
+    grid-template-rows: repeat(3, 1fr) !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    justify-items: center;
+
+    .last {
+        grid-column: 2;
+    }
+  }
+  .daily-img-txt {
+    h3 {
+      font-size: 1.5rem !important;
+    }
+    h4 {
+      font-size: 1.25rem !important;
+    }
+  }
+}

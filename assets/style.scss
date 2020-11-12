@@ -1,72 +1,264 @@
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300&family=Montserrat:wght@200;300&display=swap");
+$bg: #080809;
+$accent: #8e2cf9;
+$paccent: #db1753;
+$gaccent: #00fcc6;
+$br: 15px;
+$Montserrat: "Montserrat", sans-serif;
+
+:root{
+  font-size: 16px;
+}
+
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  font-family: "Heebo", sans-serif !important;
+  box-sizing: border-box;
+}
+a{
+  text-decoration: none !important;
+}
+.sec-1 {
+  background-image: url("https://res.cloudinary.com/sapiangroup/image/upload/v1605181402/flash-group-news/BG_flash-group-news.png");
+  background-size: cover;
+  min-height: 100vh;
+  color: white;
+
+  #fgn_img {
+    text-align: center;
+  }
+  #up_text {
+    font-family: $Montserrat;
+    h3 {
+      display: inline;
+    }
+  }
+
+  .news_report_parent {
+    height: 80vh !important;
+    justify-content: flex-end;
+    .news_report {
+      background-color: #8e2cf9;
+      height: 25vh;
+
+      h1 {
+        font-size: 50px;
+      }
+    }
+  }
 }
 
+h5 {
+  font-weight: 300;
+  &::after {
+    content: "";
+    display: block;
+    width: 60px;
+    margin-top: 5px;
+    height: 2px;
+    border-radius: 10px;
+    background-color: white;
+  }
+}
+.pink-text {
+  color: $paccent;
+}
+.green-text {
+  color: $gaccent;
+}
+.bottom-line {
+  display: block;
+  border-radius: 0 0 $br $br;
+  background-color: $paccent;
+  height: 10px;
+}
+.sec-2 {
+  background-color: $bg;
+  color: white;
+
+  h5 {
+    &::after {
+      background-color: $accent !important;
+    }
+  }
+  .big_d {
+    background-color: #1d1e20;
+    border-radius: $br;
+    .sha {
+      width: 200px;
+      background-color: #2d2e30;
+      border-radius: $br 0 $br 0;
+    }
+    .btc {
+      font-family: $Montserrat;
+      font-weight: bold;
+      font-size: 4rem;
+    }
+  }
+  .small-d {
+    background-color: #1d1e20;
+    border-radius: $br;
+    .ftext {
+      font-family: $Montserrat;
+    }
+    .bottom-line {
+      background-color: $gaccent;
+    }
+    p {
+      font-size: 1.25rem;
+    }
+  }
+
+  .coin-tokens {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+
+    .ct {
+      display: flex;
+      justify-content: center;
+     
+      width: 100%;
+      border-radius: 5%;
+
+      span {
+        margin: auto 0 !important;
+        padding: 25px;
+        text-align: center;
+      }
+    }
+    .green{
+      background-color: $gaccent;
+      color: black !important;
+    }
+    .pink{
+      background-color: $paccent;
+      color: white !important;
+    }
+  }
+}
+.sec-3{
+  color: white;
+  .top-row{
+    background-color: $accent;
+    height: 80vh;
+    margin-bottom: 450px;
+  }
+  .img-div{
+    background: url("https://res.cloudinary.com/sapiangroup/image/upload/v1605204988/flash-group-news/picture-c_flash-group-news.png") no-repeat;
+    background-size: cover;
+    
+   height: 600px;
+   
+   h3{
+     font-size: 3rem;
+     font-weight: bolder;
+   }
+   h4{
+    font-size: 2.5rem;
+    font-weight: bolder !important;
+  }
+  }
+  img{
+    width: 50%;
+  }
+  h5{
+    font-size: 1.5rem;
+  }
+  p{
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
+.sec-4{
+  .coin-img{
+    img{
+      width: 4rem;
+    }
+    
+  }
+  .topic{
+    background-color: rgba($color: $accent, $alpha: 0.2);;
+   height: 50px;
+   border-radius: 5px;
+ 
+    .box{
+      width: 20px;
+      height: 20px;
+      background-color: $accent;
+    }
+    .topic-text{
+      color: $accent;
+    }
+  }
+}
 .slider-parent {
-    width: 100%;
-    height: 100vh;
-    background-color: rgb(179, 179, 179);
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(179, 179, 179);
+  display: flex;
+  justify-content: center;
 
-    .slider {
-        align-self: center;
-        width: 340px;
-        height: 420px;
-        // background-color: #111;
-        position: relative;
-        perspective: 100;
-        transform-style: preserve-3d;
+  .slider {
+    align-self: center;
+    width: 340px;
+    height: 420px;
+    // background-color: #111;
+    position: relative;
+    perspective: 100;
+    transform-style: preserve-3d;
 
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            color: white;
-            transition: transform .3s ease-in-out;
-            transform-style: preserve-3d;
-        
-            &:nth-child(1) {
-                z-index: 3;
-                background-color: red;
-            }
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: white;
+      transition: transform 0.3s ease-in-out;
+      transform-style: preserve-3d;
 
-            &:nth-child(2) {
-                z-index: 2;
-                background-color: green;
-                transform: translate3d(70px, 0, -15px);
-            }
+      &:nth-child(1) {
+        z-index: 3;
+        background-color: red;
+      }
 
-            &:nth-child(3) {
-                z-index: 1;
-                background-color: yellow;
-                transform: translate3d(140px, 0, -30px);
-            }
-        }
+      &:nth-child(2) {
+        z-index: 2;
+        background-color: green;
+        transform: translate3d(70px, 0, -15px);
+      }
+
+      &:nth-child(3) {
+        z-index: 1;
+        background-color: yellow;
+        transform: translate3d(140px, 0, -30px);
+      }
+    }
+  }
+
+  .next {
+    position: absolute;
+    bottom: 20%;
+  }
+
+  @keyframes slide {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
     }
 
-    .next{
-        position: absolute; 
-        bottom: 20%;
+    50% {
+      opacity: 1;
+      transform: translateX(400px);
     }
 
-    @keyframes slide {
-        0%{
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        50%{
-            opacity: 1;
-            transform: translateX(400px);
-        }
-
-        100%{
-            opacity: 1;
-            transform: translateZ(-30px);
-        }
+    100% {
+      opacity: 1;
+      transform: translateZ(-30px);
     }
+  }
 }
+
+@import 'media';
