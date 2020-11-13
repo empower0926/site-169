@@ -177,8 +177,9 @@ h5 {
     }
     @include screen(small){
       background-color: red;
-      height: 35vh !important;
+      height: 50vh !important;
     }
+    
     img {
       width: 50%;
        @include screen(small){
@@ -188,12 +189,13 @@ h5 {
   }
   .bottom-row{
     height: 50vh;
-    @include screen(small){
-      height: 30vh;
-    }
     @include screen(medium){
       height: 20vh;
     }
+    @include screen(small){
+      height: 35vh;
+    }
+    
   }
   
   .img-div {

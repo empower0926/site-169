@@ -214,7 +214,7 @@ h5::after {
 @media screen and (max-width: 576px) {
   .sec-3 .top-row {
     background-color: red;
-    height: 35vh !important;
+    height: 50vh !important;
   }
 }
 
@@ -232,15 +232,15 @@ h5::after {
   height: 50vh;
 }
 
-@media screen and (max-width: 576px) {
-  .sec-3 .bottom-row {
-    height: 30vh;
-  }
-}
-
 @media screen and (max-width: 768px) {
   .sec-3 .bottom-row {
     height: 20vh;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .sec-3 .bottom-row {
+    height: 35vh;
   }
 }
 
