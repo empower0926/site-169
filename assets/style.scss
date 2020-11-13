@@ -294,7 +294,7 @@ h5 {
 }
 footer {
   background-color: $bg;
-  height: 50vh;
+  
   color: white;
   a {
     margin-left: 10px;
@@ -305,6 +305,11 @@ footer {
   }
   h4 {
     font-weight: 300;
+  }
+  select{
+  background-color: $bg;
+  border: none;
+  color: white;
   }
 }
 .slider-parent {

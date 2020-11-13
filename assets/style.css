@@ -357,7 +357,6 @@ h5::after {
 
 footer {
   background-color: #080809;
-  height: 40vh;
   color: white;
 }
 
@@ -372,6 +371,12 @@ footer ul {
 
 footer h4 {
   font-weight: 300;
+}
+
+footer select {
+  background-color: #080809;
+  border: none;
+  color: white;
 }
 
 .slider-parent {
