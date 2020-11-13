@@ -323,6 +323,25 @@ h5::after {
   color: #8e2cf9;
 }
 
+.sec-4 .news-feed {
+  -webkit-transition: height .3s ease-in-out !important;
+  transition: height .3s ease-in-out !important;
+}
+
+.sec-4 button {
+  background: none;
+  outline: none;
+  border: none;
+  color: #8e2cf9;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sec-4 .arrow {
+  width: 14px;
+  height: 14px;
+}
+
 .sec-5 .newsheader img {
   width: 50%;
 }

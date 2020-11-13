@@ -5,15 +5,38 @@ let colors = ['red', 'green', 'blue'];
 const feedURL = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fflashgroupnews.com%2Ffeed';
 const bitcoinFeedURL = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fflashgroupnews.com%2Fcategory%2Fbitcoin%2Ffeed';
 
+let bitcoinFeed;
+let newsFeed;
+
 setData(bitcoinFeedURL).then((val) => {
-    let bitcoinNews = JSON.parse(val);
-    console.log(bitcoinNews);
+    bitcoinFeed = JSON.parse(val).items;
 });
 
 setData(feedURL).then((val) => {
-    let feed = JSON.parse(val);
-    console.log(feed);
+    newsFeed = JSON.parse(val).items;
 });
+
+let counter = 0;
+function nextArticle(topic){
+    if(counter >= bitcoinFeed.length){
+        counter = 0;
+    }
+    let titleId = topic+ '-title';
+    let descId  = topic+ '-desc';
+    let readmoreId  = topic+ '-read-more';
+    // let imgId  = topic+ '-img';
+
+    let titleElem = document.getElementById(titleId);
+    let descElem = document.getElementById(descId);
+    let readMore = document.getElementById(readmoreId);
+
+    titleElem.innerHTML = bitcoinFeed[counter].title;
+    descElem.innerHTML = bitcoinFeed[counter].description;
+    readMore.setAttribute('href', bitcoinFeed[counter].link);
+    console.log(bitcoinFeed);
+
+    counter++;
+}
 
 async function setData(url) {
     try{
