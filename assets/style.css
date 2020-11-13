@@ -84,7 +84,7 @@ h5::after {
 
 .bottom-line {
   display: block;
-  border-radius: 0 0 15px 15px;
+  border-radius: 0 0 8px 8px;
   background-color: #db1753;
   height: 10px;
 }
@@ -100,13 +100,13 @@ h5::after {
 
 .sec-2 .big_d {
   background-color: #1d1e20;
-  border-radius: 15px;
+  border-radius: 8px;
 }
 
 .sec-2 .big_d .sha {
   width: 200px;
   background-color: #2d2e30;
-  border-radius: 15px 0 15px 0;
+  border-radius: 8px 0 8px 0;
 }
 
 .sec-2 .big_d .btc {
@@ -117,7 +117,7 @@ h5::after {
 
 .sec-2 .small-d {
   background-color: #1d1e20;
-  border-radius: 15px;
+  border-radius: 8px;
 }
 
 .sec-2 .small-d .ftext {
