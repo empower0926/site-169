@@ -116,7 +116,7 @@ function nextArticle(topic) {
         if (JSON.parse(val).media_type == "image") {
           document.getElementById(topic + "-img").src = JSON.parse(
             val
-          ).media_details.sizes.large.source_url;
+          ).media_details.sizes.medium.source_url;
         }
       });
       counter++;
@@ -135,7 +135,7 @@ function nextArticle(topic) {
         if (JSON.parse(val).media_type == "image") {
           document.getElementById(topic + "-img").src = JSON.parse(
             val
-          ).media_details.sizes.large.source_url;
+          ).media_details.sizes.medium.source_url;
         }
       });
 
@@ -146,7 +146,7 @@ function nextArticle(topic) {
         if (JSON.parse(val).media_type == "image") {
           document.getElementById(topic + "-img").src = JSON.parse(
             val
-          ).media_details.sizes.large.source_url;
+          ).media_details.sizes.medium.source_url;
         }
       });
 
@@ -161,7 +161,7 @@ function nextArticle(topic) {
           if (JSON.parse(val).media_type == "image") {
             document.getElementById(topic + "-img0").src = JSON.parse(
               val
-            ).media_details.sizes.large.source_url;
+            ).media_details.sizes.medium.source_url;
           }
         });
         counter++;
@@ -179,7 +179,7 @@ function nextArticle(topic) {
           if (JSON.parse(val).media_type == "image") {
             document.getElementById(topic + "-img1").src = JSON.parse(
               val
-            ).media_details.sizes.large.source_url;
+            ).media_details.sizes.medium.source_url;
           }
         });
       } else {
@@ -193,7 +193,7 @@ function nextArticle(topic) {
         if (JSON.parse(val).media_type == "image") {
           document.getElementById(topic + "-img").src = JSON.parse(
             val
-          ).media_details.sizes.large.source_url;
+          ).media_details.sizes.medium.source_url;
         }
       });
 
