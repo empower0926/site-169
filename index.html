@@ -11,7 +11,7 @@
     <title>FGN Report</title>
 </head>
 
-<body onload="nextArticle('bitcoin')">
+<body >
     <!-- sec-1 -->
     <div class="container-fluid sec-1">
         <div class="row pt-5 justify-content-center justify-content-lg-left">
@@ -288,7 +288,8 @@
     </section>
     <!-- sec-4 -->
     <section class="sec-4">
-        <div class="container">
+        <!-- bitcoin-news -->
+        <div class="container mt-5" >
             <div class="row">
                 <div class="col-sm-12 d-flex">
                     <div class="coin-img mr-2">
@@ -306,6 +307,7 @@
                 <div class="col-sm-6">
                     <article class="col-sm-12 news-feed">
                         <div>
+                            <input id="bitcoin-counter" type="text" class="d-none" value="0">
                             <h4 id="bitcoin-title">Organic growth? Bitcoin SV activity up 761% ahead of BSV conference.
                             </h4>
                             <p id="bitcoin-desc" class="mt-3 text-justify">
@@ -317,7 +319,81 @@
                 </div>
                 <div class="col-sm-6"></div>
                 <div class="col-sm-12 mt-3 ml-2">
-                    <button onclick="nextArticle('bitcoin')">Next Article</button>
+                    <button  onclick="nextArticle('bitcoin')">Next Article</button>
+                    <img class="arrow" src="assets/img/icon-navigation-arrow_forward_24px.svg" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- Ethereum-news -->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-sm-12 d-flex">
+                    <div class="coin-img mr-2">
+                        <img src="https://res.cloudinary.com/sapiangroup/image/upload/v1605182122/flash-group-news/eth-02_flash-group-news.svg"
+                            alt="Ethereum-logo">
+                    </div>
+                    <div class="topic px-3 my-auto d-flex ">
+                        <div class="box my-auto"></div>
+                        <div class="topic-text my-auto pl-2">Ethereum NEWS</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mt-5">
+                <div class="col-sm-6">
+                    <article class="col-sm-12 news-feed">
+                        <div>
+                            <input id="ethereum-counter" type="text" class="d-none" value="0">
+                           
+                            <h4 id="ethereum-title">Organic growth? Bitcoin SV activity up 761% ahead of BSV conference.
+                            </h4>
+                            <p id="ethereum-desc" class="mt-3 text-justify">
+                                In the two days leading up to the CoinGeek Live conference in New York this week, there
+                                has been an incredible increase in active addresses and transaction counts on the
+                                Bitcoin SV network.</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-sm-6"></div>
+                <div class="col-sm-12 mt-3 ml-2">
+                    <button onclick="nextArticle('ethereum')">Next Article</button>
+                    <img class="arrow" src="assets/img/icon-navigation-arrow_forward_24px.svg" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- Litecoin-news -->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-sm-12 d-flex">
+                    <div class="coin-img mr-2">
+                        <img src="https://res.cloudinary.com/sapiangroup/image/upload/v1605185683/flash-group-news/ltc-03_flash-group-news.svg"
+                            alt="Litecoin-logo">
+                    </div>
+                    <div class="topic px-3 my-auto d-flex ">
+                        <div class="box my-auto"></div>
+                        <div class="topic-text my-auto pl-2">Litecoin NEWS</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mt-5">
+                <div class="col-sm-6">
+                    <article class="col-sm-12 news-feed">
+                        <div>
+                            <input id="litecoin-counter" type="text" class="d-none" value="0">
+                           
+                            <h4 id="litecoin-title">Organic growth? Bitcoin SV activity up 761% ahead of BSV conference.
+                            </h4>
+                            <p id="litecoin-desc" class="mt-3 text-justify">
+                                In the two days leading up to the CoinGeek Live conference in New York this week, there
+                                has been an incredible increase in active addresses and transaction counts on the
+                                Bitcoin SV network.</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-sm-6"></div>
+                <div class="col-sm-12 mt-3 ml-2">
+                    <button onclick="nextArticle('litecoin')">Next Article</button>
                     <img class="arrow" src="assets/img/icon-navigation-arrow_forward_24px.svg" alt="">
                 </div>
             </div>
@@ -333,7 +409,7 @@
                         <div class="row">
                             <div class="col-sm-12 d-flex p-0  newsheader">
                                 <div class="col-sm-11 p-0">
-                                    <h5>Daily Market NEWS</h5>
+                                    <h5>Defi Market NEWS</h5>
                                 </div>
                                 <div class="col-sm-1 p-0 text-right">
                                     <img src="https://res.cloudinary.com/sapiangroup/image/upload/v1605182043/flash-group-news/FGN_logo_bis_flash-group-news.svg"
@@ -342,25 +418,27 @@
 
                             </div>
                             <div class=" newsbody">
+                                <input id="difi-counter" type="text" class="d-none" value="0">
+                           
                                 <div class="col-sm-12  p-0 mt-4 ">
-                                    <h6>Is Defi dead? Data suggests it might be, for now. </h6>
-                                    <p class="text-justify mt-3">In what seems like a perfectly normal day in the defi
+                                    <h6 id="difi-title0">Is Defi dead? Data suggests it might be, for now. </h6>
+                                    <p id="difi-desc0" class="text-justify mt-3">In what seems like a perfectly normal day in the defi
                                         landscape, another project was exploited. Andre Cronje’s gaming project –
                                         Eminence was pre-launched without his knowledge and a bug in the ecosystem was
                                         exploited that cost its users $15 million.</p>
                                 </div>
                                 <div class="row p-3 ">
                                     <div class="col-sm-5 p-0">
-                                        <h6>Yearn.finance (YFI) Takes a Hit After Eminence Finance (EMN) Bug—Is this the
+                                        <h6 id="difi-title">Yearn.finance (YFI) Takes a Hit After Eminence Finance (EMN) Bug—Is this the
                                             End for DeFi? </h6>
-                                        <p class="text-justify mt-3">Andre Cronje, the founder of Yearn.finance,
+                                        <p id="difi-desc" class="text-justify mt-3">Andre Cronje, the founder of Yearn.finance,
                                             recently deployed a series of new contracts related to the new game Eminence
                                             Finance, which has not yet been released. Although Eminence.</p>
                                     </div>
 
                                     <div class="col-sm-7 p-0 m-0 text-right">
                                         <div>
-                                            <img src="https://res.cloudinary.com/sapiangroup/image/upload/v1605204988/flash-group-news/picture-c_flash-group-news.png"
+                                            <img id="difi-img" src="https://res.cloudinary.com/sapiangroup/image/upload/v1605204988/flash-group-news/picture-c_flash-group-news.png"
                                                 alt="">
 
                                         </div>
@@ -383,21 +461,23 @@
 
                             </div>
                             <div class="newsbody">
+                                <input id="blockchain-counter" type="text" class="d-none" value="0">
+                           
                                 <div class="col-sm-12  p-0 mt-4 ">
-                                    <h6>Government investment firm develops blockchain health passport in Singapore.
+                                    <h6 id="blockchain-title">Government investment firm develops blockchain health passport in Singapore.
                                     </h6>
-                                    <p class="text-justify mt-3">In a pandemic era of unprecedented health data
+                                    <p id="blockchain-desc" class="text-justify mt-3">In a pandemic era of unprecedented health data
                                         collection and surveillance, Singapore is turning to blockchain technology for
                                         the infrastructure that can make it work.</p>
                                 </div>
                                 <div class="col-sm-12 d-flex p-0 mt-5 ">
 
-                                    <div>
-                                        <img style="width: 100%;"
+                                    
+                                        <img id="blockchain-img" style="width: 100%;"
                                             src="https://res.cloudinary.com/sapiangroup/image/upload/v1605204988/flash-group-news/picture-c_flash-group-news.png"
                                             alt="">
 
-                                    </div>
+                                    
 
                                 </div>
                             </div>
@@ -417,17 +497,18 @@
 
                             </div>
                             <div class=" newsbody mt-4">
-
+                                <input id="hotbusinessnews-counter" type="text" class="d-none" value="0">
+                           
                                 <div class="row p-3 ">
                                     <div class="col-sm-5 p-0">
-                                        <h6>Kingfisher offloads Russian chain in £73m deal. </h6>
-                                        <p class="text-justify mt-3">The news comes a week after the company welcomed a
+                                        <h6 id="hotbusinessnews-title0">Kingfisher offloads Russian chain in £73m deal. </h6>
+                                        <p id="hotbusinessnews-desc0"class="text-justify mt-3">The news comes a week after the company welcomed a
                                             ‘resilient’ performance in the first-half of the year.</p>
                                     </div>
 
                                     <div class="col-sm-7 p-0 m-0 text-right">
                                         <div>
-                                            <img src="https://res.cloudinary.com/sapiangroup/image/upload/v1605204988/flash-group-news/picture-c_flash-group-news.png"
+                                            <img id="hotbusinessnews-img0" src="https://res.cloudinary.com/sapiangroup/image/upload/v1605204988/flash-group-news/picture-c_flash-group-news.png"
                                                 alt="">
 
                                         </div>
@@ -435,9 +516,9 @@
                                 </div>
                                 <div class="row p-3 ">
                                     <div class="col-sm-5 p-0">
-                                        <h6>Tesla Autopilot scores low for driver engagement in European safety rating.
+                                        <h6 id="hotbusinessnews-title1">Tesla Autopilot scores low for driver engagement in European safety rating.
                                         </h6>
-                                        <p class="text-justify mt-3">• Tesla’s autopilot ranks sixth among the 10 driver
+                                        <p id="hotbusinessnews-desc1" class="text-justify mt-3">• Tesla’s autopilot ranks sixth among the 10 driver
                                             assistance systems evaluated in the European Safety Assessment, and scores
                                             low in maintaining driver participation.
                                         </p>
@@ -445,7 +526,7 @@
 
                                     <div class="col-sm-7 p-0 m-0 text-right">
                                         <div>
-                                            <img src="https://res.cloudinary.com/sapiangroup/image/upload/v1605204988/flash-group-news/picture-c_flash-group-news.png"
+                                            <img id="hotbusinessnews-img1" src="https://res.cloudinary.com/sapiangroup/image/upload/v1605204988/flash-group-news/picture-c_flash-group-news.png"
                                                 alt="">
 
                                         </div>
@@ -453,8 +534,9 @@
                                 </div>
                                 <div class="row p-3 ">
                                     <div class="col-sm-5 p-0">
-
-                                        <p class="text-justify mt-3">• The Tesla Model 3’s autopilot scored only 36
+                                        <h6 id="hotbusinessnews-title">Kingfisher offloads Russian chain in £73m deal. </h6>
+                                      
+                                        <p id="hotbusinessnews-desc" class="text-justify mt-3">• The Tesla Model 3’s autopilot scored only 36
                                             points when assessing the driver’s ability to stay focused on the road.
                                             However, it received the highest score for performance and ability to
                                             respond to emergencies, with an overall score of 131 points and a "moderate"
@@ -463,7 +545,7 @@
 
                                     <div class="col-sm-7 p-0 m-0 text-right">
                                         <div>
-                                            <img src="https://res.cloudinary.com/sapiangroup/image/upload/v1605204988/flash-group-news/picture-c_flash-group-news.png"
+                                            <img id="hotbusinessnews-img" src="https://res.cloudinary.com/sapiangroup/image/upload/v1605204988/flash-group-news/picture-c_flash-group-news.png"
                                                 alt="">
 
                                         </div>
