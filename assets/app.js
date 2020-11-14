@@ -49,7 +49,8 @@ setData(generateURL(BLOCKCHAIN)).then((val) => {
     blockchainFeed = JSON.parse(val);
     nextArticle("blockchain");
 });
-
+let bs=true;
+let es=true;
 function nextArticle(topic) {
     let feed;
     switch (topic) {
@@ -139,9 +140,128 @@ function nextArticle(topic) {
     switch (topic) {
         case "bitcoin":
             document.getElementById(topic + "-counter").value = counter;
+           if(bs){
+            let si=counter;
+            for (let index = 0; index < 3; index++) {
+              if(feed[si]==undefined){si=0}
+                let slide=document.createElement('div');
+              slide.className="slide";
+              slide.id=si;
+                setData(imgURL + feed[si].featured_media).then((val) => {
+                  if (JSON.parse(val).media_type == "image") {
+                      let imageSrc = JSON.parse(val).media_details.sizes.large;
+                      if (imageSrc === undefined) {
+                          imageSrc = JSON.parse(val).media_details.sizes.medium;
+                      }
+                      if (imageSrc === undefined) {
+                          imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+                      }
+                      slide.style.backgroundImage="url('"+imageSrc.source_url+"')" ;
+                  }
+              });
+              document.getElementById('bitcoin-slider').appendChild(slide);
+              si++;
+            }
+             bs=false;
+             let div=document.getElementById("bitcoin-slider")
+            div.removeChild(div.childNodes[0]); 
+           }else{
+
+            let div=document.getElementById("bitcoin-slider")
+            div.removeChild(div.childNodes[0]); 
+            let si=counter;
+            
+            let slide=document.createElement('div');
+            slide.className="slide";
+            si++;
+            if(feed.length>3){
+                si++;
+                if(si==11){si=1;}
+              }
+              
+            
+            if(feed[si]==undefined){si=0;}
+            
+            slide.id=si;
+             setData(imgURL + feed[si].featured_media).then((val) => {
+              if (JSON.parse(val).media_type == "image") {
+                  let imageSrc = JSON.parse(val).media_details.sizes.large;
+                  if (imageSrc === undefined) {
+                      imageSrc = JSON.parse(val).media_details.sizes.medium;
+                  }
+                  if (imageSrc === undefined) {
+                      imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+                  }
+                  slide.style.backgroundImage="url('"+imageSrc.source_url+"')" ;
+              }
+          });
+          div.appendChild(slide);
+           
+           }
+            
             break;
         case "ethereum":
             document.getElementById(topic + "-counter").value = counter;
+            if(es){
+              let si=counter;
+              let max=3;
+              if(feed.length<3){
+                max=feed.length;
+              }
+              for (let index = 0; index <max; index++) {
+                if(feed[si]==undefined){si=0}
+                  let slide=document.createElement('div');
+                slide.className="slide";
+                slide.id=si;
+                  setData(imgURL + feed[si].featured_media).then((val) => {
+                    if (JSON.parse(val).media_type == "image") {
+                        let imageSrc = JSON.parse(val).media_details.sizes.large;
+                        if (imageSrc === undefined) {
+                            imageSrc = JSON.parse(val).media_details.sizes.medium;
+                        }
+                        if (imageSrc === undefined) {
+                            imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+                        }
+                        slide.style.backgroundImage="url('"+imageSrc.source_url+"')" ;
+                    }
+                });
+                document.getElementById('ethereum-slider').appendChild(slide);
+                si++;
+              }
+               es=false;
+               let div=document.getElementById("ethereum-slider")
+              div.removeChild(div.childNodes[0]); 
+             }else{
+  
+              let div=document.getElementById("ethereum-slider")
+              div.removeChild(div.childNodes[0]); 
+              let si=counter;
+              
+              let slide=document.createElement('div');
+              slide.className="slide";
+              si++;
+              if(feed.length>3){
+                si++;
+                if(si==11){si=1;}
+              }
+              if(feed[si]===undefined){si=0;}
+              
+              slide.id=si;
+               setData(imgURL + feed[si].featured_media).then((val) => {
+                if (JSON.parse(val).media_type == "image") {
+                    let imageSrc = JSON.parse(val).media_details.sizes.large;
+                    if (imageSrc === undefined) {
+                        imageSrc = JSON.parse(val).media_details.sizes.medium;
+                    }
+                    if (imageSrc === undefined) {
+                        imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+                    }
+                    slide.style.backgroundImage="url('"+imageSrc.source_url+"')" ;
+                }
+            });
+            div.appendChild(slide);
+             
+             }
             break;
         case "litecoin":
             document.getElementById(topic + "-counter").value = counter;

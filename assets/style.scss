@@ -335,7 +335,7 @@ footer {
 }
 .slider-parent {
   width: 100%;
-  background-color: rgb(179, 179, 179);
+  // background-color: rgb(179, 179, 179);
   display: flex;
   justify-content: center;
 
@@ -357,21 +357,18 @@ footer {
       color: white;
       transition: transform 0.3s ease-in-out;
       transform-style: preserve-3d;
-
+      background-color: rgb(179, 179, 179);
       &:nth-child(1) {
         z-index: 3;
-        background-color: red;
-      }
+       }
 
       &:nth-child(2) {
         z-index: 2;
-        background-color: green;
-        transform: translate3d(70px, 0, -15px);
+       transform: translate3d(70px, 0, -15px);
       }
 
       &:nth-child(3) {
         z-index: 1;
-        background-color: yellow;
         transform: translate3d(140px, 0, -30px);
       }
     }

@@ -398,7 +398,6 @@ footer select {
 
 .slider-parent {
   width: 100%;
-  background-color: #b3b3b3;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -433,23 +432,21 @@ footer select {
   transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
+  background-color: #b3b3b3;
 }
 
 .slider-parent .slider .slide:nth-child(1) {
   z-index: 3;
-  background-color: red;
 }
 
 .slider-parent .slider .slide:nth-child(2) {
   z-index: 2;
-  background-color: green;
   -webkit-transform: translate3d(70px, 0, -15px);
           transform: translate3d(70px, 0, -15px);
 }
 
 .slider-parent .slider .slide:nth-child(3) {
   z-index: 1;
-  background-color: yellow;
   -webkit-transform: translate3d(140px, 0, -30px);
           transform: translate3d(140px, 0, -30px);
 }
