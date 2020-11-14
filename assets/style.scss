@@ -172,11 +172,11 @@ h5 {
     background-color: $accent;
     height: 80vh;
     @include screen(medium){
-      background-color: yellow;
+     
       height: 30vh !important;
     }
     @include screen(small){
-      background-color: red;
+      
       height: 50vh !important;
     }
     

@@ -206,14 +206,12 @@ h5::after {
 
 @media screen and (max-width: 768px) {
   .sec-3 .top-row {
-    background-color: yellow;
     height: 30vh !important;
   }
 }
 
 @media screen and (max-width: 576px) {
   .sec-3 .top-row {
-    background-color: red;
     height: 50vh !important;
   }
 }
