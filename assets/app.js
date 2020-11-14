@@ -98,27 +98,27 @@ function nextArticle(topic) {
     currentPosts.delete(id);
     switch (topic) {
       case "bitcoin":
-         bitcoinFeed.delete(feed[counter]);
+         bitcoinFeed.remove(feed[counter]);
         break;
   
       case "ethereum":
-        ethereumFeed.delete(feed[counter]);
+        ethereumFeed.remove(feed[counter]);
         break;
   
       case "defi":
-        defiFeed.delete(feed[counter]);
+        defiFeed.remove(feed[counter]);
         break;
   
       case "hotbusinessnews":
-        businessFeed.delete(feed[counter]);
+        businessFeed.remove(feed[counter]);
         break;
   
       case "news":
-        newsFeed.delete(feed[counter]);
+        newsFeed.remove(feed[counter]);
         break;
   
       case "blockchain":
-        blockchainFeed.delete(feed[counter]);
+        blockchainFeed.remove(feed[counter]);
         break;
     }
     return;
@@ -156,7 +156,12 @@ function nextArticle(topic) {
               imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
             }
             document.getElementById(topic + "-img").src = imageSrc.source_url;
+        }else{
+          document.getElementById(topic + "-imgdiv").className='d-none';
+          document.getElementById(topic + "-contentdiv").className='col-sm-12 p-0';
         }
+          
+        
       });
       counter++;
       if (feed[counter] !== undefined) {
@@ -194,6 +199,9 @@ function nextArticle(topic) {
               imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
             }
             document.getElementById(topic + "-img").src = imageSrc.source_url;
+        }else{
+          document.getElementById(topic + "-imgdiv").className='d-none';
+          document.getElementById(topic + "-contentdiv").className='col-sm-12 p-0';
         }
       });
 
@@ -213,6 +221,9 @@ function nextArticle(topic) {
               imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
             }
             document.getElementById(topic + "-img0").src = imageSrc.source_url;
+          }else{
+            document.getElementById(topic + "0-imgdiv").className='d-none';
+            document.getElementById(topic + "0-contentdiv").className='col-sm-12 p-0';
           }
         });
         counter++;
@@ -233,6 +244,9 @@ function nextArticle(topic) {
               imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
             }
             document.getElementById(topic + "-img1").src = imageSrc.source_url;
+          }else{
+            document.getElementById(topic + "1-imgdiv").className='d-none';
+            document.getElementById(topic + "1-contentdiv").className='col-sm-12 p-0';
           }
         });
       } else {
