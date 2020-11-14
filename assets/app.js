@@ -14,153 +14,188 @@ const DEFI = 30;
 const ETHEREUM = 4;
 const NEWS = 7;
 
+let bitcoinFeed;
+let ethereumFeed;
+let businessFeed;
+let defiFeed;
+let newsFeed;
+let blockchainFeed;
+
 function generateURL(category) {
     return URL + "categories=" + category;
 }
 
 setData(generateURL(BITCOIN)).then((val) => {
-    let bitcoinFeed = JSON.parse(val);
-    nextArticle("bitcoin", bitcoinFeed);
+  bitcoinFeed = JSON.parse(val);
+  nextArticle("bitcoin", bitcoinFeed);
 });
 setData(generateURL(ETHEREUM)).then((val) => {
-    let ethereumFeed = JSON.parse(val);
-    nextArticle("ethereum", ethereumFeed);
+  ethereumFeed = JSON.parse(val);
+  nextArticle("ethereum");
 });
 setData(generateURL(BUSINESS)).then((val) => {
-    let businessFeed = JSON.parse(val);
-    nextArticle("hotbusinessnews", businessFeed);
+  businessFeed = JSON.parse(val);
+  nextArticle("hotbusinessnews");
 });
 setData(generateURL(DEFI)).then((val) => {
-    let defiFeed = JSON.parse(val);
-    nextArticle("defi", defiFeed);
+  defiFeed = JSON.parse(val);
+  nextArticle("defi");
 });
 setData(generateURL(NEWS)).then((val) => {
-    let newsFeed = JSON.parse(val);
-    nextArticle("news", newsFeed);
+  newsFeed = JSON.parse(val);
+  nextArticle("news");
 });
 setData(generateURL(BLOCKCHAIN)).then((val) => {
-    let blockchainFeed = JSON.parse(val);
-    nextArticle("blockchain", blockchainFeed);
+  blockchainFeed = JSON.parse(val);
+  nextArticle("blockchain");
 });
 
-function nextArticle(topic, feed) {
-    let counter = document.getElementById(topic + "-counter").value;
-    console.log("feed"+feed);
-    if (counter >= feed.length) {
-          console.log('counter: '+counter);
-        counter = 0;
-    }
+function nextArticle(topic) {
+  let feed;
+  switch (topic) {
+    case "bitcoin":
+      feed = bitcoinFeed;
+      break;
 
-    if (currentPosts.has(feed[counter].id)) {
-        counter++;
-        document.getElementById(topic + "-counter").value = counter;
-        nextArticle(topic, feed);
-        return;
-    }
+      case "ethereum":
+      feed = ethereumFeed;
+      break;
 
-    currentPosts.add(feed[counter].id);
+      case "defi":
+      feed = defiFeed;
+      break;
 
-    let titleElem = document.getElementById(topic + "-title");
-    let descElem = document.getElementById(topic + "-desc");
-    let title;
-    let desc;
-    let img;
-    title = feed[counter].title.rendered;
-    desc = feed[counter].excerpt.rendered;
-    switch (topic) {
-        case "bitcoin":
-            document.getElementById(topic + "-counter").value = counter;
-            break;
-        case "ethereum":
-            document.getElementById(topic + "-counter").value = counter;
-            break;
-        case "litecoin":
-            document.getElementById(topic + "-counter").value = counter;
-            break;
-        case "defi":
-            setData(imgURL + feed[counter].featured_media).then((val) => {
-                if (JSON.parse(val).media_type == "image") {
-                    document.getElementById(topic + "-img").src = JSON.parse(
-                        val
-                    ).media_details.sizes.medium.source_url;
-                }
-            });
-            counter++;
-            if (feed[counter] !== undefined) {
-                currentPosts.add(feed[counter].id);
-                document.getElementById(topic + "-title0").innerHTML =
-                    feed[counter].title.rendered;
-                document.getElementById(topic + "-desc0").innerHTML =
-                    feed[counter].excerpt.rendered;
-            }
-            break;
-        case "blockchain":
-            setData(imgURL + feed[counter].featured_media).then((val) => {
-                if (JSON.parse(val).media_type == "image") {
-                    document.getElementById(topic + "-img").src = JSON.parse(
-                        val
-                    ).media_details.sizes.medium.source_url;
-                }
-            });
+      case "hotbusinessnews":
+      feed = businessFeed;
+      break;
 
-            break;
-        case "hotbusinessnews":
-            img = feed[counter].featured_media;
-            setData(imgURL + img).then((val) => {
-                if (JSON.parse(val).media_type == "image") {
-                    document.getElementById(topic + "-img").src = JSON.parse(
-                        val
-                    ).media_details.sizes.medium.source_url;
-                }
-            });
+      case "news":
+      feed = newsFeed;
+      break;
+  }
 
-            counter++;
-            if (feed[counter] !== undefined) {
-                currentPosts.add(feed[counter].id);
-                document.getElementById(topic + "-title0").innerHTML =
-                    feed[counter].title.rendered;
-                document.getElementById(topic + "-desc0").innerHTML =
-                    feed[counter].excerpt.rendered;
-                setData(imgURL + feed[counter].featured_media).then((val) => {
-                    if (JSON.parse(val).media_type == "image") {
-                        document.getElementById(topic + "-img0").src = JSON.parse(
-                            val
-                        ).media_details.sizes.medium.source_url;
-                    }
-                });
-                counter++;
-            }
+  let counter = document.getElementById(topic + "-counter").value;
+  if (counter >= feed.length - 1) {
+    counter = 0;
+  }
 
-            if (feed[counter] !== undefined) {
-                currentPosts.add(feed[counter].id);
-                document.getElementById(topic + "-title1").innerHTML =
-                    feed[counter].title.rendered;
-                document.getElementById(topic + "-desc1").innerHTML =
-                    feed[counter].excerpt.rendered;
-                setData(imgURL + feed[counter].featured_media).then((val) => {
-                    if (JSON.parse(val).media_type == "image") {
-                        document.getElementById(topic + "-img1").src = JSON.parse(
-                            val
-                        ).media_details.sizes.medium.source_url;
-                    }
-                });
-            }
-
-            break;
-        case "news":
-            setData(imgURL + feed[counter].featured_media).then((val) => {
-                if (JSON.parse(val).media_type == "image") {
-                    document.getElementById(topic + "-img").src = JSON.parse(
-                        val
-                    ).media_details.sizes.medium.source_url;
-                }
-            });
-
-            break;
-    }
-    titleElem.innerHTML = title;
-    descElem.innerHTML = desc;
+  if (currentPosts.has(feed[counter].id)) {
     counter++;
+    document.getElementById(topic + "-counter").value = counter;
+
+    nextArticle(topic);
+    return;
+  }
+
+  currentPosts.add(feed[counter].id);
+
+  let titleElem = document.getElementById(topic + "-title");
+  let descElem = document.getElementById(topic + "-desc");
+  let title;
+  let desc;
+  let img;
+  title = feed[counter].title.rendered;
+  desc = feed[counter].excerpt.rendered;
+  switch (topic) {
+    case "bitcoin":
+      document.getElementById(topic + "-counter").value = counter;
+      break;
+    case "ethereum":
+      document.getElementById(topic + "-counter").value = counter;
+      break;
+    case "litecoin":
+      document.getElementById(topic + "-counter").value = counter;
+      break;
+    case "defi":
+      setData(imgURL + feed[counter].featured_media).then((val) => {
+        if (JSON.parse(val).media_type == "image") {
+          document.getElementById(topic + "-img").src = JSON.parse(
+            val
+          ).media_details.sizes.medium.source_url;
+        }
+      });
+      counter++;
+      if (feed[counter] !== undefined) {
+        currentPosts.add(feed[counter].id);
+        document.getElementById(topic + "-title0").innerHTML =
+          feed[counter].title.rendered;
+        document.getElementById(topic + "-desc0").innerHTML =
+          feed[counter].excerpt.rendered;
+      } else {
+        document.getElementById("defi0").innerHTML = "";
+      }
+      break;
+    case "blockchain":
+      setData(imgURL + feed[counter].featured_media).then((val) => {
+        if (JSON.parse(val).media_type == "image") {
+          document.getElementById(topic + "-img").src = JSON.parse(
+            val
+          ).media_details.sizes.medium.source_url;
+        }
+      });
+
+      break;
+    case "hotbusinessnews":
+      img = feed[counter].featured_media;
+      setData(imgURL + img).then((val) => {
+        if (JSON.parse(val).media_type == "image") {
+          document.getElementById(topic + "-img").src = JSON.parse(
+            val
+          ).media_details.sizes.medium.source_url;
+        }
+      });
+
+      counter++;
+      if (feed[counter] !== undefined) {
+        currentPosts.add(feed[counter].id);
+        document.getElementById(topic + "-title0").innerHTML =
+          feed[counter].title.rendered;
+        document.getElementById(topic + "-desc0").innerHTML =
+          feed[counter].excerpt.rendered;
+        setData(imgURL + feed[counter].featured_media).then((val) => {
+          if (JSON.parse(val).media_type == "image") {
+            document.getElementById(topic + "-img0").src = JSON.parse(
+              val
+            ).media_details.sizes.medium.source_url;
+          }
+        });
+        counter++;
+      } else {
+        document.getElementById("hotbusinessnews0").innerHTML = "";
+      }
+
+      if (feed[counter] !== undefined) {
+        currentPosts.add(feed[counter].id);
+        document.getElementById(topic + "-title1").innerHTML =
+          feed[counter].title.rendered;
+        document.getElementById(topic + "-desc1").innerHTML =
+          feed[counter].excerpt.rendered;
+        setData(imgURL + feed[counter].featured_media).then((val) => {
+          if (JSON.parse(val).media_type == "image") {
+            document.getElementById(topic + "-img1").src = JSON.parse(
+              val
+            ).media_details.sizes.medium.source_url;
+          }
+        });
+      } else {
+        document.getElementById("hotbusinessnews1").innerHTML = "";
+      }
+
+      break;
+    case "news":
+      setData(imgURL + feed[counter].featured_media).then((val) => {
+        if (JSON.parse(val).media_type == "image") {
+          document.getElementById(topic + "-img").src = JSON.parse(
+            val
+          ).media_details.sizes.medium.source_url;
+        }
+      });
+
+      break;
+  }
+  titleElem.innerHTML = title;
+  descElem.innerHTML = desc;
+  counter++;
 }
 
 async function setData(url) {
@@ -173,20 +208,20 @@ async function setData(url) {
 }
 
 async function getFeed(url) {
-    let connection = new XMLHttpRequest();
-    return new Promise((resolve, reject) => {
-        connection.onreadystatechange = function () {
-            if (connection.readyState === 4) {
-                if (connection.status >= 300) {
-                    reject("error: " + status.code);
-                } else {
-                    resolve(connection.responseText);
-                }
-            }
-        };
-        connection.open("GET", url, true);
-        connection.send();
-    });
+  let connection = new XMLHttpRequest();
+  return new Promise((resolve, reject) => {
+    connection.onreadystatechange = function () {
+      if (connection.readyState === 4) {
+        if (connection.status >= 300) {
+          reject("error: " + status.code);
+        } else {
+          resolve(connection.responseText);
+        }
+      }
+    };
+    connection.open("GET", url, true);
+    connection.send();
+  });
 }
 
 function slide() {
