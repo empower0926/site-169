@@ -57,33 +57,39 @@ function nextArticle(topic) {
       feed = bitcoinFeed;
       break;
 
-      case "ethereum":
+    case "ethereum":
       feed = ethereumFeed;
       break;
 
-      case "defi":
+    case "defi":
       feed = defiFeed;
       break;
 
-      case "hotbusinessnews":
+    case "hotbusinessnews":
       feed = businessFeed;
       break;
 
-      case "news":
+    case "news":
       feed = newsFeed;
+      break;
+
+    case "blockchain":
+      feed = blockchainFeed;
       break;
   }
 
   let counter = document.getElementById(topic + "-counter").value;
-  if (counter >= feed.length - 1) {
+  console.log(topic + " feed-" + feed);
+  if (counter >= feed.length) {
     counter = 0;
   }
 
   if (currentPosts.has(feed[counter].id)) {
+    let id = feed[counter].id;
     counter++;
     document.getElementById(topic + "-counter").value = counter;
-
     nextArticle(topic);
+    currentPosts.delete(id);
     return;
   }
 
@@ -111,7 +117,7 @@ function nextArticle(topic) {
         if (JSON.parse(val).media_type == "image") {
           document.getElementById(topic + "-img").src = JSON.parse(
             val
-          ).media_details.sizes.medium.source_url;
+          ).media_details.sizes.large.source_url;
         }
       });
       counter++;
@@ -130,7 +136,7 @@ function nextArticle(topic) {
         if (JSON.parse(val).media_type == "image") {
           document.getElementById(topic + "-img").src = JSON.parse(
             val
-          ).media_details.sizes.medium.source_url;
+          ).media_details.sizes.large.source_url;
         }
       });
 
@@ -141,7 +147,7 @@ function nextArticle(topic) {
         if (JSON.parse(val).media_type == "image") {
           document.getElementById(topic + "-img").src = JSON.parse(
             val
-          ).media_details.sizes.medium.source_url;
+          ).media_details.sizes.large.source_url;
         }
       });
 
@@ -156,7 +162,7 @@ function nextArticle(topic) {
           if (JSON.parse(val).media_type == "image") {
             document.getElementById(topic + "-img0").src = JSON.parse(
               val
-            ).media_details.sizes.medium.source_url;
+            ).media_details.sizes.large.source_url;
           }
         });
         counter++;
@@ -174,7 +180,7 @@ function nextArticle(topic) {
           if (JSON.parse(val).media_type == "image") {
             document.getElementById(topic + "-img1").src = JSON.parse(
               val
-            ).media_details.sizes.medium.source_url;
+            ).media_details.sizes.large.source_url;
           }
         });
       } else {
@@ -183,11 +189,12 @@ function nextArticle(topic) {
 
       break;
     case "news":
+      alert(feed[counter].featured_media);
       setData(imgURL + feed[counter].featured_media).then((val) => {
         if (JSON.parse(val).media_type == "image") {
           document.getElementById(topic + "-img").src = JSON.parse(
             val
-          ).media_details.sizes.medium.source_url;
+          ).media_details.sizes.large.source_url;
         }
       });
 
@@ -196,6 +203,7 @@ function nextArticle(topic) {
   titleElem.innerHTML = title;
   descElem.innerHTML = desc;
   counter++;
+  document.getElementById(topic + "-counter").value = counter;
 }
 
 async function setData(url) {
