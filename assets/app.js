@@ -73,9 +73,8 @@ function nextArticle(topic) {
       feed = newsFeed;
       break;
   }
-
   let counter = document.getElementById(topic + "-counter").value;
-  if (counter >= feed.length - 1) {
+  if (counter >= feed.length) {
     counter = 0;
   }
 
