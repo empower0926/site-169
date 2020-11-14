@@ -3,13 +3,14 @@ let slideIndex = 0;
 let colors = ['red', 'green', 'blue'];
 
 const feedURL = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fflashgroupnews.com%2Ffeed';
-const bitcoinFeedURL = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fflashgroupnews.com%2Fcategory%2Fbitcoin%2Ffeed';
+const bitcoinURL = 'https://flashgroupnews.com/wp-json/wp/v2/posts?categories=2&per_page=100';
 
-let bitcoinFeed;
+let bitcoinPosts;
 let newsFeed;
 
-setData(bitcoinFeedURL).then((val) => {
-    bitcoinFeed = JSON.parse(val).items;
+setData(bitcoinURL).then((val) => {
+    bitcoinPosts = JSON.parse(val);
+    nextArticle('bitcoin');
 });
 
 setData(feedURL).then((val) => {
@@ -18,9 +19,10 @@ setData(feedURL).then((val) => {
 
 let counter = 0;
 function nextArticle(topic){
-    if(counter >= bitcoinFeed.length){
+    if(counter >= bitcoinPosts.length){
         counter = 0;
     }
+
     let titleId = topic+ '-title';
     let descId  = topic+ '-desc';
     // let imgId  = topic+ '-img';
@@ -28,9 +30,9 @@ function nextArticle(topic){
     let titleElem = document.getElementById(titleId);
     let descElem = document.getElementById(descId);
 
-    titleElem.innerHTML = bitcoinFeed[counter].title;
-    descElem.innerHTML = bitcoinFeed[counter].description;
-    console.log(bitcoinFeed);
+    titleElem.innerHTML = bitcoinPosts[counter].title.rendered;
+    descElem.innerHTML = bitcoinPosts[counter].excerpt.rendered;
+    console.log(bitcoinPosts);
 
     counter++;
 }
