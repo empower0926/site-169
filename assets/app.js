@@ -27,7 +27,7 @@ function generateURL(category) {
 
 setData(generateURL(BITCOIN)).then((val) => {
   bitcoinFeed = JSON.parse(val);
-  nextArticle("bitcoin", bitcoinFeed);
+  nextArticle("bitcoin");
 });
 setData(generateURL(ETHEREUM)).then((val) => {
   ethereumFeed = JSON.parse(val);
@@ -52,6 +52,7 @@ setData(generateURL(BLOCKCHAIN)).then((val) => {
 
 function nextArticle(topic) {
   let feed;
+  let cfeed;
   switch (topic) {
     case "bitcoin":
       feed = bitcoinFeed;
@@ -82,18 +83,50 @@ function nextArticle(topic) {
   console.log(topic + " feed-" + feed);
   if (counter >= feed.length) {
     counter = 0;
+    for (let index = 0; index < feed.length; index++) {
+      let element = feed[index].id;
+     currentPosts.delete(element);
+      
+    }
   }
 
-  if (currentPosts.has(feed[counter].id)) {
+  if (feed.length>1 && currentPosts.has(feed[counter].id)) {
     let id = feed[counter].id;
     counter++;
     document.getElementById(topic + "-counter").value = counter;
     nextArticle(topic);
     currentPosts.delete(id);
+    switch (topic) {
+      case "bitcoin":
+         bitcoinFeed.delete(feed[counter]);
+        break;
+  
+      case "ethereum":
+        ethereumFeed.delete(feed[counter]);
+        break;
+  
+      case "defi":
+        defiFeed.delete(feed[counter]);
+        break;
+  
+      case "hotbusinessnews":
+        businessFeed.delete(feed[counter]);
+        break;
+  
+      case "news":
+        newsFeed.delete(feed[counter]);
+        break;
+  
+      case "blockchain":
+        blockchainFeed.delete(feed[counter]);
+        break;
+    }
     return;
+  }else{
+    currentPosts.add(feed[counter].id);
   }
 
-  currentPosts.add(feed[counter].id);
+ 
 
   let titleElem = document.getElementById(topic + "-title");
   let descElem = document.getElementById(topic + "-desc");
@@ -113,11 +146,16 @@ function nextArticle(topic) {
       document.getElementById(topic + "-counter").value = counter;
       break;
     case "defi":
+     
       setData(imgURL + feed[counter].featured_media).then((val) => {
         if (JSON.parse(val).media_type == "image") {
-          document.getElementById(topic + "-img").src = JSON.parse(
-            val
-          ).media_details.sizes.large.source_url;
+          let imageSrc = JSON.parse(val).media_details.sizes.large;
+            if(imageSrc === undefined){
+              imageSrc = JSON.parse(val).media_details.sizes.medium;
+            }if(imageSrc === undefined){
+              imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+            }
+            document.getElementById(topic + "-img").src = imageSrc.source_url;
         }
       });
       counter++;
@@ -134,9 +172,13 @@ function nextArticle(topic) {
     case "blockchain":
       setData(imgURL + feed[counter].featured_media).then((val) => {
         if (JSON.parse(val).media_type == "image") {
-          document.getElementById(topic + "-img").src = JSON.parse(
-            val
-          ).media_details.sizes.large.source_url;
+          let imageSrc = JSON.parse(val).media_details.sizes.large;
+            if(imageSrc === undefined){
+              imageSrc = JSON.parse(val).media_details.sizes.medium;
+            }if(imageSrc === undefined){
+              imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+            }
+            document.getElementById(topic + "-img").src = imageSrc.source_url;
         }
       });
 
@@ -145,9 +187,13 @@ function nextArticle(topic) {
       img = feed[counter].featured_media;
       setData(imgURL + img).then((val) => {
         if (JSON.parse(val).media_type == "image") {
-          document.getElementById(topic + "-img").src = JSON.parse(
-            val
-          ).media_details.sizes.large.source_url;
+          let imageSrc = JSON.parse(val).media_details.sizes.large;
+            if(imageSrc === undefined){
+              imageSrc = JSON.parse(val).media_details.sizes.medium;
+            }if(imageSrc === undefined){
+              imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+            }
+            document.getElementById(topic + "-img").src = imageSrc.source_url;
         }
       });
 
@@ -160,9 +206,13 @@ function nextArticle(topic) {
           feed[counter].excerpt.rendered;
         setData(imgURL + feed[counter].featured_media).then((val) => {
           if (JSON.parse(val).media_type == "image") {
-            document.getElementById(topic + "-img0").src = JSON.parse(
-              val
-            ).media_details.sizes.large.source_url;
+            let imageSrc = JSON.parse(val).media_details.sizes.large;
+            if(imageSrc === undefined){
+              imageSrc = JSON.parse(val).media_details.sizes.medium;
+            }if(imageSrc === undefined){
+              imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+            }
+            document.getElementById(topic + "-img0").src = imageSrc.source_url;
           }
         });
         counter++;
@@ -172,15 +222,17 @@ function nextArticle(topic) {
 
       if (feed[counter] !== undefined) {
         currentPosts.add(feed[counter].id);
-        document.getElementById(topic + "-title1").innerHTML =
-          feed[counter].title.rendered;
-        document.getElementById(topic + "-desc1").innerHTML =
-          feed[counter].excerpt.rendered;
+        document.getElementById(topic + "-title1").innerHTML = feed[counter].title.rendered;
+        document.getElementById(topic + "-desc1").innerHTML = feed[counter].excerpt.rendered;
         setData(imgURL + feed[counter].featured_media).then((val) => {
           if (JSON.parse(val).media_type == "image") {
-            document.getElementById(topic + "-img1").src = JSON.parse(
-              val
-            ).media_details.sizes.large.source_url;
+            let imageSrc = JSON.parse(val).media_details.sizes.large;
+            if(imageSrc === undefined){
+              imageSrc = JSON.parse(val).media_details.sizes.medium;
+            }if(imageSrc === undefined){
+              imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+            }
+            document.getElementById(topic + "-img1").src = imageSrc.source_url;
           }
         });
       } else {
@@ -189,12 +241,16 @@ function nextArticle(topic) {
 
       break;
     case "news":
-      alert(feed[counter].featured_media);
+     
       setData(imgURL + feed[counter].featured_media).then((val) => {
         if (JSON.parse(val).media_type == "image") {
-          document.getElementById(topic + "-img").src = JSON.parse(
-            val
-          ).media_details.sizes.large.source_url;
+          let imageSrc = JSON.parse(val).media_details.sizes.large;
+            if(imageSrc === undefined){
+              imageSrc = JSON.parse(val).media_details.sizes.medium;
+            }if(imageSrc === undefined){
+              imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+            }
+            document.getElementById(topic + "-img").src = imageSrc.source_url;
         }
       });
 
