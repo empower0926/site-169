@@ -4,6 +4,7 @@ let colors = ["red", "green", "blue"];
 
 const imgURL = "https://flashgroupnews.com/wp-json/wp/v2/media/";
 const URL = "https://flashgroupnews.com/wp-json/wp/v2/posts?";
+const coinsURL="https://ticker-api.cointelegraph.com/rates/?full=true";
 
 const currentPosts = new Set();
 
@@ -20,9 +21,371 @@ let businessFeed;
 let defiFeed;
 let newsFeed;
 let blockchainFeed;
+let coinsFeed;
+let SHA256Feed=[];
+let EtHashFeed=[];
+let RPCAFeed=[];
+let DBFTFeed=[];
+let DPoSFeed=[];
+let ScryptFeed=[];
+let OtherFeed=[];
+let PoSFeed=[];
 
 function generateURL(category) {
     return URL + "categories=" + category;
+}
+
+setData(coinsURL).then((val) => {
+    coinsFeed = JSON.parse(val);
+    dividingfeed();
+});
+ function dividingfeed(){
+    SHA256Feed.push(coinsFeed['data'].BTC.USD);
+    SHA256Feed.push(coinsFeed['data'].BCH.USD);
+    SHA256Feed.push(coinsFeed['data'].BSV.USD);
+
+    EtHashFeed.push(coinsFeed['data'].ETH.USD);
+    EtHashFeed.push(coinsFeed['data'].ETC.USD);
+   // EtHashFeed.push(coinsFeed['data'].WAN.USD);
+
+    RPCAFeed.push(coinsFeed['data'].XRP.USD);
+    
+    DBFTFeed.push(coinsFeed['data'].BNB.USD);
+    DBFTFeed.push(coinsFeed['data'].NEO.USD);
+    DBFTFeed.push(coinsFeed['data'].ATOM.USD);
+
+    DPoSFeed.push(coinsFeed['data'].EOS.USD);
+
+    ScryptFeed.push(coinsFeed['data'].LTC.USD);
+    ScryptFeed.push(coinsFeed['data'].DOGE.USD);
+
+    OtherFeed.push(coinsFeed['data'].XEM.USD);
+    OtherFeed.push(coinsFeed['data'].ONT.USD);
+
+    PoSFeed.push(coinsFeed['data'].XTZ.USD);
+  coinsFeed=[];
+  coinsFeed.push(SHA256Feed,EtHashFeed,RPCAFeed,DBFTFeed,DPoSFeed,ScryptFeed,OtherFeed,PoSFeed);
+
+
+    nextHeatMap('SHA256');
+ }
+ function nextHeatMap(cointype){
+    
+     let feed;
+     let topic=cointype;
+     let coinName=[];
+
+    switch (cointype) {
+        case "SHA256":
+            feed = SHA256Feed;
+           coinName.push('BTC','BCH','BSV');
+            break;
+        case "EtHash":
+            feed = EtHashFeed;
+            coinName.push('ETH','ETC');
+            break;
+        case "RPCA":
+            feed = RPCAFeed;
+            coinName.push('XPR');
+            break;
+        case "DBFT":
+            feed = DBFTFeed;
+            coinName.push('BNB','NEO','ATOM');
+            break;
+        case "DPoS":
+            feed = DPoSFeed;
+            
+            coinName.push('EOS');
+            break;
+        case "Scrypt":
+            feed = ScryptFeed;
+            coinName.push('LTC','DOGE');
+            break;
+        case "Other":
+            feed =OtherFeed;
+            coinName.push('XEM','ONT');
+            break;
+        case "PoS":
+            feed =PoSFeed;
+            coinName.push('XTZ');
+            break;
+    }
+    document.getElementById('heatmapContent').innerHTML="";
+    let bigd=document.createElement('div');
+        bigd.className='row big_d';
+        let smalldivs=document.createElement('div');
+        for (let index = 0; index < feed.length; index++) {
+            const item = feed[index];
+            let price=new String(item.price);
+            price=price.substring(1,15);
+                if(index==0){
+                let btd=document.createElement('div');
+                btd.className="col-sm-12 pl-0";
+                    let btdd=document.createElement('div');
+                    btdd.className="col-sm-2 p-0";
+                        let bttdd=document.createElement('div');
+                        bttdd.className="sha p-3";
+                            let topich4=document.createElement('h4');
+                            topich4.className="text-center m-auto";
+                            topich4.innerText=topic;
+        
+                let bcd=document.createElement('div');
+                 bcd.className="col-sm-12 text-center my-5";
+                    let coinname=document.createElement('h1');
+                    coinname.className="btc";
+                    coinname.innerText=coinName[index];
+                    let rate=document.createElement('p');
+                    rate.innerText='$'+price;
+                    let presentage=document.createElement('p');
+                    presentage.innerText=item.day+'%';
+                    let dominance=document.createElement('h4');
+                    dominance.className="mt-5";
+                    dominance.innerText=item.day+'%';
+        
+        
+                 let bbd=document.createElement('div');
+                 bbd.className="col-sm-12 p-0";
+                 let bottom=document.createElement('div');
+              if(item.day>0){
+                    bottom.className='bottom-line line-green';
+                    presentage.className='green-text';
+                }else{
+                    bottom.className='bottom-line line-pink';
+                    presentage.className='pink-text';
+                }
+                bigd.appendChild(btd);
+                btd.appendChild(btdd);
+                btdd.appendChild(bttdd);
+                bttdd.appendChild(topich4);
+                bigd.appendChild(bcd);
+                bcd.appendChild(coinname);
+                bcd.appendChild(rate);
+                bcd.appendChild(presentage);
+                bcd.appendChild(dominance);
+                bigd.appendChild(bbd);
+                bbd.appendChild(bottom);
+        
+        
+                }
+                else{
+                let sd=document.createElement('div');
+                sd.className="row small-d  mt-4";
+               
+               
+                let srd=document.createElement('div');
+                srd.className="col-sm-12 d-flex pt-3";
+                
+                 let scnd=document.createElement('div');
+                 scnd.className="col-sm-7";
+                 let coinnameh4=document.createElement('h4');
+                 coinnameh4.className="ftext";
+                 coinnameh4.innerText=coinName[index];
+         
+                 let srrd=document.createElement('div');
+                 srrd.className="col-sm-3";
+                 let ratep=document.createElement('p');
+                 ratep.innerText='$'+price;
+         
+                 let sprd=document.createElement('div');
+                 sprd.className="col-sm-2";
+                 let prp=document.createElement('p');
+                 prp.innerText=item.day+'%';
+         
+         
+                 let bld=document.createElement('div');
+                 bld.className="col-sm-12 p-0";
+                  let bl=document.createElement('div');
+                  bl.className="bottom-line";
+                
+                 if(item.day>0){
+                    prp.className='green-text';
+                     bl.className="bottom-line line-green"
+                 }else{
+                     prp.className='pink-text';
+                     bl.className="bottom-line line-pink"
+                 }
+                 smalldivs.appendChild(sd);
+                
+                 sd.appendChild(srd);
+                 srd.appendChild(scnd);
+                 srd.appendChild(srrd);
+                 srd.appendChild(sprd);
+                 scnd.appendChild(coinnameh4);
+                 srrd.appendChild(ratep);
+                 sprd.appendChild(prp);
+                 sd.appendChild(bld);
+                 bld.appendChild(bl);
+                
+                }
+            }
+            document.getElementById('heatmapContent').appendChild(bigd);
+            document.getElementById('heatmapContent').appendChild(smalldivs);  
+    
+
+ }
+function allHeatMap(start,end){
+    let coinName=[];
+    let topic;
+    document.getElementById('heatmapContent').innerHTML="";
+    for (let j= start; j< end; j++) {
+        let bigd=document.createElement('div');
+        bigd.className='row big_d mt-5';
+        let smalldivs=document.createElement('div');
+        const feed = coinsFeed[j];
+        switch (j) {
+            case 0:
+                topic= 'SHA256';
+               coinName.push('BTC','BCH','BSV');
+                break;
+            case 1:
+                topic = 'EtHash';
+                coinName.push('ETH','ETC');
+                break;
+            case 2:
+                topic = 'RPCA';
+                coinName.push('XPR');
+                break;
+            case 3:
+                topic = 'DBFT';
+                coinName.push('BNB','NEO','ATOM');
+                break;
+            case 4:
+                topic = 'DPoS';
+                coinName.push('EOS');
+                break;
+            case 5:
+                topic = 'Scrypt';
+                coinName.push('LTC','DOGE');
+                break;
+            case 6:
+                topic ='Other';
+                coinName.push('XEM','ONT');
+                break;
+            case 7:
+                topic ='PoS';
+                coinName.push('XTZ');
+                break;
+        }
+        for (let index = 0; index < feed.length; index++) {
+            
+            const item = feed[index];
+            let price=new String(item.price);
+            price=price.substring(1,15);
+                if(index==0){
+                let btd=document.createElement('div');
+                btd.className="col-sm-12 pl-0";
+                    let btdd=document.createElement('div');
+                    btdd.className="col-sm-2 p-0";
+                        let bttdd=document.createElement('div');
+                        bttdd.className="sha p-3";
+                            let topich4=document.createElement('h4');
+                            topich4.className="text-center m-auto";
+                            topich4.innerText=topic;
+        
+                let bcd=document.createElement('div');
+                 bcd.className="col-sm-12 text-center my-5";
+                    let coinname=document.createElement('h1');
+                    coinname.className="btc";
+                    coinname.innerText=coinName[index];
+                    let rate=document.createElement('p');
+                    rate.innerText='$'+price;
+                    let presentage=document.createElement('p');
+                    presentage.innerText=item.day+'%';
+                    let dominance=document.createElement('h4');
+                    dominance.className="mt-5";
+                    dominance.innerText=item.day+'%';
+        
+        
+                 let bbd=document.createElement('div');
+                 bbd.className="col-sm-12 p-0";
+                 let bottom=document.createElement('div');
+              if(item.day>0){
+                    bottom.className='bottom-line line-green';
+                    presentage.className='green-text';
+                }else{
+                    bottom.className='bottom-line line-pink';
+                    presentage.className='pink-text';
+                }
+                bigd.appendChild(btd);
+                btd.appendChild(btdd);
+                btdd.appendChild(bttdd);
+                bttdd.appendChild(topich4);
+                bigd.appendChild(bcd);
+                bcd.appendChild(coinname);
+                bcd.appendChild(rate);
+                bcd.appendChild(presentage);
+                bcd.appendChild(dominance);
+                bigd.appendChild(bbd);
+                bbd.appendChild(bottom);
+        
+       
+                }
+                else{
+                   
+                let sd=document.createElement('div');
+                sd.className="row small-d  mt-4";
+               
+               
+                let srd=document.createElement('div');
+                srd.className="col-sm-12 d-flex pt-3";
+                
+                 let scnd=document.createElement('div');
+                 scnd.className="col-sm-7";
+                 let coinnameh4=document.createElement('h4');
+                 coinnameh4.className="ftext";
+                 coinnameh4.innerText=coinName[index];
+         
+                 let srrd=document.createElement('div');
+                 srrd.className="col-sm-3";
+                 let ratep=document.createElement('p');
+                 ratep.innerText='$'+price;
+         
+                 let sprd=document.createElement('div');
+                 sprd.className="col-sm-2";
+                 let prp=document.createElement('p');
+                 prp.innerText=item.day+'%';
+         
+         
+                 let bld=document.createElement('div');
+                 bld.className="col-sm-12 p-0";
+                  let bl=document.createElement('div');
+                  bl.className="bottom-line";
+                
+                 if(item.day>0){
+                    prp.className='green-text';
+                     bl.className="bottom-line line-green"
+                 }else{
+                     prp.className='pink-text';
+                     bl.className="bottom-line line-pink"
+                 }
+                 smalldivs.appendChild(sd);
+                
+                 sd.appendChild(srd);
+                 srd.appendChild(scnd);
+                 srd.appendChild(srrd);
+                 srd.appendChild(sprd);
+                 scnd.appendChild(coinnameh4);
+                 srrd.appendChild(ratep);
+                 sprd.appendChild(prp);
+                 sd.appendChild(bld);
+                 bld.appendChild(bl);
+                
+                }
+            }
+            coinName=[];
+            document.getElementById('heatmapContent').appendChild(bigd);
+            document.getElementById('heatmapContent').appendChild(smalldivs);  
+     }
+    if(start==0){
+        document.getElementById('showall').className="d-none";
+        document.getElementById('prev').className="d-none";
+        document.getElementById('next').className="";
+    }else if(start==4){
+        document.getElementById('showall').className="d-none";
+        document.getElementById('next').className="d-none";
+        document.getElementById('prev').className="";
+    }
+
 }
 
 setData(generateURL(BITCOIN)).then((val) => {
@@ -99,27 +462,33 @@ function nextArticle(topic) {
         currentPosts.delete(id);
         switch (topic) {
             case "bitcoin":
-                bitcoinFeed.remove(feed[counter]);
+                bitcoinFeed.splice(feed[counter],bitcoinFeed.indexOf(feed[counter]));
+            
                 break;
 
             case "ethereum":
-                ethereumFeed.remove(feed[counter]);
+                ethereumFeed.splice(feed[counter],ethereumFeed.indexOf(feed[counter]));
+            
                 break;
 
             case "defi":
-                defiFeed.remove(feed[counter]);
+                defiFeed.splice(feed[counter],defiFeed.indexOf(feed[counter]));
+            
                 break;
 
             case "hotbusinessnews":
-                businessFeed.remove(feed[counter]);
+                businessFeed.splice(feed[counter],businessFeed.indexOf(feed[counter]));
+            
                 break;
 
             case "news":
-                newsFeed.remove(feed[counter]);
+                newsFeed.splice(feed[counter],newsFeed.indexOf(feed[counter]));
+            
                 break;
 
             case "blockchain":
-                blockchainFeed.remove(feed[counter]);
+                blockchainFeed.splice(feed[counter],blockchainFeed.indexOf(feed[counter]));
+            
                 break;
         }
         return;
