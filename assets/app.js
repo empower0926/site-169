@@ -81,7 +81,6 @@ function nextArticle(topic) {
     }
 
     let counter = document.getElementById(topic + "-counter").value;
-    console.log(topic + " feed-" + feed);
     if (counter >= feed.length) {
         counter = 0;
         for (let index = 0; index < feed.length; index++) {
@@ -460,16 +459,4 @@ function slide(topic) {
     current.style.animation = "slide .6s ease-in-out forwards";
     behind.style.transform = "translate3d(0, 0, 0)";
     last.style.transform = "translate3d(70px, 0, -15px)";
-
-    let newArticle = document.createElement("div");
-    newArticle.className = "slide";
-    newArticle.style.transform = "translate3d(140px, 0, -30px)";
-
-    newArticle.style.background =
-        "url(" + jsonObject.items[slideIndex].thumbnail + ") no-repeat";
-    newArticle.style.backgroundSize = "cover";
-    newArticle.style.backgroundPosition = "center";
-
-    slider.appendChild(newArticle);
-    slideIndex++;
 }
