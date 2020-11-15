@@ -2,6 +2,9 @@ let current;
 let slideIndex = 0;
 let colors = ["red", "green", "blue"];
 
+const GREEN = ' #00a80e';
+const PINK = '#db1753';
+
 const imgURL = "https://flashgroupnews.com/wp-json/wp/v2/media/";
 const URL = "https://flashgroupnews.com/wp-json/wp/v2/posts?";
 
@@ -49,6 +52,126 @@ setData(generateURL(BLOCKCHAIN)).then((val) => {
     blockchainFeed = JSON.parse(val);
     nextArticle("blockchain");
 });
+
+const COIN_RATES_URL = "https://ticker-api.cointelegraph.com/rates/?full=true";
+
+let MARKET;
+let selectedBTC = 'USD';
+let selectedETH = 'USD';
+let selectedLTC = 'USD';
+
+let currencySymbol = '$';
+
+setInterval(() => {
+    setData(COIN_RATES_URL).then((val) => {
+        MARKET = JSON.parse(val);
+        setMarketData('BTC', selectedBTC, currencySymbol);
+        setMarketData('ETH', selectedETH, currencySymbol);
+        setMarketData('LTC', selectedLTC, currencySymbol);
+    });
+}, 10000);
+
+
+function setMarketData(crypto, currency, cs) {
+    currencySymbol = cs;
+    if (crypto === 'BTC') {
+        selectedBTC = currency;
+    } else if (crypto === 'ETH') {
+        selectedETH = currency;
+    } else {
+        selectedLTC = currency;
+    }
+
+    if (MARKET !== undefined) {
+        let values = MARKET.data[crypto][currency];
+        console.log(cs);
+        console.log(values);
+        let parent = document.getElementById(crypto + '-market-overview');
+        if (parent !== null) {
+            let price = parent.querySelector('.price');
+
+            let formatter = new Intl.NumberFormat('en-US', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+
+            price.innerHTML = currencySymbol + formatter.format(Math.round(values.price));
+
+            let day = parent.querySelector('.day');
+            if (values.day > 0) {
+                day.innerHTML = '+' + values.day + '%';
+                day.style.color = GREEN;
+            } else {
+                day.innerHTML = values.day + '%';
+                day.style.color = PINK;
+            }
+
+            let week = parent.querySelector('.week');
+            if (values.week > 0) {
+                week.innerHTML = '+' + values.week + '%';
+                week.style.color = GREEN;
+            } else {
+                week.innerHTML = values.week + '%';
+                week.style.color = PINK;
+            }
+
+            let month = parent.querySelector('.month');
+            if (values.month > 0) {
+                month.innerHTML = '+' + values.month + '%';
+                month.style.color = GREEN;
+            } else {
+                month.innerHTML = values.month + '%';
+                month.style.color = PINK;
+            }
+
+            let open = parent.querySelector('.open');
+            open.innerHTML = currencySymbol + formatter.format(Math.round(values.open));
+
+            let high = parent.querySelector('.high');
+            high.innerHTML = currencySymbol + formatter.format(Math.round(values.high));
+
+            let low = parent.querySelector('.low');
+            low.innerHTML = currencySymbol + formatter.format(Math.round(values.low));
+
+            let last_price = parent.querySelector('.last-price');
+            last_price.innerHTML = currencySymbol + formatter.format(Math.round(values.price));
+
+            let total = parent.querySelector('.total');
+            let moneyFormat_total = getMoneyFormat(values.emitted);
+            total.innerHTML = crypto + ' ' + parseFloat(moneyFormat_total).toFixed(2) + moneyFormat_total.replace(/[^T|B|M|K]/g, "");
+
+            let mkt_cap = parent.querySelector('.mkt-cap');
+            let moneyFormat_mkt_cap = getMoneyFormat(values.cap);
+            mkt_cap.innerHTML = currencySymbol + parseFloat(moneyFormat_mkt_cap).toFixed(2) + moneyFormat_mkt_cap.replace(/[^T|B|M|K]/g, "");
+
+            let vol = parent.querySelector('.vol');
+            let moneyFormat_vol = getMoneyFormat(values.volume);
+            console.log('volume '+moneyFormat_vol);
+            vol.innerHTML = crypto + ' ' + parseFloat(moneyFormat_vol).toFixed(2) + moneyFormat_vol.replace((/N?[^T|B|M|K]/g), "");
+
+            let vol_dot = parent.querySelector('.vol-dot');
+            let moneyFormat_vol_dot = getMoneyFormat(values.volumeCurrency);
+            vol_dot.innerHTML = currencySymbol + parseFloat(moneyFormat_vol_dot).toFixed(2) + moneyFormat_vol_dot.replace(/[^T|B|M|K]/g, "");
+        }
+    }
+}
+
+function getMoneyFormat(priceValue) {
+    const TRILLION = 1.0e+12;
+    const BILLION = 1.0e+9;
+    const MILLION = 1.0e+6;
+    const KILO = 1.0e+3;
+    return priceValue >= TRILLION ?
+        priceValue / TRILLION + "T" :
+        priceValue >= BILLION ?
+        priceValue / BILLION + "B" :
+        priceValue >= MILLION ?
+        priceValue / MILLION + "M" :
+        priceValue >= KILO ?
+        priceValue / KILO + "K" :
+        priceValue + "N";
+}
+
 let bs = true;
 let es = true;
 

@@ -11,7 +11,7 @@
     <title>FGN Report</title>
 </head>
 
-<body >
+<body>
     <!-- sec-1 -->
     <div class="container-fluid sec-1">
         <div class="row pt-5 justify-content-center justify-content-lg-left">
@@ -289,7 +289,7 @@
     <!-- sec-4 -->
     <section class="sec-4">
         <!-- bitcoin-news -->
-        <div class="container mt-5" >
+        <div class="container mt-5">
             <div class="row">
                 <div class="col-sm-12 d-flex">
                     <div class="coin-img mr-2">
@@ -303,7 +303,6 @@
                         <div class="topic-text my-auto pl-2">Bitcoin NEWS</div>
                     </div>
                 </div>
-
             </div>
             <div class="row mt-5">
                 <div class="col-sm-6">
@@ -318,14 +317,140 @@
                 <div class="col-sm-6 d-flex justify-content-center">
                     <div class="slider-parent">
                         <div id="bitcoin-slider" class="slider">
-                            
+
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-12 mt-3 ml-2">
-                    <button  onclick="nextArticle('bitcoin')">Next Article</button>
+                    <button onclick="nextArticle('bitcoin')">Next Article</button>
                     <img class="arrow" src="assets/img/icon-navigation-arrow_forward_24px.svg" alt="">
                 </div>
+            </div>
+            <div class="row justify-content-center mt-5">
+                <div class="col-sm-9 p-3">
+                    <div id="BTC-market-overview" class="market-overview p-3">
+                        <div class="col-sm-12 pb-3">
+                            <div class="row currency-btn-set">
+                                <button class="currency-btn" onclick="setMarketData('BTC', 'USD', '$')">USD</button>
+                                <button class="currency-btn" onclick="setMarketData('BTC', 'EUR', '€')">EUR</button>
+                                <button class="currency-btn" onclick="setMarketData('BTC', 'GBP', '£')">GBP</button>
+                                <button class="currency-btn" onclick="setMarketData('BTC', 'JPY', '¥')">JPY</button>
+                                <button class="currency-btn" onclick="setMarketData('BTC', 'RUR', '₽')">RUR</button>
+                                <button class="currency-btn" onclick="setMarketData('BTC', 'KRW', '₩')">KRW</button>
+                                <button class="currency-btn" onclick="setMarketData('BTC', 'TRY', '₺')">TRY</button>
+                                <button class="currency-btn" onclick="setMarketData('BTC', 'BRL', 'R$')">BRL</button>
+                                <button class="currency-btn" onclick="setMarketData('BTC', 'CNY', '¥')">CNY</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 p-0 mt-4 d-md-flex">
+                            <div class="col-sm-4">
+                                <div class="main-content text-center">
+                                    <div class="p-4">
+                                        <h3 class="price"></h3>
+                                    </div>
+                                    <div class="col-sm-12 d-flex p-0">
+                                        <div class="col-sm-6 text-left">
+                                            <p>DAY</p>
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <p class="day"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 d-flex p-0">
+                                        <div class="col-sm-6 text-left">
+                                            <p>WEEK</p>
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <p class="week"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 d-flex p-0">
+                                        <div class="col-sm-6 text-left">
+                                            <p>MONTH</p>
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <p class="month"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="sub-content">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <span>Open 24H</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="open bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left colored-row">
+                                            <span>High 24H</span>
+                                        </div>
+                                        <div class="col text-right colored-row">
+                                            <span class="high bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <span>Low 24H</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="low bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left colored-row">
+                                            <span>Last Price</span>
+                                        </div>
+                                        <div class="col text-right colored-row">
+                                            <span class="last-price bold-val"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="sub-content">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <span>Total</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="total bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left colored-row">
+                                            <span>Mkt. Cap</span>
+                                        </div>
+                                        <div class="col text-right colored-row">
+                                            <span class="mkt-cap bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <span>Vol 24H</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="vol bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left colored-row">
+                                            <span>Vol.24H</span>
+                                        </div>
+                                        <div class="col text-right colored-row">
+                                            <span class="vol-dot bold-val"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <!-- Ethereum-news -->
@@ -350,7 +475,7 @@
                     <article class="col-sm-12 news-feed">
                         <div>
                             <input id="ethereum-counter" type="text" class="d-none" value="0">
-                           
+
                             <h4 id="ethereum-title">
                             </h4>
                             <p id="ethereum-desc" class="mt-3 text-justify"></p>
@@ -360,15 +485,140 @@
                 <div class="col-sm-6 d-flex justify-content-center">
                     <div class="slider-parent">
                         <div id="ethereum-slider" class="slider">
-                            
+
                         </div>
-                
+
                     </div>
                 </div>
-                </div>
-                <div class="col-sm-12 mt-3 ml-2">
-                    <button onclick="nextArticle('ethereum')">Next Article</button>
-                    <img class="arrow" src="assets/img/icon-navigation-arrow_forward_24px.svg" alt="">
+            </div>
+            <div class="col-sm-12 mt-3 ml-2">
+                <button onclick="nextArticle('ethereum')">Next Article</button>
+                <img class="arrow" src="assets/img/icon-navigation-arrow_forward_24px.svg" alt="">
+            </div>
+
+            <div class="row justify-content-center mt-5">
+                <div class="col-sm-9 p-3">
+                    <div id="ETH-market-overview" class="market-overview p-3">
+                        <div class="col-sm-12 pb-3">
+                            <div class="row currency-btn-set">
+                                <button class="currency-btn" onclick="setMarketData('ETH', 'USD', '$')">USD</button>
+                                <button class="currency-btn" onclick="setMarketData('ETH', 'EUR', '€')">EUR</button>
+                                <button class="currency-btn" onclick="setMarketData('ETH', 'GBP', '£')">GBP</button>
+                                <button class="currency-btn" onclick="setMarketData('ETH', 'JPY', '¥')">JPY</button>
+                                <button class="currency-btn" onclick="setMarketData('ETH', 'RUR', '₽')">RUR</button>
+                                <button class="currency-btn" onclick="setMarketData('ETH', 'KRW', '₩')">KRW</button>
+                                <button class="currency-btn" onclick="setMarketData('ETH', 'TRY', '₺')">TRY</button>
+                                <button class="currency-btn" onclick="setMarketData('ETH', 'BRL', 'R$')">BRL</button>
+                                <button class="currency-btn" onclick="setMarketData('ETH', 'CNY', '¥')">CNY</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 p-0 mt-4 d-md-flex">
+                            <div class="col-sm-4">
+                                <div class="main-content text-center">
+                                    <div class="p-4">
+                                        <h3 class="price"></h3>
+                                    </div>
+                                    <div class="col-sm-12 d-flex p-0">
+                                        <div class="col-sm-6 text-left">
+                                            <p>DAY</p>
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <p class="day"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 d-flex p-0">
+                                        <div class="col-sm-6 text-left">
+                                            <p>WEEK</p>
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <p class="week"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 d-flex p-0">
+                                        <div class="col-sm-6 text-left">
+                                            <p>MONTH</p>
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <p class="month"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="sub-content">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <span>Open 24H</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="open bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left colored-row">
+                                            <span>High 24H</span>
+                                        </div>
+                                        <div class="col text-right colored-row">
+                                            <span class="high bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <span>Low 24H</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="low bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left colored-row">
+                                            <span>Last Price</span>
+                                        </div>
+                                        <div class="col text-right colored-row">
+                                            <span class="last-price bold-val"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="col-sm-4">
+                                <div class="sub-content">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <span>Total</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="total bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left colored-row">
+                                            <span>Mkt. Cap</span>
+                                        </div>
+                                        <div class="col text-right colored-row">
+                                            <span class="mkt-cap bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <span>Vol 24H</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="vol bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left colored-row">
+                                            <span>Vol.24H</span>
+                                        </div>
+                                        <div class="col text-right colored-row">
+                                            <span class="vol-dot bold-val"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -394,7 +644,7 @@
                     <article class="col-sm-12 news-feed">
                         <div>
                             <input id="litecoin-counter" type="text" class="d-none" value="0">
-                           
+
                             <h4 id="litecoin-title">Organic growth? Bitcoin SV activity up 761% ahead of BSV conference.
                             </h4>
                             <p id="litecoin-desc" class="mt-3 text-justify">
@@ -409,6 +659,132 @@
                     <button onclick="nextArticle('litecoin')">Next Article</button>
                     <img class="arrow" src="assets/img/icon-navigation-arrow_forward_24px.svg" alt="">
                 </div>
+            </div>
+            <div class="row justify-content-center mt-5">
+                <div class="col-sm-9 p-3">
+                    <div id="LTC-market-overview" class="market-overview p-3">
+                        <div class="col-sm-12 pb-3">
+                            <div class="row currency-btn-set">
+                                <button class="currency-btn" onclick="setMarketData('LTC', 'USD', '$')">USD</button>
+                                <button class="currency-btn" onclick="setMarketData('LTC', 'EUR', '€')">EUR</button>
+                                <button class="currency-btn" onclick="setMarketData('LTC', 'GBP', '£')">GBP</button>
+                                <button class="currency-btn" onclick="setMarketData('LTC', 'JPY', '¥')">JPY</button>
+                                <button class="currency-btn" onclick="setMarketData('LTC', 'RUR', '₽')">RUR</button>
+                                <button class="currency-btn" onclick="setMarketData('LTC', 'KRW', '₩')">KRW</button>
+                                <button class="currency-btn" onclick="setMarketData('LTC', 'TRY', '₺')">TRY</button>
+                                <button class="currency-btn" onclick="setMarketData('LTC', 'BRL', 'R$')">BRL</button>
+                                <button class="currency-btn" onclick="setMarketData('LTC', 'CNY', '¥')">CNY</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 p-0 mt-4 d-md-flex">
+                            <div class="col-sm-4">
+                                <div class="main-content text-center">
+                                    <div class="p-4">
+                                        <h3 class="price"></h3>
+                                    </div>
+                                    <div class="col-sm-12 d-flex p-0">
+                                        <div class="col-sm-6 text-left">
+                                            <p>DAY</p>
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <p class="day"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 d-flex p-0">
+                                        <div class="col-sm-6 text-left">
+                                            <p>WEEK</p>
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <p class="week"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 d-flex p-0">
+                                        <div class="col-sm-6 text-left">
+                                            <p>MONTH</p>
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <p class="month"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="sub-content">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <span>Open 24H</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="open bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left colored-row">
+                                            <span>High 24H</span>
+                                        </div>
+                                        <div class="col text-right colored-row">
+                                            <span class="high bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <span>Low 24H</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="low bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left colored-row">
+                                            <span>Last Price</span>
+                                        </div>
+                                        <div class="col text-right colored-row">
+                                            <span class="last-price bold-val"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="sub-content">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <span>Total</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="total bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left colored-row">
+                                            <span>Mkt. Cap</span>
+                                        </div>
+                                        <div class="col text-right colored-row">
+                                            <span class="mkt-cap bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <span>Vol 24H</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="vol bold-val"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left colored-row">
+                                            <span>Vol.24H</span>
+                                        </div>
+                                        <div class="col text-right colored-row">
+                                            <span class="vol-dot bold-val"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -432,7 +808,7 @@
                             </div>
                             <div class=" newsbody">
                                 <input id="defi-counter" type="text" class="d-none" value="0">
-                           
+
                                 <div id="defi0" class="col-sm-12  p-0 mt-4 ">
                                     <h6 id="defi-title0"> </h6>
                                     <p id="defi-desc0" class="text-justify mt-3"></p>
@@ -445,8 +821,7 @@
 
                                     <div id="defi-imgdiv" class="col-sm-7 p-0 m-0 text-right ">
                                         <div>
-                                            <img id="defi-img" src=""
-                                                alt="Defi News Image">
+                                            <img id="defi-img" src="" alt="Defi News Image">
 
                                         </div>
                                     </div>
@@ -469,19 +844,17 @@
                             </div>
                             <div class="newsbody">
                                 <input id="blockchain-counter" type="text" class="d-none" value="0">
-                           
+
                                 <div id="blockchain-contentdiv" class="col-sm-12  p-0 mt-4 ">
                                     <h6 id="blockchain-title"> </h6>
                                     <p id="blockchain-desc" class="text-justify mt-3"></p>
                                 </div>
                                 <div id="blockchain-imgdiv" class="col-sm-12 d-flex p-0 mt-5 ">
 
-                                    
-                                        <img id="blockchain-img" style="width: 100%;"
-                                            src=""
-                                            alt="General Blockchain News">
 
-                                    
+                                    <img id="blockchain-img" style="width: 100%;" src="" alt="General Blockchain News">
+
+
 
                                 </div>
                             </div>
@@ -505,14 +878,13 @@
                                 <div class="row p-3 ">
                                     <div id="hotbusinessnews-contentdiv" class="col-sm-5 p-0">
                                         <h6 id="hotbusinessnews-title"></h6>
-                                      
+
                                         <p id="hotbusinessnews-desc" class="text-justify mt-3"></p>
                                     </div>
 
                                     <div id="hotbusinessnews-imgdiv" class="col-sm-7 p-0 m-0 text-right">
                                         <div>
-                                            <img  id="hotbusinessnews-img" src=""
-                                                alt="Business News Image">
+                                            <img id="hotbusinessnews-img" src="" alt="Business News Image">
 
                                         </div>
                                     </div>
@@ -520,13 +892,12 @@
                                 <div id="hotbusinessnews0" class="row p-3 ">
                                     <div id="hotbusinessnews0-contentdiv" class="col-sm-5 p-0">
                                         <h6 id="hotbusinessnews-title0"> </h6>
-                                        <p id="hotbusinessnews-desc0"class="text-justify mt-3"></p>
+                                        <p id="hotbusinessnews-desc0" class="text-justify mt-3"></p>
                                     </div>
 
                                     <div id="hotbusinessnews0-imgdiv" class="col-sm-7 p-0 m-0 text-right">
                                         <div>
-                                            <img id="hotbusinessnews-img0" src=""
-                                                alt="Business News Image">
+                                            <img id="hotbusinessnews-img0" src="" alt="Business News Image">
 
                                         </div>
                                     </div>
@@ -539,13 +910,12 @@
 
                                     <div id="hotbusinessnews1-imgdiv" class="col-sm-7 p-0 m-0 text-right">
                                         <div>
-                                            <img id="hotbusinessnews-img1" src=""
-                                                alt="Business News Image">
+                                            <img id="hotbusinessnews-img1" src="" alt="Business News Image">
 
                                         </div>
                                     </div>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -564,16 +934,14 @@
                             </div>
                             <div class="newsbody">
                                 <input id="news-counter" type="text" class="d-none" value="0">
-                           
+
                                 <div class="col-sm-12  p-0 mt-4 ">
                                     <h6 id="news-title"> </h6>
                                     <p id="news-desc" class="text-justify mt-3"></p>
                                 </div>
                                 <div id="news-imgdiv" class="col-sm-12 d-flex p-0 mt-5 ">
                                     <div class="w-100">
-                                        <img id="news-img" style="width: 100%;"
-                                            src=""
-                                            alt="Exclusif News Image">
+                                        <img id="news-img" style="width: 100%;" src="" alt="Exclusif News Image">
 
                                     </div>
 
@@ -638,7 +1006,7 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init();
