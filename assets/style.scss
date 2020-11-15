@@ -4,9 +4,10 @@
 $bg: #080809;
 $accent: #8e2cf9;
 $paccent: #db1753;
-$gaccent: #00fcc6;
+$gaccent: #00fc15;
 $br: 8px;
-$Montserrat: "Montserrat", sans-serif;
+$Montserrat: "Montserrat",
+sans-serif;
 
 :root {
   font-size: 16px;
@@ -18,9 +19,11 @@ body {
   font-family: "Heebo", sans-serif !important;
   box-sizing: border-box;
 }
+
 a {
   text-decoration: none !important;
 }
+
 .sec-1 {
   background-image: url("https://res.cloudinary.com/sapiangroup/image/upload/v1605181402/flash-group-news/BG_flash-group-news.png");
   background-size: cover;
@@ -29,17 +32,21 @@ a {
 
   #fgn_img {
     text-align: center;
-    img{
+
+    img {
       width: 100%;
     }
-    @include screen(large){
-      img{
+
+    @include screen(large) {
+      img {
         width: auto;
       }
     }
   }
+
   #up_text {
     font-family: $Montserrat;
+
     h3 {
       display: inline;
     }
@@ -48,6 +55,7 @@ a {
   .news_report_parent {
     height: 80vh !important;
     justify-content: flex-end;
+
     .news_report {
       background-color: #8e2cf9;
       height: 25vh;
@@ -61,6 +69,7 @@ a {
 
 h5 {
   font-weight: 300;
+
   &::after {
     content: "";
     display: block;
@@ -71,17 +80,26 @@ h5 {
     background-color: white;
   }
 }
+
 .pink-text {
   color: $paccent;
 }
+
 .green-text {
   color: $gaccent;
 }
+
 .bottom-line {
   display: block;
   border-radius: 0 0 $br $br;
-  background-color: $paccent;
+
   height: 10px;
+}
+.line-green{
+  background-color: $gaccent;
+}
+.line-pink{
+  background-color: $paccent;
 }
 .sec-2 {
   background-color: $bg;
@@ -92,29 +110,32 @@ h5 {
       background-color: $accent !important;
     }
   }
+
   .big_d {
     background-color: #1d1e20;
     border-radius: $br;
+
     .sha {
       width: 200px;
       background-color: #2d2e30;
       border-radius: $br 0 $br 0;
     }
+
     .btc {
       font-family: $Montserrat;
       font-weight: bold;
       font-size: 4rem;
     }
   }
+
   .small-d {
     background-color: #1d1e20;
     border-radius: $br;
+
     .ftext {
       font-family: $Montserrat;
     }
-    .bottom-line {
-      background-color: $gaccent;
-    }
+    
     p {
       font-size: 1.25rem;
     }
@@ -138,10 +159,12 @@ h5 {
         text-align: center;
       }
     }
+
     .green {
       background-color: $gaccent;
       color: black !important;
     }
+
     .pink {
       background-color: $paccent;
       color: white !important;
@@ -151,6 +174,7 @@ h5 {
       grid-template-rows: repeat(3, 1fr) !important;
       grid-template-columns: repeat(3, 1fr) !important;
       justify-items: center;
+
       .last {
         grid-column: 2;
       }
@@ -160,52 +184,62 @@ h5 {
       grid-template-rows: repeat(3, 1fr) !important;
       grid-template-columns: repeat(3, 1fr) !important;
       justify-items: center;
+
       .last {
         grid-column: 2;
       }
     }
   }
 }
+
 .sec-3 {
   color: white;
+
   .top-row {
     background-color: $accent;
     height: 80vh;
-    @include screen(medium){
-     
+
+    @include screen(medium) {
+
       height: 30vh !important;
     }
-    @include screen(small){
-      
+
+    @include screen(small) {
+
       height: 50vh !important;
     }
-    
+
     img {
       width: 50%;
-       @include screen(small){
+
+      @include screen(small) {
         width: 25% !important;
-       }
+      }
     }
   }
-  .bottom-row{
+
+  .bottom-row {
     height: calc(5vh + 180px);
-    @include screen(medium){
+
+    @include screen(medium) {
       height: calc(20vh + 120px);
     }
-    @include screen(small){
+
+    @include screen(small) {
       height: 20vh;
     }
   }
-  
+
   .img-div {
-    background: url("https://res.cloudinary.com/sapiangroup/image/upload/v1605204988/flash-group-news/picture-c_flash-group-news.png")
-      no-repeat;
+    background: url("https://res.cloudinary.com/sapiangroup/image/upload/v1605204988/flash-group-news/picture-c_flash-group-news.png") no-repeat;
     background-size: cover;
     height: 600px;
-    @include screen(small){
+
+    @include screen(small) {
       height: 350px;
     }
-    @include screen(medium){
+
+    @include screen(medium) {
       height: 300px;
     }
 
@@ -213,44 +247,54 @@ h5 {
       font-size: 3rem;
       font-weight: bolder;
     }
+
     h4 {
       font-size: 2.5rem;
       font-weight: bolder !important;
     }
+
     @include screen(small) {
       h3 {
         font-size: 1.5rem !important;
       }
+
       h4 {
         font-size: 1.25rem !important;
       }
     }
+
     @include screen(medium) {
       h3 {
         font-size: 1.5rem !important;
       }
+
       h4 {
         font-size: 1.25rem !important;
       }
     }
   }
+
   img {
     width: 50%;
   }
+
   h5 {
     font-size: 1.5rem;
   }
+
   p {
     font-size: 1.5rem;
     font-weight: bold;
   }
 }
+
 .sec-4 {
   .coin-img {
     img {
       width: 4rem;
     }
   }
+
   .topic {
     background-color: rgba($color: $accent, $alpha: 0.2);
     height: 50px;
@@ -261,16 +305,17 @@ h5 {
       height: 20px;
       background-color: $accent;
     }
+
     .topic-text {
       color: $accent;
     }
   }
 
-  .news-feed{
+  .news-feed {
     transition: height .3s ease-in-out !important;
   }
 
-  button{
+  button {
     background: none;
     outline: none;
     border: none;
@@ -279,59 +324,111 @@ h5 {
     font-weight: 600;
   }
 
-  .arrow{
+  .arrow {
     width: 14px;
     height: 14px;
   }
 
+  .market-overview {
+    box-shadow: 1px 1px 10px 1px rgba($color: #000000, $alpha: 0.1);
+
+    .currency-btn-set {
+
+      background-color: #fafafa;
+
+      .currency-btn {
+        padding: 1rem;
+        color: black;
+        font-weight: bold;
+      }
+    }
+
+    .main-content {
+      background-color: #fafafa;
+
+      p {
+        font-size: 1.1rem;
+      }
+    }
+
+    .sub-content {
+
+      .bold-val {
+        font-weight: bolder;
+      }
+      span {
+        display: inline-block;
+        font-size: 14px;
+        margin: 1rem 0 !important;
+      }
+
+      .colored-row {
+        background-color: rgba(142, 44, 249, 0.2)
+      }
+    }
+  }
+
 }
+
 .sec-5 {
   .newsheader {
     img {
       width: 50%;
-       @include screen(small){
+
+      @include screen(small) {
         width: 25% !important;
-       }
+      }
     }
+
     h5 {
       font-weight: 300;
+
       &::after {
         background-color: $accent !important;
       }
     }
   }
+
   .newsbody {
     h6 {
       font-weight: bolder;
     }
+
     img {
       width: 75%;
-      @include screen(small){
+
+      @include screen(small) {
         width: 100% !important;
-       }
+      }
     }
   }
 }
+
 footer {
   background-color: $bg;
-  
+
   color: white;
+
   a {
     margin-left: 10px;
     color: white !important;
   }
+
   ul {
     list-style: none;
   }
+
   h4 {
     font-weight: 300;
   }
-  select{
-  background-color: $bg;
-  border: none;
-  color: white;
+
+  select {
+    background-color: $bg;
+    border: none;
+    color: white;
   }
 }
+
 .slider-parent {
   width: 320px;
   height: 360px;
@@ -341,7 +438,7 @@ footer {
   justify-content: center;
   flex-wrap: wrap;
 
-  @include screen(small){
+  @include screen(small) {
     width: 100%;
     height: 250px;
     overflow-x: hidden;
@@ -371,13 +468,14 @@ footer {
       background-color: rgb(179, 179, 179);
       background-position: center;
       background-size: cover;
+
       &:nth-child(1) {
         z-index: 3;
-       }
+      }
 
       &:nth-child(2) {
         z-index: 2;
-       transform: translate3d(50px, 20px, -15px);
+        transform: translate3d(50px, 20px, -15px);
       }
 
       &:nth-child(3) {

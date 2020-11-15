@@ -79,14 +79,21 @@ h5::after {
 }
 
 .green-text {
-  color: #00fcc6;
+  color: #00fc15;
 }
 
 .bottom-line {
   display: block;
   border-radius: 0 0 8px 8px;
-  background-color: #db1753;
   height: 10px;
+}
+
+.line-green {
+  background-color: #00fc15;
+}
+
+.line-pink {
+  background-color: #db1753;
 }
 
 .sec-2 {
@@ -124,10 +131,6 @@ h5::after {
   font-family: "Montserrat", sans-serif;
 }
 
-.sec-2 .small-d .bottom-line {
-  background-color: #00fcc6;
-}
-
 .sec-2 .small-d p {
   font-size: 1.25rem;
 }
@@ -158,7 +161,7 @@ h5::after {
 }
 
 .sec-2 .coin-tokens .green {
-  background-color: #00fcc6;
+  background-color: #00fc15;
   color: black !important;
 }
 
@@ -338,6 +341,43 @@ h5::after {
 .sec-4 .arrow {
   width: 14px;
   height: 14px;
+}
+
+.sec-4 .market-overview {
+  -webkit-box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
+          box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
+}
+
+.sec-4 .market-overview .currency-btn-set {
+  background-color: #fafafa;
+}
+
+.sec-4 .market-overview .currency-btn-set .currency-btn {
+  padding: 1rem;
+  color: black;
+  font-weight: bold;
+}
+
+.sec-4 .market-overview .main-content {
+  background-color: #fafafa;
+}
+
+.sec-4 .market-overview .main-content p {
+  font-size: 1.1rem;
+}
+
+.sec-4 .market-overview .sub-content .bold-val {
+  font-weight: bolder;
+}
+
+.sec-4 .market-overview .sub-content span {
+  display: inline-block;
+  font-size: 14px;
+  margin: 1rem 0 !important;
+}
+
+.sec-4 .market-overview .sub-content .colored-row {
+  background-color: rgba(142, 44, 249, 0.2);
 }
 
 .sec-5 .newsheader img {
