@@ -92,10 +92,15 @@ h5 {
 .bottom-line {
   display: block;
   border-radius: 0 0 $br $br;
-  background-color: $paccent;
+
   height: 10px;
 }
-
+.line-green{
+  background-color: $gaccent;
+}
+.line-pink{
+  background-color: $paccent;
+}
 .sec-2 {
   background-color: $bg;
   color: white;
@@ -130,11 +135,7 @@ h5 {
     .ftext {
       font-family: $Montserrat;
     }
-
-    .bottom-line {
-      background-color: $gaccent;
-    }
-
+    
     p {
       font-size: 1.25rem;
     }

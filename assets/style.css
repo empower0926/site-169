@@ -85,8 +85,15 @@ h5::after {
 .bottom-line {
   display: block;
   border-radius: 0 0 8px 8px;
-  background-color: #db1753;
   height: 10px;
+}
+
+.line-green {
+  background-color: #00fc15;
+}
+
+.line-pink {
+  background-color: #db1753;
 }
 
 .sec-2 {
@@ -122,10 +129,6 @@ h5::after {
 
 .sec-2 .small-d .ftext {
   font-family: "Montserrat", sans-serif;
-}
-
-.sec-2 .small-d .bottom-line {
-  background-color: #00fc15;
 }
 
 .sec-2 .small-d p {

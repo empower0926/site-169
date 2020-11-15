@@ -46,98 +46,56 @@
                                 <h5>Heat map</h5>
                             </div>
                         </div>
-                        <div class="row big_d">
-                            <div class="col-sm-12 pl-0">
-                                <div class="col-sm-2 p-0">
-                                    <div class="sha p-3 ">
-                                        <h4 class="text-center m-auto">SHA256</h4>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-sm-12 text-center my-5">
-                                <h1 class="btc">BTC</h1>
-                                <p>$13,624.67</p>
-                                <p class="pink-text">- 0.67%</p>
-                                <h4 class="mt-5">Dominance: 65,45%</h4>
-                            </div>
-                            <div class="col-sm-12 p-0">
-                                <div class="bottom-line">
-
-                                </div>
-                            </div>
+                        <div id="heatmapContent">
+                            <div id="big-d" class="row big_d"> </div>
+                            <div id="smalldivs"> </div>
                         </div>
-                        <div class="row small-d  mt-4">
-                            <div class="col-sm-12 d-flex pt-3">
-                                <div class="col-sm-7">
-                                    <h4 class="ftext">BCH</h4>
-                                </div>
-                                <div class="col-sm-3">
-                                    <p>$268,63</p>
-                                </div>
-                                <div class="col-sm-2 green-text">
-                                    <p>+1,59%</p>
-                                </div>
-                            </div>
+                        
+                        
 
-                            <div class="col-sm-12 p-0">
-                                <div class="bottom-line">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row small-d  mt-4">
-                            <div class="col-sm-12 d-flex pt-3">
-                                <div class="col-sm-7">
-                                    <h4 class="ftext">BSV</h4>
-                                </div>
-                                <div class="col-sm-3">
-                                    <p>$166,4</p>
-                                </div>
-                                <div class="col-sm-2 green-text">
-                                    <p>+0,87%</p>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12 p-0">
-                                <div class="bottom-line">
-
-                                </div>
-                            </div>
-                        </div>
                         <div class="row mt-5">
                             <div class="col-sm-12 pl-0">
                                 Other Coins & Tokens
                             </div>
                             <div class="col-sm-12 p-0">
                                 <div class="coin-tokens mt-3">
-                                    <a class="green ct d-flex" href="#">
+                                    <a onclick="nextHeatMap('EtHash')" class="green ct d-flex" >
                                         <span>EtHash</span>
                                     </a>
-                                    <a class="pink ct" href="#">
+                                    <a onclick="nextHeatMap('RPCA')" class="pink ct" >
                                         <span>RPCA</span>
                                     </a>
-                                    <a class="pink ct" href="#">
+                                    <a onclick="nextHeatMap('DBFT')" class="pink ct" >
                                         <span>DBFT</span>
                                     </a>
-                                    <a class="green ct" href="#">
+                                    <a onclick="nextHeatMap('DPoS')" class="green ct" >
                                         <span>DPoS</span>
                                     </a>
-                                    <a class="pink ct" href="#">
+                                    <a onclick="nextHeatMap('Scrypt')" class="pink ct" >
                                         <span>Scrypt</span>
                                     </a>
-                                    <a class="pink ct" href="#">
+                                    <a onclick="nextHeatMap('Other')" class="pink ct" >
                                         <span>Other</span>
                                     </a>
-                                    <a class="green ct last" href="#">
+                                    <a onclick="nextHeatMap('PoS')" class="green ct last" >
                                         <span>PoS</span>
                                     </a>
                                 </div>
                             </div>
                             <div class="col-sm-12  text-right mt-4">
-                                <a href="#">
-                                    <p class="green-text ">Show All</p>
-                                </a>
+                                <div>
+                                    <a id="showall" onclick="allHeatMap(0,4)">
+                                        <p class="green-text ">Show All</p>
+                                    </a>
+                                    <a id="next" class="d-none" onclick="allHeatMap(4,8)">
+                                        <p class="green-text ">Next</p>
+                                    </a>
+                                    <a id="prev" class="d-none" onclick="allHeatMap(0,4)">
+                                        <p class="green-text ">Next</p>
+                                    </a>
+                                   
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -165,7 +123,7 @@
                                 <h4 class="mt-5">Dominance: 65,45%</h4>
                             </div>
                             <div class="col-sm-12 p-0">
-                                <div class="bottom-line">
+                                <div id="big-bl" class="bottom-line line-pink">
 
                                 </div>
                             </div>
@@ -184,7 +142,7 @@
                             </div>
 
                             <div class="col-sm-12 p-0">
-                                <div class="bottom-line">
+                                <div class="bottom-line line-green">
 
                                 </div>
                             </div>
@@ -203,7 +161,7 @@
                             </div>
 
                             <div class="col-sm-12 p-0">
-                                <div class="bottom-line">
+                                <div class="bottom-line line-green">
 
                                 </div>
                             </div>
