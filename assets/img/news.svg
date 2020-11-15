@@ -1,0 +1,3 @@
+<svg id="news" xmlns="http://www.w3.org/2000/svg" width="16" height="18" viewBox="0 0 16 18">
+  <path id="Shape" d="M15,18H1a1,1,0,0,1-1-1V1A1,1,0,0,1,1,0H15a1,1,0,0,1,1,1V17A1,1,0,0,1,15,18ZM2,2V16H14V2ZM12,14H4V13h8v1Zm0-2H10V11h2v1ZM9,12H4V11H9v1Zm3-2H7V9h5v1ZM6,10H4V9H6v1Zm6-2H8V7h4V8ZM7,8H4V4H7V8Zm5-2H8V4h4V6Z" fill="#7a50ff"/>
+</svg>
