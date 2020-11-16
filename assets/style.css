@@ -348,14 +348,24 @@ h5::after {
           box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
 }
 
-.sec-4 .market-overview .currency-btn-set {
-  background-color: #fafafa;
+.sec-4 .market-overview .price {
+  font-weight: 600;
 }
 
 .sec-4 .market-overview .currency-btn-set .currency-btn {
+  -webkit-box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.2), -1px -1px 5px 0 rgba(255, 255, 255, 0.5);
+          box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.2), -1px -1px 5px 0 rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+  margin-left: 4px;
   padding: 1rem;
   color: black;
   font-weight: bold;
+  margin-top: 5px;
+}
+
+.sec-4 .market-overview .currency-btn-set .selected-btn {
+  -webkit-box-shadow: inset 1px 1px 5px 0 rgba(0, 0, 0, 0.2), inset -1px -1px 5px 0 rgba(255, 255, 255, 0.5);
+          box-shadow: inset 1px 1px 5px 0 rgba(0, 0, 0, 0.2), inset -1px -1px 5px 0 rgba(255, 255, 255, 0.5);
 }
 
 .sec-4 .market-overview .main-content {
@@ -469,8 +479,6 @@ footer select {
   position: relative;
   -webkit-perspective: 100;
           perspective: 100;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
 }

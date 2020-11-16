@@ -25,7 +25,7 @@ let defiFeed;
 let newsFeed;
 let blockchainFeed;
 let coinsFeed;
-let coinfeedNames=['SHA256','EtHash','RPCA','DBFT','DPoS','Scrypt','Other','PoS'];
+let coinfeedNames = ['SHA256', 'EtHash', 'RPCA', 'DBFT', 'DPoS', 'Scrypt', 'Other', 'PoS'];
 let SHA256Feed = [];
 let EtHashFeed = [];
 let RPCAFeed = [];
@@ -182,7 +182,7 @@ function nextHeatMap(cointype) {
             maximumFractionDigits: 2
         });
         price = formatter.format(Math.round(price));
-        let rate=item.day;
+        let rate = item.day;
         if (index == 0) {
             let btd = document.createElement('div');
             btd.className = "col-sm-12 pl-0";
@@ -202,7 +202,7 @@ function nextHeatMap(cointype) {
             let ratep = document.createElement('p');
             ratep.innerText = '$' + price;
             let presentage = document.createElement('p');
-            
+
             let dominance = document.createElement('h4');
             dominance.className = "mt-5";
             dominance.innerText = rate + '%';
@@ -214,7 +214,7 @@ function nextHeatMap(cointype) {
             if (rate > 0) {
                 bottom.className = 'bottom-line line-green';
                 presentage.className = 'green-text';
-                presentage.innerText = "+"+rate + '%';
+                presentage.innerText = "+" + rate + '%';
             } else {
                 bottom.className = 'bottom-line line-pink';
                 presentage.className = 'pink-text';
@@ -255,7 +255,7 @@ function nextHeatMap(cointype) {
             let sprd = document.createElement('div');
             sprd.className = "col-sm-2";
             let prp = document.createElement('p');
-            
+
 
 
             let bld = document.createElement('div');
@@ -266,7 +266,7 @@ function nextHeatMap(cointype) {
             if (rate > 0) {
                 prp.className = 'green-text';
                 bl.className = "bottom-line line-green"
-                prp.innerText = '+'+rate + '%';
+                prp.innerText = '+' + rate + '%';
             } else {
                 prp.className = 'pink-text';
                 bl.className = "bottom-line line-pink"
@@ -345,7 +345,7 @@ function allHeatMap(start, end) {
                 maximumFractionDigits: 2
             });
             price = formatter.format(Math.round(price));
-            let rate=item.day;
+            let rate = item.day;
             if (index == 0) {
                 let btd = document.createElement('div');
                 btd.className = "col-sm-12 pl-0";
@@ -365,7 +365,7 @@ function allHeatMap(start, end) {
                 let ratep = document.createElement('p');
                 ratep.innerText = '$' + price;
                 let presentage = document.createElement('p');
-                
+
                 let dominance = document.createElement('h4');
                 dominance.className = "mt-5";
                 dominance.innerText = rate + '%';
@@ -377,7 +377,7 @@ function allHeatMap(start, end) {
                 if (rate > 0) {
                     bottom.className = 'bottom-line line-green';
                     presentage.className = 'green-text';
-                    presentage.innerText = '+'+rate + '%';
+                    presentage.innerText = '+' + rate + '%';
                 } else {
                     bottom.className = 'bottom-line line-pink';
                     presentage.className = 'pink-text';
@@ -419,7 +419,7 @@ function allHeatMap(start, end) {
                 let sprd = document.createElement('div');
                 sprd.className = "col-sm-2";
                 let prp = document.createElement('p');
-                
+
 
 
                 let bld = document.createElement('div');
@@ -430,7 +430,7 @@ function allHeatMap(start, end) {
                 if (rate > 0) {
                     prp.className = 'green-text';
                     bl.className = "bottom-line line-green"
-                    prp.innerText = '+'+rate + '%';
+                    prp.innerText = '+' + rate + '%';
                 } else {
                     prp.className = 'pink-text';
                     bl.className = "bottom-line line-pink"
@@ -520,17 +520,21 @@ setInterval(() => {
 
 
 function setMarketData(crypto, currency, cs) {
+    
     if (crypto === 'BTC') {
+        document.getElementById(crypto + selectedBTC).className = 'currency-btn ';
         selectedBTC = currency;
         currencySymbolBTC = cs;
     } else if (crypto === 'ETH') {
+        document.getElementById(crypto + selectedETH).className = 'currency-btn ';
         selectedETH = currency;
         currencySymbolETH = cs;
     } else {
+        document.getElementById(crypto + selectedLTC).className = 'currency-btn ';
         selectedLTC = currency;
         currencySymbolLTC = cs;
     }
-
+    document.getElementById(crypto + currency).className = 'currency-btn selected-btn';
     if (MARKET !== undefined) {
         let values = MARKET.data[crypto][currency];
         let parent = document.getElementById(crypto + '-market-overview');
@@ -548,7 +552,7 @@ function setMarketData(crypto, currency, cs) {
             if (values.day > 0) {
                 day.innerHTML = '+' + values.day + '%';
                 day.style.color = GREEN;
-            } else if (values.day < 0){
+            } else if (values.day < 0) {
                 day.innerHTML = values.day + '%';
                 day.style.color = PINK;
             } else {
