@@ -37,6 +37,7 @@ let PoSFeed = [];
 let currentHMcointype;
 let isShowinAll = false;
 
+
 function generateURL(category) {
     return URL + "categories=" + category;
 }
@@ -47,7 +48,6 @@ setData(coinsURL).then((val) => {
     currentHMcointype = 'SHA256';
     nextHeatMap('SHA256');
     coinbtncoloring();
-
     document.getElementById("SHA256btn").style.display = "none";
     setInterval(function () {
         if (!isShowinAll) {
@@ -98,8 +98,7 @@ function coinbtncoloring() {
 
         let ct = coinfeedNames[count];
         let btn = document.getElementById(ct + "btn");
-       
-        if(feed[0].day==0){
+         if(feed[0].day==0){
             btn.style.backgroundColor='#fff';
             btn.style.color='#000';
             btn.className = "ct";
@@ -124,9 +123,16 @@ function setNewData() {
     });
 }
 
-function nextHeatMap(cointype) {
+function nextHeatMap(cointype) 
+{
+    
+    if(isShowinAll){
+        document.getElementById('showall').className = "";
+        document.getElementById('prev').className = "d-none";
+        document.getElementById('next').className = "d-none";
+    }
     isShowinAll = false;
-    setNewData();
+     setNewData();
     let feed;
     let coinName = [];
     if (currentHMcointype != cointype) {
@@ -217,8 +223,7 @@ function nextHeatMap(cointype) {
             bbd.className = "col-sm-12 p-0";
             let bottom = document.createElement('div');
             if(rate==0){
-                alert();
-                bottom.style.backgroundColor='#fff';
+                 bottom.style.backgroundColor='#fff';
                 bottom.className = 'bottom-line';
                 presentage.style.color='#fff';
                 presentage.innerText = rate + '%';
@@ -493,7 +498,7 @@ function allHeatMap(start, end) {
         document.getElementById('next').className = "d-none";
         document.getElementById('prev').className = "";
     }
-
+    smoothscroll('#sec-2');
 }
 
 setData(generateURL(BITCOIN)).then((val) => {
@@ -587,7 +592,7 @@ function setMarketData(crypto, currency, cs) {
                 day.style.color = PINK;
             } else {
                 day.innerHTML = values.day;
-                day.style.color = '#fff';
+                day.style.color = '#000';
             }
 
             let week = parent.querySelector('.week');
@@ -1051,3 +1056,19 @@ function slide(topic) {
     behind.style.transform = "translate3d(0, 0, 0)";
     last.style.transform = "translate3d(70px, 0, -15px)";
 }
+
+function smoothscroll(hash,topic) {
+    if(topic!=undefined){
+        nextHeatMap(topic);
+    }
+
+    $("html, body").animate(
+      {
+        scrollTop: $(hash).offset().top,
+      },
+      800,
+      function () {
+        window.location.hash = hash;
+      }
+    );
+  }
