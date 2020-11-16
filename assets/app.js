@@ -24,9 +24,7 @@ let businessFeed;
 let defiFeed;
 let newsFeed;
 let blockchainFeed;
-
 let coinsFeed;
-let coinfeedNames=['SHA256','EtHash','RPCA','DBFT','DPoS','Scrypt','Other','PoS'];
 let SHA256Feed=[];
 let EtHashFeed=[];
 let RPCAFeed=[];
@@ -35,7 +33,6 @@ let DPoSFeed=[];
 let ScryptFeed=[];
 let OtherFeed=[];
 let PoSFeed=[];
-let currentHMcointype;
 
 function generateURL(category) {
     return URL + "categories=" + category;
@@ -43,9 +40,9 @@ function generateURL(category) {
 
 setData(coinsURL).then((val) => {
     coinsFeed = JSON.parse(val);
-    devidingfeed();
+    dividingfeed();
 });
- function devidingfeed(){
+ function dividingfeed(){
     SHA256Feed.push(coinsFeed['data'].BTC.USD);
     SHA256Feed.push(coinsFeed['data'].BCH.USD);
     SHA256Feed.push(coinsFeed['data'].BSV.USD);
@@ -72,41 +69,15 @@ setData(coinsURL).then((val) => {
   coinsFeed=[];
   coinsFeed.push(SHA256Feed,EtHashFeed,RPCAFeed,DBFTFeed,DPoSFeed,ScryptFeed,OtherFeed,PoSFeed);
 
-    currentHMcointype='SHA256';
-    nextHeatMap('SHA256');
-    coinbtncoloring();
 
+    nextHeatMap('SHA256');
  }
- function coinbtncoloring(){
-    let count=0;
-    coinsFeed.forEach(feed => {
-       
-        let ct=coinfeedNames[count];
-        let btn=document.getElementById(ct+"btn");
-        if(feed[0].day>0){
-            btn.className="green ct ";
-        }else{
-            btn.className="pink ct ";
-        }
-        count++;
-    });
- }
- 
  function nextHeatMap(cointype){
     
      let feed;
      let topic=cointype;
      let coinName=[];
-     if(currentHMcointype!=cointype){
-     let removebtn=document.getElementById(cointype+"btn");
-     removebtn.style.display = "none";
-     removebtn.className =removebtn.className.split("d-flex");
-     
-     let newbtn=document.getElementById(currentHMcointype+"btn");
-     newbtn.style.display = "block";
-     newbtn.className =newbtn.className + " d-flex";
-     currentHMcointype=cointype;
-     }
+
     switch (cointype) {
         case "SHA256":
             feed = SHA256Feed;
@@ -252,9 +223,7 @@ setData(coinsURL).then((val) => {
             }
             document.getElementById('heatmapContent').appendChild(bigd);
             document.getElementById('heatmapContent').appendChild(smalldivs);  
-            document.getElementById('showall').className="d-block";
-            document.getElementById('prev').className="d-none";
-            document.getElementById('next').className="d-none";
+    
 
  }
 function allHeatMap(start,end){
@@ -478,8 +447,6 @@ function setMarketData(crypto, currency, cs) {
 
     if (MARKET !== undefined) {
         let values = MARKET.data[crypto][currency];
-        console.log(cs);
-        console.log(values);
         let parent = document.getElementById(crypto + '-market-overview');
         if (parent !== null) {
             let price = parent.querySelector('.price');
@@ -540,7 +507,6 @@ function setMarketData(crypto, currency, cs) {
 
             let vol = parent.querySelector('.vol');
             let moneyFormat_vol = getMoneyFormat(values.volume);
-            console.log('volume '+moneyFormat_vol);
             vol.innerHTML = crypto + ' ' + parseFloat(moneyFormat_vol).toFixed(2) + moneyFormat_vol.replace((/N?[^T|B|M|K]/g), "");
 
             let vol_dot = parent.querySelector('.vol-dot');
