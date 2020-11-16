@@ -7,7 +7,7 @@ const PINK = '#db1753';
 
 const imgURL = "https://flashgroupnews.com/wp-json/wp/v2/media/";
 const URL = "https://flashgroupnews.com/wp-json/wp/v2/posts?";
-const coinsURL="https://ticker-api.cointelegraph.com/rates/?full=true";
+const coinsURL = "https://ticker-api.cointelegraph.com/rates/?full=true";
 
 const currentPosts = new Set();
 
@@ -25,34 +25,55 @@ let defiFeed;
 let newsFeed;
 let blockchainFeed;
 let coinsFeed;
-let SHA256Feed=[];
-let EtHashFeed=[];
-let RPCAFeed=[];
-let DBFTFeed=[];
-let DPoSFeed=[];
-let ScryptFeed=[];
-let OtherFeed=[];
-let PoSFeed=[];
+let SHA256Feed = [];
+let EtHashFeed = [];
+let RPCAFeed = [];
+let DBFTFeed = [];
+let DPoSFeed = [];
+let ScryptFeed = [];
+let OtherFeed = [];
+let PoSFeed = [];
+let currentHMcointype;
+let isShowinAll = false;
 
 function generateURL(category) {
     return URL + "categories=" + category;
 }
 
 setData(coinsURL).then((val) => {
-    coinsFeed = JSON.parse(val);
-    dividingfeed();
+    coinsFeed = val;
+    devidingfeed();
+    currentHMcointype = 'SHA256';
+    nextHeatMap('SHA256');
+    coinbtncoloring();
+
+    document.getElementById("SHA256btn").style.display = "none";
+    setInterval(function () {
+        if (!isShowinAll) {
+            nextHeatMap(currentHMcointype);
+        }
+    }, 10000);
 });
- function dividingfeed(){
+
+function devidingfeed() {
+    SHA256Feed = [];
+    EtHashFeed = [];
+    RPCAFeed = [];
+    DBFTFeed = [];
+    DPoSFeed = [];
+    ScryptFeed = [];
+    OtherFeed = [];
+    PoSFeed = [];
     SHA256Feed.push(coinsFeed['data'].BTC.USD);
     SHA256Feed.push(coinsFeed['data'].BCH.USD);
     SHA256Feed.push(coinsFeed['data'].BSV.USD);
 
     EtHashFeed.push(coinsFeed['data'].ETH.USD);
     EtHashFeed.push(coinsFeed['data'].ETC.USD);
-   // EtHashFeed.push(coinsFeed['data'].WAN.USD);
+    // EtHashFeed.push(coinsFeed['data'].WAN.USD);
 
     RPCAFeed.push(coinsFeed['data'].XRP.USD);
-    
+
     DBFTFeed.push(coinsFeed['data'].BNB.USD);
     DBFTFeed.push(coinsFeed['data'].NEO.USD);
     DBFTFeed.push(coinsFeed['data'].ATOM.USD);
@@ -66,26 +87,60 @@ setData(coinsURL).then((val) => {
     OtherFeed.push(coinsFeed['data'].ONT.USD);
 
     PoSFeed.push(coinsFeed['data'].XTZ.USD);
-  coinsFeed=[];
-  coinsFeed.push(SHA256Feed,EtHashFeed,RPCAFeed,DBFTFeed,DPoSFeed,ScryptFeed,OtherFeed,PoSFeed);
+    coinsFeed = [];
+    coinsFeed.push(SHA256Feed, EtHashFeed, RPCAFeed, DBFTFeed, DPoSFeed, ScryptFeed, OtherFeed, PoSFeed);
+}
 
+function coinbtncoloring() {
+    let count = 0;
+    coinsFeed.forEach(feed => {
 
-    nextHeatMap('SHA256');
- }
- function nextHeatMap(cointype){
-    
-     let feed;
-     let topic=cointype;
-     let coinName=[];
+        let ct = coinfeedNames[count];
+        let btn = document.getElementById(ct + "btn");
+        if (feed[0].day > 0) {
+            btn.className = "green ct";
+        } else {
+            btn.className = "pink ct";
+        }
+        if (ct != currentHMcointype) {
+            btn.className = btn.className + " d-flex";
+        }
 
+        count++;
+    });
+}
+
+function setNewData() {
+    setData(coinsURL).then((val) => {
+        coinsFeed = val;
+        devidingfeed();
+        coinbtncoloring();
+    });
+}
+
+function nextHeatMap(cointype) {
+    isShowinAll = false;
+    setNewData();
+    let feed;
+    let coinName = [];
+    if (currentHMcointype != cointype) {
+        let removebtn = document.getElementById(cointype + "btn");
+        removebtn.style.display = "none";
+        removebtn.className = removebtn.className.split("d-flex");
+
+        let newbtn = document.getElementById(currentHMcointype + "btn");
+        newbtn.style.display = "block";
+        newbtn.className = newbtn.className + " d-flex";
+        currentHMcointype = cointype;
+    }
     switch (cointype) {
         case "SHA256":
             feed = SHA256Feed;
-           coinName.push('BTC','BCH','BSV');
+            coinName.push('BTC', 'BCH', 'BSV');
             break;
         case "EtHash":
             feed = EtHashFeed;
-            coinName.push('ETH','ETC');
+            coinName.push('ETH', 'ETC');
             break;
         case "RPCA":
             feed = RPCAFeed;
@@ -93,156 +148,158 @@ setData(coinsURL).then((val) => {
             break;
         case "DBFT":
             feed = DBFTFeed;
-            coinName.push('BNB','NEO','ATOM');
+            coinName.push('BNB', 'NEO', 'ATOM');
             break;
         case "DPoS":
             feed = DPoSFeed;
-            
+
             coinName.push('EOS');
             break;
         case "Scrypt":
             feed = ScryptFeed;
-            coinName.push('LTC','DOGE');
+            coinName.push('LTC', 'DOGE');
             break;
         case "Other":
-            feed =OtherFeed;
-            coinName.push('XEM','ONT');
+            feed = OtherFeed;
+            coinName.push('XEM', 'ONT');
             break;
         case "PoS":
-            feed =PoSFeed;
+            feed = PoSFeed;
             coinName.push('XTZ');
             break;
     }
-    document.getElementById('heatmapContent').innerHTML="";
-    let bigd=document.createElement('div');
-        bigd.className='row big_d';
-        let smalldivs=document.createElement('div');
-        for (let index = 0; index < feed.length; index++) {
-            const item = feed[index];
-            let price=new String(item.price);
-            price=price.substring(1,15);
-                if(index==0){
-                let btd=document.createElement('div');
-                btd.className="col-sm-12 pl-0";
-                    let btdd=document.createElement('div');
-                    btdd.className="col-sm-2 p-0";
-                        let bttdd=document.createElement('div');
-                        bttdd.className="sha p-3";
-                            let topich4=document.createElement('h4');
-                            topich4.className="text-center m-auto";
-                            topich4.innerText=topic;
-        
-                let bcd=document.createElement('div');
-                 bcd.className="col-sm-12 text-center my-5";
-                    let coinname=document.createElement('h1');
-                    coinname.className="btc";
-                    coinname.innerText=coinName[index];
-                    let rate=document.createElement('p');
-                    rate.innerText='$'+price;
-                    let presentage=document.createElement('p');
-                    presentage.innerText=item.day+'%';
-                    let dominance=document.createElement('h4');
-                    dominance.className="mt-5";
-                    dominance.innerText=item.day+'%';
-        
-        
-                 let bbd=document.createElement('div');
-                 bbd.className="col-sm-12 p-0";
-                 let bottom=document.createElement('div');
-              if(item.day>0){
-                    bottom.className='bottom-line line-green';
-                    presentage.className='green-text';
-                }else{
-                    bottom.className='bottom-line line-pink';
-                    presentage.className='pink-text';
-                }
-                bigd.appendChild(btd);
-                btd.appendChild(btdd);
-                btdd.appendChild(bttdd);
-                bttdd.appendChild(topich4);
-                bigd.appendChild(bcd);
-                bcd.appendChild(coinname);
-                bcd.appendChild(rate);
-                bcd.appendChild(presentage);
-                bcd.appendChild(dominance);
-                bigd.appendChild(bbd);
-                bbd.appendChild(bottom);
-        
-        
-                }
-                else{
-                let sd=document.createElement('div');
-                sd.className="row small-d  mt-4";
-               
-               
-                let srd=document.createElement('div');
-                srd.className="col-sm-12 d-flex pt-3";
-                
-                 let scnd=document.createElement('div');
-                 scnd.className="col-sm-7";
-                 let coinnameh4=document.createElement('h4');
-                 coinnameh4.className="ftext";
-                 coinnameh4.innerText=coinName[index];
-         
-                 let srrd=document.createElement('div');
-                 srrd.className="col-sm-3";
-                 let ratep=document.createElement('p');
-                 ratep.innerText='$'+price;
-         
-                 let sprd=document.createElement('div');
-                 sprd.className="col-sm-2";
-                 let prp=document.createElement('p');
-                 prp.innerText=item.day+'%';
-         
-         
-                 let bld=document.createElement('div');
-                 bld.className="col-sm-12 p-0";
-                  let bl=document.createElement('div');
-                  bl.className="bottom-line";
-                
-                 if(item.day>0){
-                    prp.className='green-text';
-                     bl.className="bottom-line line-green"
-                 }else{
-                     prp.className='pink-text';
-                     bl.className="bottom-line line-pink"
-                 }
-                 smalldivs.appendChild(sd);
-                
-                 sd.appendChild(srd);
-                 srd.appendChild(scnd);
-                 srd.appendChild(srrd);
-                 srd.appendChild(sprd);
-                 scnd.appendChild(coinnameh4);
-                 srrd.appendChild(ratep);
-                 sprd.appendChild(prp);
-                 sd.appendChild(bld);
-                 bld.appendChild(bl);
-                
-                }
-            }
-            document.getElementById('heatmapContent').appendChild(bigd);
-            document.getElementById('heatmapContent').appendChild(smalldivs);  
-    
 
- }
-function allHeatMap(start,end){
-    let coinName=[];
+    document.getElementById('heatmapContent').innerHTML = "";
+    let bigd = document.createElement('div');
+    bigd.className = 'row big_d';
+    let smalldivs = document.createElement('div');
+    for (let index = 0; index < feed.length; index++) {
+        const item = feed[index];
+        let price = new String(item.price);
+        price = price.substring(1, 15);
+        if (index == 0) {
+            let btd = document.createElement('div');
+            btd.className = "col-sm-12 pl-0";
+            let btdd = document.createElement('div');
+            btdd.className = "col-sm-2 p-0";
+            let bttdd = document.createElement('div');
+            bttdd.className = "sha p-3";
+            let topich4 = document.createElement('h4');
+            topich4.className = "text-center m-auto";
+            topich4.innerText = cointype;
+
+            let bcd = document.createElement('div');
+            bcd.className = "col-sm-12 text-center my-5";
+            let coinname = document.createElement('h1');
+            coinname.className = "btc";
+            coinname.innerText = coinName[index];
+            let rate = document.createElement('p');
+            rate.innerText = '$' + price;
+            let presentage = document.createElement('p');
+            presentage.innerText = item.day + '%';
+            let dominance = document.createElement('h4');
+            dominance.className = "mt-5";
+            dominance.innerText = item.day + '%';
+
+
+            let bbd = document.createElement('div');
+            bbd.className = "col-sm-12 p-0";
+            let bottom = document.createElement('div');
+            if (item.day > 0) {
+                bottom.className = 'bottom-line line-green';
+                presentage.className = 'green-text';
+            } else {
+                bottom.className = 'bottom-line line-pink';
+                presentage.className = 'pink-text';
+            }
+            bigd.appendChild(btd);
+            btd.appendChild(btdd);
+            btdd.appendChild(bttdd);
+            bttdd.appendChild(topich4);
+            bigd.appendChild(bcd);
+            bcd.appendChild(coinname);
+            bcd.appendChild(rate);
+            bcd.appendChild(presentage);
+            bcd.appendChild(dominance);
+            bigd.appendChild(bbd);
+            bbd.appendChild(bottom);
+
+
+        } else {
+            let sd = document.createElement('div');
+            sd.className = "row small-d  mt-4";
+
+
+            let srd = document.createElement('div');
+            srd.className = "col-sm-12 d-flex pt-3";
+
+            let scnd = document.createElement('div');
+            scnd.className = "col-sm-7";
+            let coinnameh4 = document.createElement('h4');
+            coinnameh4.className = "ftext";
+            coinnameh4.innerText = coinName[index];
+
+            let srrd = document.createElement('div');
+            srrd.className = "col-sm-3";
+            let ratep = document.createElement('p');
+            ratep.innerText = '$' + price;
+
+            let sprd = document.createElement('div');
+            sprd.className = "col-sm-2";
+            let prp = document.createElement('p');
+            prp.innerText = item.day + '%';
+
+
+            let bld = document.createElement('div');
+            bld.className = "col-sm-12 p-0";
+            let bl = document.createElement('div');
+            bl.className = "bottom-line";
+
+            if (item.day > 0) {
+                prp.className = 'green-text';
+                bl.className = "bottom-line line-green"
+            } else {
+                prp.className = 'pink-text';
+                bl.className = "bottom-line line-pink"
+            }
+            smalldivs.appendChild(sd);
+
+            sd.appendChild(srd);
+            srd.appendChild(scnd);
+            srd.appendChild(srrd);
+            srd.appendChild(sprd);
+            scnd.appendChild(coinnameh4);
+            srrd.appendChild(ratep);
+            sprd.appendChild(prp);
+            sd.appendChild(bld);
+            bld.appendChild(bl);
+
+        }
+    }
+    document.getElementById('heatmapContent').appendChild(bigd);
+    document.getElementById('heatmapContent').appendChild(smalldivs);
+
+
+}
+
+function allHeatMap(start, end) {
+    isShowinAll = true;
+    let coinName = [];
     let topic;
-    document.getElementById('heatmapContent').innerHTML="";
-    for (let j= start; j< end; j++) {
-        let bigd=document.createElement('div');
-        bigd.className='row big_d mt-5';
-        let smalldivs=document.createElement('div');
+    document.getElementById('heatmapContent').innerHTML = "";
+    for (let j = start; j < end; j++) {
+        let bigd = document.createElement('div');
+        bigd.className = 'row big_d mt-5';
+        let smalldivs = document.createElement('div');
         const feed = coinsFeed[j];
         switch (j) {
             case 0:
-                topic= 'SHA256';
-               coinName.push('BTC','BCH','BSV');
+                topic = 'SHA256';
+                coinName.push('BTC', 'BCH', 'BSV');
                 break;
             case 1:
                 topic = 'EtHash';
-                coinName.push('ETH','ETC');
+                coinName.push('ETH', 'ETC');
                 break;
             case 2:
                 topic = 'RPCA';
@@ -250,7 +307,7 @@ function allHeatMap(start,end){
                 break;
             case 3:
                 topic = 'DBFT';
-                coinName.push('BNB','NEO','ATOM');
+                coinName.push('BNB', 'NEO', 'ATOM');
                 break;
             case 4:
                 topic = 'DPoS';
@@ -258,56 +315,56 @@ function allHeatMap(start,end){
                 break;
             case 5:
                 topic = 'Scrypt';
-                coinName.push('LTC','DOGE');
+                coinName.push('LTC', 'DOGE');
                 break;
             case 6:
-                topic ='Other';
-                coinName.push('XEM','ONT');
+                topic = 'Other';
+                coinName.push('XEM', 'ONT');
                 break;
             case 7:
-                topic ='PoS';
+                topic = 'PoS';
                 coinName.push('XTZ');
                 break;
         }
         for (let index = 0; index < feed.length; index++) {
-            
+
             const item = feed[index];
-            let price=new String(item.price);
-            price=price.substring(1,15);
-                if(index==0){
-                let btd=document.createElement('div');
-                btd.className="col-sm-12 pl-0";
-                    let btdd=document.createElement('div');
-                    btdd.className="col-sm-2 p-0";
-                        let bttdd=document.createElement('div');
-                        bttdd.className="sha p-3";
-                            let topich4=document.createElement('h4');
-                            topich4.className="text-center m-auto";
-                            topich4.innerText=topic;
-        
-                let bcd=document.createElement('div');
-                 bcd.className="col-sm-12 text-center my-5";
-                    let coinname=document.createElement('h1');
-                    coinname.className="btc";
-                    coinname.innerText=coinName[index];
-                    let rate=document.createElement('p');
-                    rate.innerText='$'+price;
-                    let presentage=document.createElement('p');
-                    presentage.innerText=item.day+'%';
-                    let dominance=document.createElement('h4');
-                    dominance.className="mt-5";
-                    dominance.innerText=item.day+'%';
-        
-        
-                 let bbd=document.createElement('div');
-                 bbd.className="col-sm-12 p-0";
-                 let bottom=document.createElement('div');
-              if(item.day>0){
-                    bottom.className='bottom-line line-green';
-                    presentage.className='green-text';
-                }else{
-                    bottom.className='bottom-line line-pink';
-                    presentage.className='pink-text';
+            let price = new String(item.price);
+            price = price.substring(1, 15);
+            if (index == 0) {
+                let btd = document.createElement('div');
+                btd.className = "col-sm-12 pl-0";
+                let btdd = document.createElement('div');
+                btdd.className = "col-sm-2 p-0";
+                let bttdd = document.createElement('div');
+                bttdd.className = "sha p-3";
+                let topich4 = document.createElement('h4');
+                topich4.className = "text-center m-auto";
+                topich4.innerText = topic;
+
+                let bcd = document.createElement('div');
+                bcd.className = "col-sm-12 text-center my-5";
+                let coinname = document.createElement('h1');
+                coinname.className = "btc";
+                coinname.innerText = coinName[index];
+                let rate = document.createElement('p');
+                rate.innerText = '$' + price;
+                let presentage = document.createElement('p');
+                presentage.innerText = item.day + '%';
+                let dominance = document.createElement('h4');
+                dominance.className = "mt-5";
+                dominance.innerText = item.day + '%';
+
+
+                let bbd = document.createElement('div');
+                bbd.className = "col-sm-12 p-0";
+                let bottom = document.createElement('div');
+                if (item.day > 0) {
+                    bottom.className = 'bottom-line line-green';
+                    presentage.className = 'green-text';
+                } else {
+                    bottom.className = 'bottom-line line-pink';
+                    presentage.className = 'pink-text';
                 }
                 bigd.appendChild(btd);
                 btd.appendChild(btdd);
@@ -320,99 +377,98 @@ function allHeatMap(start,end){
                 bcd.appendChild(dominance);
                 bigd.appendChild(bbd);
                 bbd.appendChild(bottom);
-        
-       
+
+
+            } else {
+
+                let sd = document.createElement('div');
+                sd.className = "row small-d  mt-4";
+
+
+                let srd = document.createElement('div');
+                srd.className = "col-sm-12 d-flex pt-3";
+
+                let scnd = document.createElement('div');
+                scnd.className = "col-sm-7";
+                let coinnameh4 = document.createElement('h4');
+                coinnameh4.className = "ftext";
+                coinnameh4.innerText = coinName[index];
+
+                let srrd = document.createElement('div');
+                srrd.className = "col-sm-3";
+                let ratep = document.createElement('p');
+                ratep.innerText = '$' + price;
+
+                let sprd = document.createElement('div');
+                sprd.className = "col-sm-2";
+                let prp = document.createElement('p');
+                prp.innerText = item.day + '%';
+
+
+                let bld = document.createElement('div');
+                bld.className = "col-sm-12 p-0";
+                let bl = document.createElement('div');
+                bl.className = "bottom-line";
+
+                if (item.day > 0) {
+                    prp.className = 'green-text';
+                    bl.className = "bottom-line line-green"
+                } else {
+                    prp.className = 'pink-text';
+                    bl.className = "bottom-line line-pink"
                 }
-                else{
-                   
-                let sd=document.createElement('div');
-                sd.className="row small-d  mt-4";
-               
-               
-                let srd=document.createElement('div');
-                srd.className="col-sm-12 d-flex pt-3";
-                
-                 let scnd=document.createElement('div');
-                 scnd.className="col-sm-7";
-                 let coinnameh4=document.createElement('h4');
-                 coinnameh4.className="ftext";
-                 coinnameh4.innerText=coinName[index];
-         
-                 let srrd=document.createElement('div');
-                 srrd.className="col-sm-3";
-                 let ratep=document.createElement('p');
-                 ratep.innerText='$'+price;
-         
-                 let sprd=document.createElement('div');
-                 sprd.className="col-sm-2";
-                 let prp=document.createElement('p');
-                 prp.innerText=item.day+'%';
-         
-         
-                 let bld=document.createElement('div');
-                 bld.className="col-sm-12 p-0";
-                  let bl=document.createElement('div');
-                  bl.className="bottom-line";
-                
-                 if(item.day>0){
-                    prp.className='green-text';
-                     bl.className="bottom-line line-green"
-                 }else{
-                     prp.className='pink-text';
-                     bl.className="bottom-line line-pink"
-                 }
-                 smalldivs.appendChild(sd);
-                
-                 sd.appendChild(srd);
-                 srd.appendChild(scnd);
-                 srd.appendChild(srrd);
-                 srd.appendChild(sprd);
-                 scnd.appendChild(coinnameh4);
-                 srrd.appendChild(ratep);
-                 sprd.appendChild(prp);
-                 sd.appendChild(bld);
-                 bld.appendChild(bl);
-                
-                }
+                smalldivs.appendChild(sd);
+
+                sd.appendChild(srd);
+                srd.appendChild(scnd);
+                srd.appendChild(srrd);
+                srd.appendChild(sprd);
+                scnd.appendChild(coinnameh4);
+                srrd.appendChild(ratep);
+                sprd.appendChild(prp);
+                sd.appendChild(bld);
+                bld.appendChild(bl);
+
             }
-            coinName=[];
-            document.getElementById('heatmapContent').appendChild(bigd);
-            document.getElementById('heatmapContent').appendChild(smalldivs);  
-     }
-    if(start==0){
-        document.getElementById('showall').className="d-none";
-        document.getElementById('prev').className="d-none";
-        document.getElementById('next').className="";
-    }else if(start==4){
-        document.getElementById('showall').className="d-none";
-        document.getElementById('next').className="d-none";
-        document.getElementById('prev').className="";
+        }
+        coinName = [];
+        document.getElementById('heatmapContent').appendChild(bigd);
+        document.getElementById('heatmapContent').appendChild(smalldivs);
+    }
+    if (start == 0) {
+        document.getElementById('showall').className = "d-none";
+        document.getElementById('prev').className = "d-none";
+        document.getElementById('next').className = "";
+    } else if (start == 4) {
+        document.getElementById('showall').className = "d-none";
+        document.getElementById('next').className = "d-none";
+        document.getElementById('prev').className = "";
     }
 
 }
 
 setData(generateURL(BITCOIN)).then((val) => {
-    bitcoinFeed = JSON.parse(val);
+    bitcoinFeed = val;
     nextArticle("bitcoin");
 });
 setData(generateURL(ETHEREUM)).then((val) => {
-    ethereumFeed = JSON.parse(val);
+    ethereumFeed = val;
     nextArticle("ethereum");
 });
 setData(generateURL(BUSINESS)).then((val) => {
-    businessFeed = JSON.parse(val);
+    businessFeed = val;
     nextArticle("hotbusinessnews");
 });
 setData(generateURL(DEFI)).then((val) => {
-    defiFeed = JSON.parse(val);
+    defiFeed = val;
     nextArticle("defi");
 });
 setData(generateURL(NEWS)).then((val) => {
-    newsFeed = JSON.parse(val);
+    newsFeed = val;
     nextArticle("news");
 });
 setData(generateURL(BLOCKCHAIN)).then((val) => {
-    blockchainFeed = JSON.parse(val);
+    blockchainFeed = val;
     nextArticle("blockchain");
 });
 
@@ -423,26 +479,37 @@ let selectedBTC = 'USD';
 let selectedETH = 'USD';
 let selectedLTC = 'USD';
 
-let currencySymbol = '$';
+let currencySymbolBTC = '$';
+let currencySymbolETH = '$';
+let currencySymbolLTC = '$';
+
+setData(COIN_RATES_URL).then((val) => {
+    MARKET = val;
+    setMarketData('BTC', selectedBTC, currencySymbolBTC);
+    setMarketData('ETH', selectedETH, currencySymbolETH);
+    setMarketData('LTC', selectedLTC, currencySymbolLTC);
+});
 
 setInterval(() => {
     setData(COIN_RATES_URL).then((val) => {
-        MARKET = JSON.parse(val);
-        setMarketData('BTC', selectedBTC, currencySymbol);
-        setMarketData('ETH', selectedETH, currencySymbol);
-        setMarketData('LTC', selectedLTC, currencySymbol);
+        MARKET = val;
+        setMarketData('BTC', selectedBTC, currencySymbolBTC);
+        setMarketData('ETH', selectedETH, currencySymbolETH);
+        setMarketData('LTC', selectedLTC, currencySymbolLTC);
     });
 }, 10000);
 
 
 function setMarketData(crypto, currency, cs) {
-    currencySymbol = cs;
     if (crypto === 'BTC') {
         selectedBTC = currency;
+        currencySymbolBTC = cs;
     } else if (crypto === 'ETH') {
         selectedETH = currency;
+        currencySymbolETH = cs;
     } else {
         selectedLTC = currency;
+        currencySymbolLTC = cs;
     }
 
     if (MARKET !== undefined) {
@@ -456,7 +523,7 @@ function setMarketData(crypto, currency, cs) {
                 maximumFractionDigits: 0
             });
 
-            price.innerHTML = currencySymbol + formatter.format(Math.round(values.price));
+            price.innerHTML = cs + formatter.format(Math.round(values.price));
 
             let day = parent.querySelector('.day');
             if (values.day > 0) {
@@ -486,24 +553,24 @@ function setMarketData(crypto, currency, cs) {
             }
 
             let open = parent.querySelector('.open');
-            open.innerHTML = currencySymbol + formatter.format(Math.round(values.open));
+            open.innerHTML = cs + formatter.format(Math.round(values.open));
 
             let high = parent.querySelector('.high');
-            high.innerHTML = currencySymbol + formatter.format(Math.round(values.high));
+            high.innerHTML = cs + formatter.format(Math.round(values.high));
 
             let low = parent.querySelector('.low');
-            low.innerHTML = currencySymbol + formatter.format(Math.round(values.low));
+            low.innerHTML = cs + formatter.format(Math.round(values.low));
 
             let last_price = parent.querySelector('.last-price');
-            last_price.innerHTML = currencySymbol + formatter.format(Math.round(values.price));
+            last_price.innerHTML = cs + formatter.format(Math.round(values.price));
 
             let total = parent.querySelector('.total');
             let moneyFormat_total = getMoneyFormat(values.emitted);
-            total.innerHTML = crypto + ' ' + parseFloat(moneyFormat_total).toFixed(2) + moneyFormat_total.replace(/[^T|B|M|K]/g, "");
+            total.innerHTML = crypto + ' ' + parseFloat(moneyFormat_total).toFixed(2) + moneyFormat_total.replace((/N?[^T|B|M|K]/g), "");
 
             let mkt_cap = parent.querySelector('.mkt-cap');
             let moneyFormat_mkt_cap = getMoneyFormat(values.cap);
-            mkt_cap.innerHTML = currencySymbol + parseFloat(moneyFormat_mkt_cap).toFixed(2) + moneyFormat_mkt_cap.replace(/[^T|B|M|K]/g, "");
+            mkt_cap.innerHTML = cs + parseFloat(moneyFormat_mkt_cap).toFixed(2) + moneyFormat_mkt_cap.replace((/N?[^T|B|M|K]/g), "");
 
             let vol = parent.querySelector('.vol');
             let moneyFormat_vol = getMoneyFormat(values.volume);
@@ -511,7 +578,7 @@ function setMarketData(crypto, currency, cs) {
 
             let vol_dot = parent.querySelector('.vol-dot');
             let moneyFormat_vol_dot = getMoneyFormat(values.volumeCurrency);
-            vol_dot.innerHTML = currencySymbol + parseFloat(moneyFormat_vol_dot).toFixed(2) + moneyFormat_vol_dot.replace(/[^T|B|M|K]/g, "");
+            vol_dot.innerHTML = cs + parseFloat(moneyFormat_vol_dot).toFixed(2) + moneyFormat_vol_dot.replace((/N?[^T|B|M|K]/g), "");
         }
     }
 }
@@ -581,33 +648,33 @@ function nextArticle(topic) {
         currentPosts.delete(id);
         switch (topic) {
             case "bitcoin":
-                bitcoinFeed.splice(feed[counter],bitcoinFeed.indexOf(feed[counter]));
-            
+                bitcoinFeed.splice(feed[counter], bitcoinFeed.indexOf(feed[counter]));
+
                 break;
 
             case "ethereum":
-                ethereumFeed.splice(feed[counter],ethereumFeed.indexOf(feed[counter]));
-            
+                ethereumFeed.splice(feed[counter], ethereumFeed.indexOf(feed[counter]));
+
                 break;
 
             case "defi":
-                defiFeed.splice(feed[counter],defiFeed.indexOf(feed[counter]));
-            
+                defiFeed.splice(feed[counter], defiFeed.indexOf(feed[counter]));
+
                 break;
 
             case "hotbusinessnews":
-                businessFeed.splice(feed[counter],businessFeed.indexOf(feed[counter]));
-            
+                businessFeed.splice(feed[counter], businessFeed.indexOf(feed[counter]));
+
                 break;
 
             case "news":
-                newsFeed.splice(feed[counter],newsFeed.indexOf(feed[counter]));
-            
+                newsFeed.splice(feed[counter], newsFeed.indexOf(feed[counter]));
+
                 break;
 
             case "blockchain":
-                blockchainFeed.splice(feed[counter],blockchainFeed.indexOf(feed[counter]));
-            
+                blockchainFeed.splice(feed[counter], blockchainFeed.indexOf(feed[counter]));
+
                 break;
         }
         return;
@@ -639,13 +706,13 @@ function nextArticle(topic) {
                     slide.className = "slide";
                     slide.id = si;
                     setData(imgURL + feed[si].featured_media).then((val) => {
-                        if (JSON.parse(val).media_type == "image") {
-                            let imageSrc = JSON.parse(val).media_details.sizes.large;
+                        if (val.media_type == "image") {
+                            let imageSrc = val.media_details.sizes.large;
                             if (imageSrc === undefined) {
-                                imageSrc = JSON.parse(val).media_details.sizes.medium;
+                                imageSrc = val.media_details.sizes.medium;
                             }
                             if (imageSrc === undefined) {
-                                imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+                                imageSrc = val.media_details.sizes.thumbnail;
                             }
                             slide.style.background = "url('" + imageSrc.source_url + "') no-repeat";
                             slide.style.backgroundSize = 'cover';
@@ -681,13 +748,13 @@ function nextArticle(topic) {
 
                 slide.id = si;
                 setData(imgURL + feed[si].featured_media).then((val) => {
-                    if (JSON.parse(val).media_type == "image") {
-                        let imageSrc = JSON.parse(val).media_details.sizes.large;
+                    if (val.media_type == "image") {
+                        let imageSrc = val.media_details.sizes.large;
                         if (imageSrc === undefined) {
-                            imageSrc = JSON.parse(val).media_details.sizes.medium;
+                            imageSrc = val.media_details.sizes.medium;
                         }
                         if (imageSrc === undefined) {
-                            imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+                            imageSrc = val.media_details.sizes.thumbnail;
                         }
                         slide.style.background = "url('" + imageSrc.source_url + "') no-repeat";
                         slide.style.backgroundSize = 'cover';
@@ -715,13 +782,13 @@ function nextArticle(topic) {
                     slide.className = "slide";
                     slide.id = si;
                     setData(imgURL + feed[si].featured_media).then((val) => {
-                        if (JSON.parse(val).media_type == "image") {
-                            let imageSrc = JSON.parse(val).media_details.sizes.large;
+                        if (val.media_type == "image") {
+                            let imageSrc = val.media_details.sizes.large;
                             if (imageSrc === undefined) {
-                                imageSrc = JSON.parse(val).media_details.sizes.medium;
+                                imageSrc = val.media_details.sizes.medium;
                             }
                             if (imageSrc === undefined) {
-                                imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+                                imageSrc = val.media_details.sizes.thumbnail;
                             }
                             slide.style.background = "url('" + imageSrc.source_url + "') no-repeat";
                             slide.style.backgroundSize = 'cover';
@@ -755,13 +822,13 @@ function nextArticle(topic) {
 
                 slide.id = si;
                 setData(imgURL + feed[si].featured_media).then((val) => {
-                    if (JSON.parse(val).media_type == "image") {
-                        let imageSrc = JSON.parse(val).media_details.sizes.large;
+                    if (val.media_type == "image") {
+                        let imageSrc = val.media_details.sizes.large;
                         if (imageSrc === undefined) {
-                            imageSrc = JSON.parse(val).media_details.sizes.medium;
+                            imageSrc = val.media_details.sizes.medium;
                         }
                         if (imageSrc === undefined) {
-                            imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+                            imageSrc = val.media_details.sizes.thumbnail;
                         }
                         slide.style.background = "url('" + imageSrc.source_url + "') no-repeat";
                         slide.style.backgroundSize = 'cover';
@@ -778,13 +845,13 @@ function nextArticle(topic) {
         case "defi":
 
             setData(imgURL + feed[counter].featured_media).then((val) => {
-                if (JSON.parse(val).media_type == "image") {
-                    let imageSrc = JSON.parse(val).media_details.sizes.large;
+                if (val.media_type == "image") {
+                    let imageSrc = val.media_details.sizes.large;
                     if (imageSrc === undefined) {
-                        imageSrc = JSON.parse(val).media_details.sizes.medium;
+                        imageSrc = val.media_details.sizes.medium;
                     }
                     if (imageSrc === undefined) {
-                        imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+                        imageSrc = val.media_details.sizes.thumbnail;
                     }
                     document.getElementById(topic + "-img").src = imageSrc.source_url;
                 } else {
@@ -807,13 +874,13 @@ function nextArticle(topic) {
             break;
         case "blockchain":
             setData(imgURL + feed[counter].featured_media).then((val) => {
-                if (JSON.parse(val).media_type == "image") {
-                    let imageSrc = JSON.parse(val).media_details.sizes.large;
+                if (val.media_type == "image") {
+                    let imageSrc = val.media_details.sizes.large;
                     if (imageSrc === undefined) {
-                        imageSrc = JSON.parse(val).media_details.sizes.medium;
+                        imageSrc = val.media_details.sizes.medium;
                     }
                     if (imageSrc === undefined) {
-                        imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+                        imageSrc = val.media_details.sizes.thumbnail;
                     }
                     document.getElementById(topic + "-img").src = imageSrc.source_url;
                 }
@@ -823,13 +890,13 @@ function nextArticle(topic) {
         case "hotbusinessnews":
             img = feed[counter].featured_media;
             setData(imgURL + img).then((val) => {
-                if (JSON.parse(val).media_type == "image") {
-                    let imageSrc = JSON.parse(val).media_details.sizes.large;
+                if (val.media_type == "image") {
+                    let imageSrc = val.media_details.sizes.large;
                     if (imageSrc === undefined) {
-                        imageSrc = JSON.parse(val).media_details.sizes.medium;
+                        imageSrc = val.media_details.sizes.medium;
                     }
                     if (imageSrc === undefined) {
-                        imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+                        imageSrc = val.media_details.sizes.thumbnail;
                     }
                     document.getElementById(topic + "-img").src = imageSrc.source_url;
                 } else {
@@ -846,13 +913,13 @@ function nextArticle(topic) {
                 document.getElementById(topic + "-desc0").innerHTML =
                     feed[counter].excerpt.rendered;
                 setData(imgURL + feed[counter].featured_media).then((val) => {
-                    if (JSON.parse(val).media_type == "image") {
-                        let imageSrc = JSON.parse(val).media_details.sizes.large;
+                    if (val.media_type == "image") {
+                        let imageSrc = val.media_details.sizes.large;
                         if (imageSrc === undefined) {
-                            imageSrc = JSON.parse(val).media_details.sizes.medium;
+                            imageSrc = val.media_details.sizes.medium;
                         }
                         if (imageSrc === undefined) {
-                            imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+                            imageSrc = val.media_details.sizes.thumbnail;
                         }
                         document.getElementById(topic + "-img0").src = imageSrc.source_url;
                     } else {
@@ -870,13 +937,13 @@ function nextArticle(topic) {
                 document.getElementById(topic + "-title1").innerHTML = feed[counter].title.rendered;
                 document.getElementById(topic + "-desc1").innerHTML = feed[counter].excerpt.rendered;
                 setData(imgURL + feed[counter].featured_media).then((val) => {
-                    if (JSON.parse(val).media_type == "image") {
-                        let imageSrc = JSON.parse(val).media_details.sizes.large;
+                    if (val.media_type == "image") {
+                        let imageSrc = val.media_details.sizes.large;
                         if (imageSrc === undefined) {
-                            imageSrc = JSON.parse(val).media_details.sizes.medium;
+                            imageSrc = val.media_details.sizes.medium;
                         }
                         if (imageSrc === undefined) {
-                            imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+                            imageSrc = val.media_details.sizes.thumbnail;
                         }
                         document.getElementById(topic + "-img1").src = imageSrc.source_url;
                     } else {
@@ -892,13 +959,13 @@ function nextArticle(topic) {
         case "news":
 
             setData(imgURL + feed[counter].featured_media).then((val) => {
-                if (JSON.parse(val).media_type == "image") {
-                    let imageSrc = JSON.parse(val).media_details.sizes.large;
+                if (val.media_type == "image") {
+                    let imageSrc = val.media_details.sizes.large;
                     if (imageSrc === undefined) {
-                        imageSrc = JSON.parse(val).media_details.sizes.medium;
+                        imageSrc = val.media_details.sizes.medium;
                     }
                     if (imageSrc === undefined) {
-                        imageSrc = JSON.parse(val).media_details.sizes.thumbnail;
+                        imageSrc = val.media_details.sizes.thumbnail;
                     }
                     document.getElementById(topic + "-img").src = imageSrc.source_url;
                 }
@@ -913,12 +980,9 @@ function nextArticle(topic) {
 }
 
 async function setData(url) {
-    try {
-        let data = await getFeed(url);
-        return data;
-    } catch (err) {
-        console.log(err);
-    }
+    let data = await fetch(url);
+    let json = await data.json();
+    return json;
 }
 
 async function getFeed(url) {
