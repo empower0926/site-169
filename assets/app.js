@@ -53,7 +53,7 @@ setData(coinsURL).then((val) => {
         if (!isShowinAll) {
             nextHeatMap(currentHMcointype);
         }
-    }, 10000);
+    }, 5000);
 });
 
 function devidingfeed() {
