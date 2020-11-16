@@ -292,13 +292,8 @@ function nextHeatMap(cointype) {
             }
             else if (rate > 0) {
                 prp.className = 'green-text';
-<<<<<<< HEAD
-                bl.className = "bottom-line line-green"
-                prp.innerText = '+' + rate + '%';
-=======
                 bl.className = "bottom-line line-green";
                 prp.innerText = '+'+rate + '%';
->>>>>>> 2583f2c8f9183ebd71a0bf435bd23ecba3e5f153
             } else {
                 prp.className = 'pink-text';
                 bl.className = "bottom-line line-pink";
