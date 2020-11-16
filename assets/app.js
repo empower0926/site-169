@@ -49,11 +49,11 @@ setData(coinsURL).then((val) => {
     coinbtncoloring();
 
     document.getElementById("SHA256btn").style.display = "none";
-    setInterval(function () {
-        if (!isShowinAll) {
-            nextHeatMap(currentHMcointype);
-        }
-    }, 10000);
+    // setInterval(function () {
+    //     if (!isShowinAll) {
+    //         nextHeatMap(currentHMcointype);
+    //     }
+    // }, 10000);
 });
 
 function devidingfeed() {
@@ -98,7 +98,12 @@ function coinbtncoloring() {
 
         let ct = coinfeedNames[count];
         let btn = document.getElementById(ct + "btn");
-        if (feed[0].day > 0) {
+       
+        if(feed[0].day==0){
+            btn.style.backgroundColor='#fff';
+            btn.style.color='#000';
+            btn.className = "ct";
+        }else if (feed[0].day > 0) {
             btn.className = "green ct";
         } else {
             btn.className = "pink ct";
@@ -211,7 +216,14 @@ function nextHeatMap(cointype) {
             let bbd = document.createElement('div');
             bbd.className = "col-sm-12 p-0";
             let bottom = document.createElement('div');
-            if (rate > 0) {
+            if(rate==0){
+                alert();
+                bottom.style.backgroundColor='#fff';
+                bottom.className = 'bottom-line';
+                presentage.style.color='#fff';
+                presentage.innerText = rate + '%';
+            }
+            else if (rate > 0) {
                 bottom.className = 'bottom-line line-green';
                 presentage.className = 'green-text';
                 presentage.innerText = "+"+rate + '%';
@@ -263,13 +275,19 @@ function nextHeatMap(cointype) {
             let bl = document.createElement('div');
             bl.className = "bottom-line";
 
-            if (rate > 0) {
+            if(rate==0){
+                bl.style.backgroundColor='#fff';
+                prp.style.color='#fff';
+                prp.innerText = rate + '%';
+                bl.className = "bottom-line ";
+            }
+            else if (rate > 0) {
                 prp.className = 'green-text';
-                bl.className = "bottom-line line-green"
+                bl.className = "bottom-line line-green";
                 prp.innerText = '+'+rate + '%';
             } else {
                 prp.className = 'pink-text';
-                bl.className = "bottom-line line-pink"
+                bl.className = "bottom-line line-pink";
                 prp.innerText = rate + '%';
             }
             smalldivs.appendChild(sd);
@@ -374,7 +392,13 @@ function allHeatMap(start, end) {
                 let bbd = document.createElement('div');
                 bbd.className = "col-sm-12 p-0";
                 let bottom = document.createElement('div');
-                if (rate > 0) {
+                if(rate==0){
+                    bottom.style.backgroundColor='#fff';
+                    presentage.style.color='#fff';
+                    presentage.innerText = rate + '%';
+                    bottom.className = 'bottom-line';
+                }
+                else if (rate > 0) {
                     bottom.className = 'bottom-line line-green';
                     presentage.className = 'green-text';
                     presentage.innerText = '+'+rate + '%';
@@ -427,7 +451,13 @@ function allHeatMap(start, end) {
                 let bl = document.createElement('div');
                 bl.className = "bottom-line";
 
-                if (rate > 0) {
+                if(rate==0){
+                    bl.style.backgroundColor='#fff';
+                prp.style.color='#fff';
+                prp.innerText = rate + '%';
+                bl.className = "bottom-line ";
+                }
+                else if (rate > 0) {
                     prp.className = 'green-text';
                     bl.className = "bottom-line line-green"
                     prp.innerText = '+'+rate + '%';
@@ -714,7 +744,7 @@ function nextArticle(topic) {
     let desc;
     let img;
     title = feed[counter].title.rendered;
-    desc = feed[counter].excerpt.rendered;
+     desc = new String(feed[counter].excerpt.rendered).split("[&hellip;]")+"<a href='"+feed[counter].link+"'  target=',blank'><p>Read more</p></a>";
     switch (topic) {
         case "bitcoin":
             document.getElementById(topic + "-counter").value = counter;
@@ -889,7 +919,7 @@ function nextArticle(topic) {
                 document.getElementById(topic + "-title0").innerHTML =
                     feed[counter].title.rendered;
                 document.getElementById(topic + "-desc0").innerHTML =
-                    feed[counter].excerpt.rendered;
+                    new String(feed[counter].excerpt.rendered).split("[&hellip;]")+"<a href='"+feed[counter].link+"'  target=',blank'><p>Read more</p></a>";
             } else {
                 document.getElementById("defi0").innerHTML = "";
             }
@@ -933,7 +963,7 @@ function nextArticle(topic) {
                 document.getElementById(topic + "-title0").innerHTML =
                     feed[counter].title.rendered;
                 document.getElementById(topic + "-desc0").innerHTML =
-                    feed[counter].excerpt.rendered;
+                    new String(feed[counter].excerpt.rendered).split("[&hellip;]")+"<a href='"+feed[counter].link+"'  target=',blank'><p>Read more</p></a>";
                 setData(imgURL + feed[counter].featured_media).then((val) => {
                     if (val.media_type == "image") {
                         let imageSrc = val.media_details.sizes.large;
@@ -957,7 +987,7 @@ function nextArticle(topic) {
             if (feed[counter] !== undefined) {
                 currentPosts.add(feed[counter].id);
                 document.getElementById(topic + "-title1").innerHTML = feed[counter].title.rendered;
-                document.getElementById(topic + "-desc1").innerHTML = feed[counter].excerpt.rendered;
+                document.getElementById(topic + "-desc1").innerHTML = new String(feed[counter].excerpt.rendered).split("[&hellip;]")+"<a href='"+feed[counter].link+"'  target=',blank'><p>Read more</p></a>";
                 setData(imgURL + feed[counter].featured_media).then((val) => {
                     if (val.media_type == "image") {
                         let imageSrc = val.media_details.sizes.large;
