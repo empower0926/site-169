@@ -37,6 +37,14 @@ let PoSFeed = [];
 let currentHMcointype;
 let isShowinAll = false;
 
+const date = new Date().toString().split(" ", 4);
+console.log(date);
+
+let year = date[3];
+let month = date[1];
+let day = date[2];
+
+document.querySelector('#date').innerHTML = year + " " + month + " " + day;
 
 function generateURL(category) {
     return URL + "categories=" + category;

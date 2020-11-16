@@ -1,4 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300&family=Montserrat:wght@200;300&display=swap");
+::-webkit-scrollbar {
+  width: 0.25rem;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 25px;
+  background: #8e2cf9;
+}
+
 :root {
   font-size: 16px;
 }
@@ -90,7 +104,7 @@ h5::after {
 }
 
 .line-green {
-  background-color: #00fc15;
+  background-color: #32ff76;
 }
 
 .line-pink {
@@ -136,12 +150,37 @@ h5::after {
   font-size: 1.25rem;
 }
 
+.sec-2 .green-btns a {
+  display: inline;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.sec-2 .green-btns a:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
 .sec-2 .coin-tokens {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[7];
       grid-template-columns: repeat(7, 1fr);
   gap: 10px;
+}
+
+.sec-2 .coin-tokens a {
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.sec-2 .coin-tokens a:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
 }
 
 .sec-2 .coin-tokens .ct {
@@ -162,7 +201,7 @@ h5::after {
 }
 
 .sec-2 .coin-tokens .green {
-  background-color: #00fc15;
+  background-color: #32ff76;
   color: black !important;
 }
 
@@ -345,8 +384,8 @@ h5::after {
 }
 
 .sec-4 .market-overview {
-  -webkit-box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
-          box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.08);
+          box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.08);
 }
 
 .sec-4 .market-overview .price {
