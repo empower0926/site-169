@@ -9,6 +9,20 @@ $br: 8px;
 $Montserrat: "Montserrat",
 sans-serif;
 
+::-webkit-scrollbar {
+  width: 0.25rem;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 25px;
+  background: $accent;
+}
+
 :root {
   font-size: 16px;
 }
@@ -95,14 +109,8 @@ h5 {
 
   height: 10px;
 }
-<<<<<<< HEAD
 .line-green{
   background-color: rgb(50, 255, 118);
-=======
-
-.line-green {
-  background-color: $gaccent;
->>>>>>> 2583f2c8f9183ebd71a0bf435bd23ecba3e5f153
 }
 
 .line-pink {
