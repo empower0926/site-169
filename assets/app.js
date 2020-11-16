@@ -24,7 +24,9 @@ let businessFeed;
 let defiFeed;
 let newsFeed;
 let blockchainFeed;
+
 let coinsFeed;
+let coinfeedNames=['SHA256','EtHash','RPCA','DBFT','DPoS','Scrypt','Other','PoS'];
 let SHA256Feed=[];
 let EtHashFeed=[];
 let RPCAFeed=[];
@@ -33,6 +35,8 @@ let DPoSFeed=[];
 let ScryptFeed=[];
 let OtherFeed=[];
 let PoSFeed=[];
+let currentHMcointype;
+let isShowinAll=false;
 
 function generateURL(category) {
     return URL + "categories=" + category;
@@ -40,9 +44,24 @@ function generateURL(category) {
 
 setData(coinsURL).then((val) => {
     coinsFeed = JSON.parse(val);
-    dividingfeed();
+    devidingfeed();
+    currentHMcointype='SHA256';
+    nextHeatMap('SHA256');
+    coinbtncoloring();
+   
+    document.getElementById("SHA256btn").style.display = "none";
+     setInterval(function(){ 
+         if(!isShowinAll){nextHeatMap(currentHMcointype);} }, 10000);
 });
- function dividingfeed(){
+ function devidingfeed(){
+    SHA256Feed=[];
+    EtHashFeed=[];
+    RPCAFeed=[];
+    DBFTFeed=[];
+    DPoSFeed=[];
+    ScryptFeed=[];
+    OtherFeed=[];
+    PoSFeed=[];
     SHA256Feed.push(coinsFeed['data'].BTC.USD);
     SHA256Feed.push(coinsFeed['data'].BCH.USD);
     SHA256Feed.push(coinsFeed['data'].BSV.USD);
@@ -69,15 +88,52 @@ setData(coinsURL).then((val) => {
   coinsFeed=[];
   coinsFeed.push(SHA256Feed,EtHashFeed,RPCAFeed,DBFTFeed,DPoSFeed,ScryptFeed,OtherFeed,PoSFeed);
 
+   
 
-    nextHeatMap('SHA256');
  }
+ function coinbtncoloring(){
+    let count=0;
+    coinsFeed.forEach(feed => {
+       
+        let ct=coinfeedNames[count];
+        let btn=document.getElementById(ct+"btn");
+        if(feed[0].day>0){
+            btn.className="green ct";
+        }else{
+            btn.className="pink ct";
+        }
+        if(ct!=currentHMcointype){
+            btn.className=btn.className+" d-flex";
+        }
+        
+        count++;
+    });
+ }
+ function setNewData(){
+    setData(coinsURL).then((val) => {
+        coinsFeed = JSON.parse(val);
+        devidingfeed();
+        coinbtncoloring();
+    });
+ }
+ 
  function nextHeatMap(cointype){
-    
+    isShowinAll=false;
+    setNewData();
      let feed;
-     let topic=cointype;
      let coinName=[];
-
+     if(currentHMcointype!=cointype){
+        
+     let removebtn=document.getElementById(cointype+"btn");
+     removebtn.style.display = "none";
+     removebtn.className =removebtn.className.split("d-flex");
+    
+     let newbtn=document.getElementById(currentHMcointype+"btn");
+     newbtn.style.display = "block";
+     newbtn.className =newbtn.className + " d-flex";
+     currentHMcointype=cointype;
+    
+     }
     switch (cointype) {
         case "SHA256":
             feed = SHA256Feed;
@@ -113,6 +169,7 @@ setData(coinsURL).then((val) => {
             coinName.push('XTZ');
             break;
     }
+   
     document.getElementById('heatmapContent').innerHTML="";
     let bigd=document.createElement('div');
         bigd.className='row big_d';
@@ -130,7 +187,7 @@ setData(coinsURL).then((val) => {
                         bttdd.className="sha p-3";
                             let topich4=document.createElement('h4');
                             topich4.className="text-center m-auto";
-                            topich4.innerText=topic;
+                            topich4.innerText=cointype;
         
                 let bcd=document.createElement('div');
                  bcd.className="col-sm-12 text-center my-5";
@@ -223,10 +280,13 @@ setData(coinsURL).then((val) => {
             }
             document.getElementById('heatmapContent').appendChild(bigd);
             document.getElementById('heatmapContent').appendChild(smalldivs);  
-    
+            document.getElementById('showall').className="d-block";
+            document.getElementById('prev').className="d-none";
+            document.getElementById('next').className="d-none";
 
  }
 function allHeatMap(start,end){
+    isShowinAll=true;
     let coinName=[];
     let topic;
     document.getElementById('heatmapContent').innerHTML="";
@@ -577,7 +637,6 @@ function nextArticle(topic) {
     }
 
     let counter = document.getElementById(topic + "-counter").value;
-    console.log(topic + " feed-" + feed);
     if (counter >= feed.length) {
         counter = 0;
         for (let index = 0; index < feed.length; index++) {
@@ -962,16 +1021,4 @@ function slide(topic) {
     current.style.animation = "slide .6s ease-in-out forwards";
     behind.style.transform = "translate3d(0, 0, 0)";
     last.style.transform = "translate3d(70px, 0, -15px)";
-
-    let newArticle = document.createElement("div");
-    newArticle.className = "slide";
-    newArticle.style.transform = "translate3d(140px, 0, -30px)";
-
-    newArticle.style.background =
-        "url(" + jsonObject.items[slideIndex].thumbnail + ") no-repeat";
-    newArticle.style.backgroundSize = "cover";
-    newArticle.style.backgroundPosition = "center";
-
-    slider.appendChild(newArticle);
-    slideIndex++;
 }

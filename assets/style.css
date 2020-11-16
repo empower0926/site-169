@@ -469,6 +469,8 @@ footer select {
   position: relative;
   -webkit-perspective: 100;
           perspective: 100;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
 }
