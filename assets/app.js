@@ -88,8 +88,6 @@ setData(coinsURL).then((val) => {
   coinsFeed=[];
   coinsFeed.push(SHA256Feed,EtHashFeed,RPCAFeed,DBFTFeed,DPoSFeed,ScryptFeed,OtherFeed,PoSFeed);
 
-   
-
  }
  function coinbtncoloring(){
     let count=0;
