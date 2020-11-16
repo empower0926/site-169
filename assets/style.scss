@@ -96,7 +96,7 @@ h5 {
   height: 10px;
 }
 .line-green{
-  background-color: $gaccent;
+  background-color: rgb(50, 255, 118);
 }
 .line-pink{
   background-color: $paccent;
@@ -141,10 +141,31 @@ h5 {
     }
   }
 
+  .green-btns{
+    a{
+      display: inline;
+      text-decoration: none;
+      cursor: pointer;
+      transition: .3s;
+      &:hover{
+        transform: scale(1.05);
+      }
+    }
+  }
+
   .coin-tokens {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
+
+    a{
+      text-decoration: none;
+      cursor: pointer;
+      transition: .3s;
+      &:hover{
+        transform: scale(1.05);
+      }
+    }
 
     .ct {
       display: flex;
@@ -161,7 +182,7 @@ h5 {
     }
 
     .green {
-      background-color: $gaccent;
+      background-color: rgb(50, 255, 118);
       color: black !important;
     }
 
