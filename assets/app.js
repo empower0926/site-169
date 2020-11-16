@@ -36,6 +36,7 @@ let ScryptFeed=[];
 let OtherFeed=[];
 let PoSFeed=[];
 let currentHMcointype;
+let isShowinAll=false;
 
 function generateURL(category) {
     return URL + "categories=" + category;
@@ -44,8 +45,23 @@ function generateURL(category) {
 setData(coinsURL).then((val) => {
     coinsFeed = JSON.parse(val);
     devidingfeed();
+    currentHMcointype='SHA256';
+    nextHeatMap('SHA256');
+    coinbtncoloring();
+   
+    document.getElementById("SHA256btn").style.display = "none";
+     setInterval(function(){ 
+         if(!isShowinAll){nextHeatMap(currentHMcointype);} }, 10000);
 });
  function devidingfeed(){
+    SHA256Feed=[];
+    EtHashFeed=[];
+    RPCAFeed=[];
+    DBFTFeed=[];
+    DPoSFeed=[];
+    ScryptFeed=[];
+    OtherFeed=[];
+    PoSFeed=[];
     SHA256Feed.push(coinsFeed['data'].BTC.USD);
     SHA256Feed.push(coinsFeed['data'].BCH.USD);
     SHA256Feed.push(coinsFeed['data'].BSV.USD);
@@ -72,9 +88,7 @@ setData(coinsURL).then((val) => {
   coinsFeed=[];
   coinsFeed.push(SHA256Feed,EtHashFeed,RPCAFeed,DBFTFeed,DPoSFeed,ScryptFeed,OtherFeed,PoSFeed);
 
-    currentHMcointype='SHA256';
-    nextHeatMap('SHA256');
-    coinbtncoloring();
+   
 
  }
  function coinbtncoloring(){
@@ -84,28 +98,41 @@ setData(coinsURL).then((val) => {
         let ct=coinfeedNames[count];
         let btn=document.getElementById(ct+"btn");
         if(feed[0].day>0){
-            btn.className="green ct ";
+            btn.className="green ct";
         }else{
-            btn.className="pink ct ";
+            btn.className="pink ct";
         }
+        if(ct!=currentHMcointype){
+            btn.className=btn.className+" d-flex";
+        }
+        
         count++;
+    });
+ }
+ function setNewData(){
+    setData(coinsURL).then((val) => {
+        coinsFeed = JSON.parse(val);
+        devidingfeed();
+        coinbtncoloring();
     });
  }
  
  function nextHeatMap(cointype){
-    
+    isShowinAll=false;
+    setNewData();
      let feed;
-     let topic=cointype;
      let coinName=[];
      if(currentHMcointype!=cointype){
+        
      let removebtn=document.getElementById(cointype+"btn");
      removebtn.style.display = "none";
      removebtn.className =removebtn.className.split("d-flex");
-     
+    
      let newbtn=document.getElementById(currentHMcointype+"btn");
      newbtn.style.display = "block";
      newbtn.className =newbtn.className + " d-flex";
      currentHMcointype=cointype;
+    
      }
     switch (cointype) {
         case "SHA256":
@@ -142,6 +169,7 @@ setData(coinsURL).then((val) => {
             coinName.push('XTZ');
             break;
     }
+   
     document.getElementById('heatmapContent').innerHTML="";
     let bigd=document.createElement('div');
         bigd.className='row big_d';
@@ -159,7 +187,7 @@ setData(coinsURL).then((val) => {
                         bttdd.className="sha p-3";
                             let topich4=document.createElement('h4');
                             topich4.className="text-center m-auto";
-                            topich4.innerText=topic;
+                            topich4.innerText=cointype;
         
                 let bcd=document.createElement('div');
                  bcd.className="col-sm-12 text-center my-5";
@@ -258,6 +286,7 @@ setData(coinsURL).then((val) => {
 
  }
 function allHeatMap(start,end){
+    isShowinAll=true;
     let coinName=[];
     let topic;
     document.getElementById('heatmapContent').innerHTML="";
