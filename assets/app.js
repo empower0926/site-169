@@ -423,31 +423,42 @@ let selectedBTC = 'USD';
 let selectedETH = 'USD';
 let selectedLTC = 'USD';
 
-let currencySymbol = '$';
+let currencySymbolBTC = '$';
+let currencySymbolETH = '$';
+let currencySymbolLTC = '$';
+
+setData(COIN_RATES_URL).then((val) => {
+    MARKET = JSON.parse(val);
+    setMarketData('BTC', selectedBTC, currencySymbolBTC);
+    setMarketData('ETH', selectedETH, currencySymbolETH);
+    setMarketData('LTC', selectedLTC, currencySymbolLTC);
+});
 
 setInterval(() => {
     setData(COIN_RATES_URL).then((val) => {
         MARKET = JSON.parse(val);
-        setMarketData('BTC', selectedBTC, currencySymbol);
-        setMarketData('ETH', selectedETH, currencySymbol);
-        setMarketData('LTC', selectedLTC, currencySymbol);
+        setMarketData('BTC', selectedBTC, currencySymbolBTC);
+        setMarketData('ETH', selectedETH, currencySymbolETH);
+        setMarketData('LTC', selectedLTC, currencySymbolLTC);
     });
 }, 10000);
 
 
 function setMarketData(crypto, currency, cs) {
-    currencySymbol = cs;
+    console.log(crypto, currency);
     if (crypto === 'BTC') {
         selectedBTC = currency;
+        currencySymbolBTC = cs;
     } else if (crypto === 'ETH') {
         selectedETH = currency;
+        currencySymbolETH = cs;
     } else {
         selectedLTC = currency;
+        currencySymbolLTC = cs;
     }
 
     if (MARKET !== undefined) {
         let values = MARKET.data[crypto][currency];
-        console.log(cs);
         console.log(values);
         let parent = document.getElementById(crypto + '-market-overview');
         if (parent !== null) {
@@ -458,7 +469,7 @@ function setMarketData(crypto, currency, cs) {
                 maximumFractionDigits: 0
             });
 
-            price.innerHTML = currencySymbol + formatter.format(Math.round(values.price));
+            price.innerHTML = cs + formatter.format(Math.round(values.price));
 
             let day = parent.querySelector('.day');
             if (values.day > 0) {
@@ -488,33 +499,32 @@ function setMarketData(crypto, currency, cs) {
             }
 
             let open = parent.querySelector('.open');
-            open.innerHTML = currencySymbol + formatter.format(Math.round(values.open));
+            open.innerHTML = cs + formatter.format(Math.round(values.open));
 
             let high = parent.querySelector('.high');
-            high.innerHTML = currencySymbol + formatter.format(Math.round(values.high));
+            high.innerHTML = cs + formatter.format(Math.round(values.high));
 
             let low = parent.querySelector('.low');
-            low.innerHTML = currencySymbol + formatter.format(Math.round(values.low));
+            low.innerHTML = cs + formatter.format(Math.round(values.low));
 
             let last_price = parent.querySelector('.last-price');
-            last_price.innerHTML = currencySymbol + formatter.format(Math.round(values.price));
+            last_price.innerHTML = cs + formatter.format(Math.round(values.price));
 
             let total = parent.querySelector('.total');
             let moneyFormat_total = getMoneyFormat(values.emitted);
-            total.innerHTML = crypto + ' ' + parseFloat(moneyFormat_total).toFixed(2) + moneyFormat_total.replace(/[^T|B|M|K]/g, "");
+            total.innerHTML = crypto + ' ' + parseFloat(moneyFormat_total).toFixed(2) + moneyFormat_total.replace((/N?[^T|B|M|K]/g), "");
 
             let mkt_cap = parent.querySelector('.mkt-cap');
             let moneyFormat_mkt_cap = getMoneyFormat(values.cap);
-            mkt_cap.innerHTML = currencySymbol + parseFloat(moneyFormat_mkt_cap).toFixed(2) + moneyFormat_mkt_cap.replace(/[^T|B|M|K]/g, "");
+            mkt_cap.innerHTML = cs + parseFloat(moneyFormat_mkt_cap).toFixed(2) + moneyFormat_mkt_cap.replace((/N?[^T|B|M|K]/g), "");
 
             let vol = parent.querySelector('.vol');
             let moneyFormat_vol = getMoneyFormat(values.volume);
-            console.log('volume '+moneyFormat_vol);
             vol.innerHTML = crypto + ' ' + parseFloat(moneyFormat_vol).toFixed(2) + moneyFormat_vol.replace((/N?[^T|B|M|K]/g), "");
 
             let vol_dot = parent.querySelector('.vol-dot');
             let moneyFormat_vol_dot = getMoneyFormat(values.volumeCurrency);
-            vol_dot.innerHTML = currencySymbol + parseFloat(moneyFormat_vol_dot).toFixed(2) + moneyFormat_vol_dot.replace(/[^T|B|M|K]/g, "");
+            vol_dot.innerHTML = cs + parseFloat(moneyFormat_vol_dot).toFixed(2) + moneyFormat_vol_dot.replace((/N?[^T|B|M|K]/g), "");
         }
     }
 }
