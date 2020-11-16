@@ -25,6 +25,7 @@ let defiFeed;
 let newsFeed;
 let blockchainFeed;
 let coinsFeed;
+let coinfeedNames=['SHA256','EtHash','RPCA','DBFT','DPoS','Scrypt','Other','PoS'];
 let SHA256Feed = [];
 let EtHashFeed = [];
 let RPCAFeed = [];
@@ -981,25 +982,7 @@ function nextArticle(topic) {
 
 async function setData(url) {
     let data = await fetch(url);
-    let json = await data.json();
-    return json;
-}
-
-async function getFeed(url) {
-    let connection = new XMLHttpRequest();
-    return new Promise((resolve, reject) => {
-        connection.onreadystatechange = function () {
-            if (connection.readyState === 4) {
-                if (connection.status >= 300) {
-                    reject("error: " + status.code);
-                } else {
-                    resolve(connection.responseText);
-                }
-            }
-        };
-        connection.open("GET", url, true);
-        connection.send();
-    });
+    return await data.json();
 }
 
 function slide(topic) {
