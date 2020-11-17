@@ -60,6 +60,7 @@ setData(coinsURL).then((val) => {
     setInterval(function () {
         if (!isShowinAll) {
             nextHeatMap(currentHMcointype);
+            coinbtncoloring();
         }
     }, 5000);
 });
