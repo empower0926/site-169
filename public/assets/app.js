@@ -6,7 +6,8 @@ const GREEN = ' #00a80e';
 const PINK = '#db1753';
 
 const imgURL = "https://flashgroupnews.com/wp-json/wp/v2/media/";
-const URL = "https://flashgroupnews.com/wp-json/wp/v2/posts?";
+const URL = "/getposts?";
+// const URL = "https://flashgroupnews.com/wp-json/wp/v2/posts?";
 const coinsURL = "https://ticker-api.cointelegraph.com/rates/?full=true";
 
 const currentPosts = new Set();
@@ -47,6 +48,7 @@ let day = date[2];
 document.querySelector('#date').innerHTML = year + " " + month + " " + day;
 
 function generateURL(category) {
+    console.log('generating URL: '+URL + "categories=" + category);
     return URL + "categories=" + category;
 }
 
@@ -56,11 +58,11 @@ setData(coinsURL).then((val) => {
     currentHMcointype = 'SHA256';
     nextHeatMap('SHA256');
     coinbtncoloring();
+
     document.getElementById("SHA256btn").style.display = "none";
     setInterval(function () {
         if (!isShowinAll) {
             nextHeatMap(currentHMcointype);
-            coinbtncoloring();
         }
     }, 5000);
 });
@@ -107,7 +109,8 @@ function coinbtncoloring() {
 
         let ct = coinfeedNames[count];
         let btn = document.getElementById(ct + "btn");
-         if(feed[0].day==0){
+       
+        if(feed[0].day==0){
             btn.style.backgroundColor='#fff';
             btn.style.color='#000';
             btn.className = "ct";
@@ -132,16 +135,9 @@ function setNewData() {
     });
 }
 
-function nextHeatMap(cointype) 
-{
-    
-    if(isShowinAll){
-        document.getElementById('showall').className = "";
-        document.getElementById('prev').className = "d-none";
-        document.getElementById('next').className = "d-none";
-    }
+function nextHeatMap(cointype) {
     isShowinAll = false;
-     setNewData();
+    setNewData();
     let feed;
     let coinName = [];
     if (currentHMcointype != cointype) {
@@ -232,7 +228,8 @@ function nextHeatMap(cointype)
             bbd.className = "col-sm-12 p-0";
             let bottom = document.createElement('div');
             if(rate==0){
-                 bottom.style.backgroundColor='#fff';
+                alert();
+                bottom.style.backgroundColor='#fff';
                 bottom.className = 'bottom-line';
                 presentage.style.color='#fff';
                 presentage.innerText = rate + '%';
@@ -507,7 +504,7 @@ function allHeatMap(start, end) {
         document.getElementById('next').className = "d-none";
         document.getElementById('prev').className = "";
     }
-    smoothscroll('#sec-2');
+
 }
 
 setData(generateURL(BITCOIN)).then((val) => {
@@ -601,7 +598,7 @@ function setMarketData(crypto, currency, cs) {
                 day.style.color = PINK;
             } else {
                 day.innerHTML = values.day;
-                day.style.color = '#000';
+                day.style.color = '#fff';
             }
 
             let week = parent.querySelector('.week');
@@ -1065,19 +1062,3 @@ function slide(topic) {
     behind.style.transform = "translate3d(0, 0, 0)";
     last.style.transform = "translate3d(70px, 0, -15px)";
 }
-
-function smoothscroll(hash,topic) {
-    if(topic!=undefined){
-        nextHeatMap(topic);
-    }
-
-    $("html, body").animate(
-      {
-        scrollTop: $(hash).offset().top,
-      },
-      800,
-      function () {
-        window.location.hash = hash;
-      }
-    );
-  }

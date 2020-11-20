@@ -23,7 +23,6 @@ body {
   font-family: "Heebo", sans-serif !important;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  scroll-behavior: smooth;
 }
 
 a {

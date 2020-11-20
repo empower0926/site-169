@@ -1,0 +1,27 @@
+{
+  "name": "fgn-report",
+  "version": "1.0.0",
+  "description": "the mini-server on the fgn-news report",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon index.js"
+  },
+  "keywords": [
+    "fgn",
+    "flashgroupnews"
+  ],
+  "author": "merlinDev",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.1",
+    "nedb": "^1.8.0",
+    "nodemon": "^2.0.6",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  }
+}

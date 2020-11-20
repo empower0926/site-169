@@ -35,7 +35,7 @@
         </div>
     </div>
     <!-- sec-2 -->
-    <section id="sec-2" class="sec-2">
+    <section class="sec-2">
         <div class="container">
             <div data-aos="fade-up" data-aos-duration="1000" class="row justify-content-center">
                 <!-- content -->
@@ -59,29 +59,29 @@
                             </div>
                             <div class="col-sm-12 p-0">
                                 <div class="coin-tokens mt-3">
-                                    <a id="SHA256btn" onclick="smoothscroll('#sec-2','SHA256')" class="green ct "
+                                    <a id="SHA256btn" onclick="nextHeatMap('SHA256')" class="green ct "
                                         style="display: none;">
                                         <span>SHA256</span>
                                     </a>
-                                    <a id="EtHashbtn" onclick="smoothscroll('#sec-2','EtHash')" class="green ct ">
+                                    <a id="EtHashbtn" onclick="nextHeatMap('EtHash')" class="green ct ">
                                         <span>EtHash</span>
                                     </a>
-                                    <a id="RPCAbtn" onclick="smoothscroll('#sec-2','RPCA')" class="pink ct">
+                                    <a id="RPCAbtn" onclick="nextHeatMap('RPCA')" class="pink ct">
                                         <span>RPCA</span>
                                     </a>
-                                    <a id="DBFTbtn" onclick="smoothscroll('#sec-2','DBFT')" class="pink ct">
+                                    <a id="DBFTbtn" onclick="nextHeatMap('DBFT')" class="pink ct">
                                         <span>DBFT</span>
                                     </a>
-                                    <a id="DPoSbtn" onclick="smoothscroll('#sec-2','DPoS')" class="green ct">
+                                    <a id="DPoSbtn" onclick="nextHeatMap('DPoS')" class="green ct">
                                         <span>DPoS</span>
                                     </a>
-                                    <a id="Scryptbtn" onclick="smoothscroll('#sec-2','Scrypt')" class="pink ct">
+                                    <a id="Scryptbtn" onclick="nextHeatMap('Scrypt')" class="pink ct">
                                         <span>Scrypt</span>
                                     </a>
-                                    <a id="Otherbtn" onclick="smoothscroll('#sec-2','Other')" class="pink ct">
+                                    <a id="Otherbtn" onclick="nextHeatMap('Other')" class="pink ct">
                                         <span>Other</span>
                                     </a>
-                                    <a id="PoSbtn" onclick="smoothscroll('#sec-2','PoS')" class="green ct last">
+                                    <a id="PoSbtn" onclick="nextHeatMap('PoS')" class="green ct last">
                                         <span>PoS</span>
                                     </a>
                                 </div>
@@ -842,10 +842,13 @@
                                     <p id="blockchain-desc" class="text-justify mt-3"></p>
                                 </div>
                                 <div id="blockchain-imgdiv" class="col-sm-12 d-flex p-0 mt-5 ">
-                                    <div>
-                                     <img id="blockchain-img" style="width: 100%;" src="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_700/v1605204988/flash-group-news/picture-c_flash-group-news.png" alt="General Blockchain News">
-                                    </div>
-                             </div>
+
+
+                                    <img id="blockchain-img" style="width: 100%;" src="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_700/v1605204988/flash-group-news/picture-c_flash-group-news.png" alt="General Blockchain News">
+
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -929,7 +932,7 @@
                                     <p id="news-desc" class="text-justify mt-3"></p>
                                 </div>
                                 <div id="news-imgdiv" class="col-sm-12 d-flex p-0 mt-5 ">
-                                    <div >
+                                    <div class="w-100">
                                         <img id="news-img" style="width: 100%;" src="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_700/v1605204988/flash-group-news/picture-c_flash-group-news.png" alt="Exclusif News Image">
 
                                     </div>

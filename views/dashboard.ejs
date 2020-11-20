@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <title>Dashboard</title>
+
+    <style>
+        body{
+            background: #111;
+            background-size: cover;
+            color: white;
+        }
+        button{
+            background-color: blueviolet;
+            color: white;
+            padding: 5px 16px;
+            border-radius: 4px;
+            border: none;
+            margin: 12px 0;
+        }
+
+        select {
+            border: none;
+            border-radius: 4px;
+            padding: 12px;
+            width: 100%;
+        }
+
+        option {
+            width: 100%;
+        }
+
+        @keyframes fade {
+            0% {
+                opacity: 0;
+            }
+
+            25% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 1;
+
+            }
+
+            75% {
+                opacity: 1;
+
+            }
+
+            100% {
+                opacity: 0;
+
+            }
+        }
+    </style>
+</head>
+
+<body onload="loadPosts()">
+    <main>
+        <section class="bitcoin-sec mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h4>choose bitcoin news to show</h4>
+                        <select name="bitcoin_news" id="bitcoin_news">
+                        </select>
+                        <button onclick="addPost('bitcoin_news')">ADD</button>
+                        <div class="d-flex justify-content-end">
+                            <div style="opacity: 0" id="bitcoin_news_success">
+                                <span style="color: green">Post Successfully Added</span>
+                                <img style="width: 22px;"
+                                    src="https://res.cloudinary.com/sapiangroup/image/upload/v1605735619/flash-group-news/success_wy6hel.svg"
+                                    alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" id="bitcoin_posts">
+
+                </div>
+            </div>
+        </section>
+
+        <section class="ethereum-sec mt-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h4>choose Ethereum news to show</h4>
+                        <select name="ethereum_news" id="ethereum_news">
+                        </select>
+                        <button onclick="addPost('ethereum_news')">ADD</button>
+                        <div class="d-flex justify-content-end">
+                            <div style="opacity: 0" id="ethereum_news_success">
+                                <span style="color: green">Post Successfully Added</span>
+                                <img style="width: 22px;"
+                                    src="https://res.cloudinary.com/sapiangroup/image/upload/v1605735619/flash-group-news/success_wy6hel.svg"
+                                    alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" id="ethereum_posts">
+
+                </div>
+            </div>
+        </section>
+
+        <section class="litecoin-sec mt-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h4>choose Litecoin news to show</h4>
+                        <select name="litecoin_news" id="litecoin_news">
+                        </select>
+                        <button onclick="addPost('litecoin_news')">ADD</button>
+                        <div class="d-flex justify-content-end">
+                            <div style="opacity: 0" id="litecoin_news_success">
+                                <span style="color: green">Post Successfully Added</span>
+                                <img style="width: 22px;"
+                                    src="https://res.cloudinary.com/sapiangroup/image/upload/v1605735619/flash-group-news/success_wy6hel.svg"
+                                    alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" id="litecoin_posts">
+
+                </div>
+            </div>
+        </section>
+
+        <section class="blockchain-sec mt-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h4>choose blockchain news to show</h4>
+                        <form action="">
+                            <select name="blockchain_news" id="blockchain_news">
+                            </select>
+                            <button onclick="addPost('blockchain_news')">ADD</button>
+                            <div class="d-flex justify-content-end">
+                                <div style="opacity: 0" id="blockchain_news_success">
+                                    <span style="color: green">Post Successfully Added</span>
+                                    <img style="width: 22px;"
+                                        src="https://res.cloudinary.com/sapiangroup/image/upload/v1605735619/flash-group-news/success_wy6hel.svg"
+                                        alt="">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row" id="blockchain_posts">
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+
+
+    <script>
+
+        const BITCOIN = 2;
+        const BLOCKCHAIN = 3;
+        const BUSINESS = 131;
+        const DEFI = 30;
+        const ETHEREUM = 4;
+        const NEWS = 7;
+
+        let bitcoinPost;
+        let blockchainPost;
+        let businessPost;
+        let defiPost;
+        let ethoinPost;
+        let newsoinPost;
+
+        const bitcoinSelect = document.querySelector('#bitcoin_news');
+        const blockchainSelect = document.querySelector('#blockchain_news');
+        const ethereumSelect = document.querySelector('#ethereum_news');
+        const litecoinSelect = document.querySelector('#litecoin_news');
+
+        getData(getURL(BITCOIN)).then((posts) => {
+            addOptions(bitcoinSelect, posts);
+        });
+
+        getData(getURL(BLOCKCHAIN)).then((posts) => {
+            addOptions(blockchainSelect, posts);
+        });
+
+        getData(getURL(ETHEREUM)).then((posts) => {
+            addOptions(ethereumSelect, posts);
+        });
+
+        function getURL(topic) {
+            return 'https://flashgroupnews.com/wp-json/wp/v2/posts?categories=' + topic + '&per_page=100';
+        }
+
+        function addOptions(selection, posts) {
+            for (i = 0; i < posts.length; i++) {
+                let option = document.createElement('option');
+                option.value = JSON.stringify(posts[i]);
+                option.innerHTML = i + 1 + '. ' + posts[i].title.rendered;
+                selection.appendChild(option);
+            }
+        }
+
+        async function getData(url) {
+            const res = await fetch(url);
+            return await res.json();
+        }
+
+        async function addPost(topic) {
+            let selected = document.getElementById(topic);
+            let post = selected.value;
+
+            const options = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: post
+            };
+            const response = fetch('/addPost', options).then((response) => {
+                console.log(response.status);
+                let stat = document.getElementById(topic + "_success");
+                let message = stat.querySelector('span');
+                let sign = stat.querySelector('img');
+
+                if (response.status === 200) {
+                    message.innerHTML = 'Post successfully added';
+                    message.style.color = 'green';
+                    sign.src = 'https://res.cloudinary.com/sapiangroup/image/upload/v1605735619/flash-group-news/success_wy6hel.svg';
+                } else if (response.status === 304) {
+                    message.innerHTML = 'Post already added';
+                    message.style.color = 'orange';
+                    sign.src = 'https://res.cloudinary.com/sapiangroup/image/upload/v1605736923/flash-group-news/warning_g7bcea.svg';
+                } else {
+                    message.innerHTML = 'Something went wrong, please try again';
+                    message.style.color = 'red';
+                    sign.src = 'https://res.cloudinary.com/sapiangroup/image/upload/v1605736635/flash-group-news/error_tuprkl.svg';
+                }
+
+                stat.style.animation = 'fade ease-in-out 3.5s';
+                setTimeout(() => {
+                    stat.removeAttribute('style');
+                    stat.style.opacity = '0';
+                }, 3500);
+            });
+            // loadPosts();
+        }
+
+        const bitcoinPosts = document.querySelector('#bitcoin_posts');
+        const ethereumPosts = document.querySelector('#ethereum_posts');
+        const blockchainPosts = document.querySelector('#blockchain_posts');
+
+        // function loadPosts() {
+        //     getData('/getPosts?categories=' + BITCOIN).then((posts) => {
+        //         for (i = 0; i < posts.length; i++) {
+        //             const col = document.createElement('div');
+        //             col.className = 'col-sm-2';
+        //             col.style.height = '100px';
+        //             bitcoinPosts.appendChild(col);
+
+        //             const postDiv = document.createElement('div');
+        //             postDiv.style.width = '100%';
+        //             postDiv.style.height = '100%';
+        //             postDiv.style.background = 'url(https://img.freepik.com/free-vector/color-seamless-space-pattern_102902-2360.jpg?size=664&ext=jpg&uid=R26947815&ga=GA1.2.473264681.1585136185) no-repeat';
+        //             col.appendChild(postDiv);
+        //         }
+        //     });
+
+        //     getData('/getPosts?categories=' + ETHEREUM).then((posts) => {
+        //         for (i = 0; i < posts.length; i++) {
+        //             const col = document.createElement('div');
+        //             col.className = 'col-sm-2';
+        //             col.style.height = '100px';
+        //             ethereumPosts.appendChild(col);
+
+        //             const postDiv = document.createElement('div');
+        //             postDiv.style.width = '100%';
+        //             postDiv.style.height = '100%';
+        //             postDiv.style.background = 'url(https://img.freepik.com/free-vector/color-seamless-space-pattern_102902-2360.jpg?size=664&ext=jpg&uid=R26947815&ga=GA1.2.473264681.1585136185) no-repeat';
+        //             col.appendChild(postDiv);
+        //         }
+        //     });
+
+        //     getData('/getPosts?categories=' + BLOCKCHAIN).then((posts) => {
+        //         for (i = 0; i < posts.length; i++) {
+        //             const col = document.createElement('div');
+        //             col.className = 'col-sm-2';
+        //             col.style.height = '100px';
+        //             blockchainPosts.appendChild(col);
+
+        //             const postDiv = document.createElement('div');
+        //             postDiv.style.width = '100%';
+        //             postDiv.style.height = '100%';
+        //             postDiv.style.background = 'url(https://img.freepik.com/free-vector/color-seamless-space-pattern_102902-2360.jpg?size=664&ext=jpg&uid=R26947815&ga=GA1.2.473264681.1585136185) no-repeat';
+        //             col.appendChild(postDiv);
+        //         }
+        //     });
+        // }
+
+    </script>
+</body>
+
+</html>
