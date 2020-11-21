@@ -398,6 +398,11 @@ h5::after {
   margin-top: 5px;
 }
 
+.sec-4 .market-overview .currency-btn-set .selected-btn {
+  -webkit-box-shadow: inset 1px 1px 5px 0 rgba(0, 0, 0, 0.2), inset -1px -1px 5px 0 rgba(255, 255, 255, 0.5);
+          box-shadow: inset 1px 1px 5px 0 rgba(0, 0, 0, 0.2), inset -1px -1px 5px 0 rgba(255, 255, 255, 0.5);
+}
+
 .sec-4 .market-overview .main-content {
   background-color: #fafafa;
 }
