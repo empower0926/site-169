@@ -383,6 +383,11 @@ h5::after {
   height: 14px;
 }
 
+.sec-4 .market-overview {
+  -webkit-box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.08);
+          box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.08);
+}
+
 .sec-4 .market-overview .price {
   font-weight: 600;
 }
