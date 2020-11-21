@@ -61,9 +61,12 @@ const database = new Database('posts.db');
 database.loadDatabase();
 
 app.post('/addPost', (req, res) => {
+    
     const id = req.body.id
+    const category = req.body.category;
+    console.log('id is :'+req.body.id);
     database.find({
-        id: id
+        id: id , category: category
     }, (err, docs) => {
         if(err){
             res.status(500).send();
@@ -80,13 +83,24 @@ app.post('/addPost', (req, res) => {
 });
 
 app.get('/getPosts', (req, res) => {
-    console.log('getting posts on category: '+req.query.categories+'...');
-    let id = parseInt(req.query.categories);
-    database.find({categories: id}, (err, docs) => {
+    console.log('getting posts on category: '+req.query.category+'...');
+    
+    database.find({category: req.query.category}, (err, docs) => {
         res.json(docs);
     });
 });
 
+app.post('/removePost', (req, res) => {
+  
+    const id = req.body.id;
+    const category = req.body.category;
+    console.log('remove category is :'+category);
+    console.log('remove id is :'+id);
+    
+    database.remove({ id: id , category: category}, {}, function (err, numRemoved) {
+        // numRemoved = 1
+      });
+});
 
 // auth
 function checkUser(req, res, next) {

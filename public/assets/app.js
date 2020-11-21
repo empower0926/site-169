@@ -696,8 +696,11 @@ function nextArticle(topic) {
             feed = blockchainFeed;
             break;
     }
-
+if(feed.length==0){
+    return;
+}
     let counter = document.getElementById(topic + "-counter").value;
+    alert(counter);
     if (counter >= feed.length) {
         counter = 0;
         for (let index = 0; index < feed.length; index++) {
@@ -746,6 +749,7 @@ function nextArticle(topic) {
         }
         return;
     } else {
+        
         currentPosts.add(feed[counter].id);
     }
 

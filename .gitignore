@@ -1,4 +1,4 @@
 .env
-node_modules/
 auth.db
 posts.db
+node_modules/
