@@ -156,13 +156,13 @@ function setNewData() {
 }
 
 function nextHeatMap(cointype) {
-  
-  if(isShowinAll){
+
+  if (isShowinAll) {
     document.getElementById('showall').className = "green-text";
     document.getElementById('prev').className = "d-none green-text ";
     document.getElementById('next').className = "d-none green-text ";
-     }
-     isShowinAll = false;
+  }
+  isShowinAll = false;
   setNewData();
   let feed;
   let coinName = [];
@@ -223,7 +223,7 @@ function nextHeatMap(cointype) {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
-   // price = formatter.format(Math.round(price));
+    price = formatter.format(price);
     let rate = item.day;
     if (index == 0) {
       let btd = document.createElement("div");
@@ -387,7 +387,7 @@ function allHeatMap(start, end) {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       });
-      price = formatter.format(Math.round(price));
+      price = formatter.format(price);
       let rate = item.day;
       if (index == 0) {
         let btd = document.createElement("div");
@@ -516,9 +516,9 @@ setData(generateURL(BITCOIN)).then((val) => {
   nextArticle("bitcoin");
 });
 setData(generateURL(LITECOIN)).then((val) => {
-    litecoinFeed= val;
-    nextArticle("litecoin");
-  });
+  litecoinFeed = val;
+  nextArticle("litecoin");
+});
 setData(generateURL(ETHEREUM)).then((val) => {
   ethereumFeed = val;
   nextArticle("ethereum");
@@ -594,7 +594,7 @@ function setMarketData(crypto, currency, cs) {
         maximumFractionDigits: 0,
       });
 
-      price.innerHTML = cs + formatter.format(Math.round(values.price));
+      price.innerHTML = cs + formatter.format(values.price);
 
       let day = parent.querySelector(".day");
       if (values.day > 0) {
@@ -627,16 +627,16 @@ function setMarketData(crypto, currency, cs) {
       }
 
       let open = parent.querySelector(".open");
-      open.innerHTML = cs + formatter.format(Math.round(values.open));
+      open.innerHTML = cs + formatter.format(values.open);
 
       let high = parent.querySelector(".high");
-      high.innerHTML = cs + formatter.format(Math.round(values.high));
+      high.innerHTML = cs + formatter.format(values.high);
 
       let low = parent.querySelector(".low");
-      low.innerHTML = cs + formatter.format(Math.round(values.low));
+      low.innerHTML = cs + formatter.format(values.low);
 
       let last_price = parent.querySelector(".last-price");
-      last_price.innerHTML = cs + formatter.format(Math.round(values.price));
+      last_price.innerHTML = cs + formatter.format(values.price);
 
       let total = parent.querySelector(".total");
       let moneyFormat_total = getMoneyFormat(values.emitted);
@@ -676,15 +676,15 @@ function getMoneyFormat(priceValue) {
   const BILLION = 1.0e9;
   const MILLION = 1.0e6;
   const KILO = 1.0e3;
-  return priceValue >= TRILLION
-    ? priceValue / TRILLION + "T"
-    : priceValue >= BILLION
-    ? priceValue / BILLION + "B"
-    : priceValue >= MILLION
-    ? priceValue / MILLION + "M"
-    : priceValue >= KILO
-    ? priceValue / KILO + "K"
-    : priceValue + "N";
+  return priceValue >= TRILLION ?
+    priceValue / TRILLION + "T" :
+    priceValue >= BILLION ?
+    priceValue / BILLION + "B" :
+    priceValue >= MILLION ?
+    priceValue / MILLION + "M" :
+    priceValue >= KILO ?
+    priceValue / KILO + "K" :
+    priceValue + "N";
 }
 
 let bs = true;
@@ -698,8 +698,8 @@ function nextArticle(topic) {
       feed = bitcoinFeed;
       break;
     case "litecoin":
-        feed = litecoinFeed;
-        break;
+      feed = litecoinFeed;
+      break;
     case "ethereum":
       feed = ethereumFeed;
       break;
@@ -744,8 +744,8 @@ function nextArticle(topic) {
         bitcoinFeed.splice(feed[counter], bitcoinFeed.indexOf(feed[counter]));
 
         break;
-        case "litecoin":
-            litecoinFeed.splice(feed[counter], litecoinFeed.indexOf(feed[counter]));
+      case "litecoin":
+        litecoinFeed.splice(feed[counter], litecoinFeed.indexOf(feed[counter]));
 
         break;
 
@@ -809,7 +809,7 @@ function nextArticle(topic) {
           let slide = document.createElement("div");
           slide.className = "slide";
           slide.id = si;
-              slide.style.backgroundImage =  "url('" + feed[si].limg+ "')";
+          slide.style.backgroundImage = "url('" + feed[si].limg + "')";
           document.getElementById("bitcoin-slider").appendChild(slide);
           si++;
         }
@@ -820,75 +820,75 @@ function nextArticle(topic) {
         let div = document.getElementById("bitcoin-slider");
         div.removeChild(div.childNodes[0]);
         let si = counter;
-       
+
         let slide = document.createElement("div");
         slide.className = "slide";
         si++;
-        
+
         if (feed.length > 3) {
           si++;
-          
-          let feedplus=feed.length;
+
+          let feedplus = feed.length;
           feedplus++;
           if (si == feedplus) {
             si = 1;
           }
         }
-       
+
         if (feed[si] == undefined) {
           si = 0;
         }
-        
+
         slide.id = si;
         slide.style.backgroundImage = "url('" + feed[si].limg + "')";
         div.appendChild(slide);
       }
       break;
     case "ethereum":
-        document.getElementById(topic + "-counter").value = counter;
-        if (es) {
-          let si = counter;
-          for (let index = 0; index < 3; index++) {
-            if (feed[si] == undefined) {
-              si = 0;
-            }
-            let slide = document.createElement("div");
-            slide.className = "slide";
-            slide.id = si;
-                slide.style.backgroundImage =  "url('" + feed[si].limg+ "')";
-            document.getElementById("ethereum-slider").appendChild(slide);
-            si++;
-          }
-          es = false;
-          let div = document.getElementById("ethereum-slider");
-          div.removeChild(div.childNodes[0]);
-        } else {
-          let div = document.getElementById("ethereum-slider");
-          div.removeChild(div.childNodes[0]);
-          let si = counter;
-         
-          let slide = document.createElement("div");
-          slide.className = "slide";
-          si++;
-          
-          if (feed.length > 3) {
-            si++;
-            
-            let feedplus=feed.length;
-            feedplus++;
-            if (si == feedplus) {
-              si = 1;
-            }
-          }
-         
+      document.getElementById(topic + "-counter").value = counter;
+      if (es) {
+        let si = counter;
+        for (let index = 0; index < 3; index++) {
           if (feed[si] == undefined) {
             si = 0;
           }
-          
+          let slide = document.createElement("div");
+          slide.className = "slide";
           slide.id = si;
           slide.style.backgroundImage = "url('" + feed[si].limg + "')";
-          div.appendChild(slide);
+          document.getElementById("ethereum-slider").appendChild(slide);
+          si++;
         }
+        es = false;
+        let div = document.getElementById("ethereum-slider");
+        div.removeChild(div.childNodes[0]);
+      } else {
+        let div = document.getElementById("ethereum-slider");
+        div.removeChild(div.childNodes[0]);
+        let si = counter;
+
+        let slide = document.createElement("div");
+        slide.className = "slide";
+        si++;
+
+        if (feed.length > 3) {
+          si++;
+
+          let feedplus = feed.length;
+          feedplus++;
+          if (si == feedplus) {
+            si = 1;
+          }
+        }
+
+        if (feed[si] == undefined) {
+          si = 0;
+        }
+
+        slide.id = si;
+        slide.style.backgroundImage = "url('" + feed[si].limg + "')";
+        div.appendChild(slide);
+      }
       break;
 
     case "litecoin":
@@ -902,7 +902,7 @@ function nextArticle(topic) {
           let slide = document.createElement("div");
           slide.className = "slide";
           slide.id = si;
-              slide.style.backgroundImage =  "url('" + feed[si].limg+ "')";
+          slide.style.backgroundImage = "url('" + feed[si].limg + "')";
           document.getElementById("litecoin-slider").appendChild(slide);
           si++;
         }
@@ -913,25 +913,25 @@ function nextArticle(topic) {
         let div = document.getElementById("litecoin-slider");
         div.removeChild(div.childNodes[0]);
         let si = counter;
-       
+
         let slide = document.createElement("div");
         slide.className = "slide";
         si++;
-        
+
         if (feed.length > 3) {
           si++;
-          
-          let feedplus=feed.length;
+
+          let feedplus = feed.length;
           feedplus++;
           if (si == feedplus) {
             si = 1;
           }
         }
-       
+
         if (feed[si] == undefined) {
           si = 0;
         }
-        
+
         slide.id = si;
         slide.style.backgroundImage = "url('" + feed[si].limg + "')";
         div.appendChild(slide);
@@ -1022,18 +1022,18 @@ function slide(topic) {
   behind.style.transform = "translate3d(0, 0, 0)";
   last.style.transform = "translate3d(70px, 0, -15px)";
 }
-function smoothscroll(hash,topic) {
-   if(topic!=undefined){
-       nextHeatMap(topic);
-   }
-    
-   $("html, body").animate(
-     {
-       scrollTop: $(hash).offset().top,
-     },
-     800,
-     function () {
-       window.location.hash = hash;
-     }
-   );
- }
+
+function smoothscroll(hash, topic) {
+  if (topic != undefined) {
+    nextHeatMap(topic);
+  }
+
+  $("html, body").animate({
+      scrollTop: $(hash).offset().top,
+    },
+    800,
+    function () {
+      window.location.hash = hash;
+    }
+  );
+}
