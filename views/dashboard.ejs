@@ -61,8 +61,7 @@
         }
 
         .currency-btn {
-            -webkit-box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.2), -1px -1px 5px 0 rgba(255, 255, 255, 0.5);
-            box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.2), -1px -1px 5px 0 rgba(255, 255, 255, 0.5);
+            box-shadow: 1px 1px 5px 0 rgba(153, 153, 153, 0.2), -1px -1px 5px 0 rgba(255, 255, 255, 0.5);
             border-radius: 2px;
             
             padding: 1rem;
@@ -281,9 +280,7 @@
                         <div class="container">
                             <h2>Blockchain</h2>
                             <div class="row mt-5">
-                                <div class="col-sm-6">
-                                    <h1> Post count <span id="blockchaincount" style="font-size: 5rem"></span></h1>
-                                </div>
+                                
                                 <div class="col-sm-6">
                                     <h4>choose Blockchain news to show</h4>
                                     <select name="blockchain_news" id="blockchain_news">
@@ -310,9 +307,7 @@
                         <div class="container">
                             <h2>Defi</h2>
                             <div class="row mt-5">
-                                <div class="col-sm-6">
-                                    <h1> Post count <span id="deficount" style="font-size: 5rem"></span></h1>
-                                </div>
+                                
                                 <div class="col-sm-6">
                                     <h4>choose Defi news to show</h4>
                                     <select name="defi_news" id="defi_news">
@@ -339,9 +334,7 @@
                         <div class="container">
                             <h2>Business</h2>
                             <div class="row mt-5">
-                                <div class="col-sm-6">
-                                    <h1> Post count <span id="businesscount" style="font-size: 5rem"></span></h1>
-                                </div>
+                               
                                 <div class="col-sm-6">
                                     <h4>choose business news to show</h4>
                                     <select name="business_news" id="business_news">
@@ -368,9 +361,7 @@
                         <div class="container">
                             <h2>News</h2>
                             <div class="row mt-5">
-                                <div class="col-sm-6">
-                                    <h1> Post count <span id="newscount" style="font-size: 5rem"></span></h1>
-                                </div>
+                                
                                 <div class="col-sm-6">
                                     <h4>choose News news to show</h4>
                                     <select name="news_news" id="news_news">
@@ -428,6 +419,9 @@
         const blockchainSelect = document.querySelector('#blockchain_news');
         const ethereumSelect = document.querySelector('#ethereum_news');
         const litecoinSelect = document.querySelector('#litecoin_news');
+        const defiSelect = document.querySelector('#defi_news');
+        const businessSelect = document.querySelector('#business_news');
+        const newsSelect = document.querySelector('#news_news');
 
         getData(getURL(BITCOIN)).then((posts) => {
             addOptions(bitcoinSelect, posts);
@@ -439,6 +433,17 @@
 
         getData(getURL(ETHEREUM)).then((posts) => {
             addOptions(ethereumSelect, posts);
+        });
+        getData(getURL(DEFI)).then((posts) => {
+            addOptions(defiSelect, posts);
+        });
+
+        getData(getURL(BUSINESS)).then((posts) => {
+            addOptions(businessSelect, posts);
+        });
+
+        getData(getURL(NEWS)).then((posts) => {
+            addOptions(newsSelect, posts);
         });
 
         function getURL(topic) {
@@ -483,8 +488,6 @@
                 }
             });
             setTimeout(function () {
-
-
                 let jsonArticle = { 'category': topic, 'id': id, "limg": imageSrc, "tmimg": imageSrctm, 'post': post };
 
                 const options = {
@@ -501,9 +504,14 @@
                     if (response.status === 200) {
                         message.innerHTML = 'Post successfully added';
                         message.style.color = 'green';
+                        loadPosts();
                         sign.src = 'https://res.cloudinary.com/sapiangroup/image/upload/v1605735619/flash-group-news/success_wy6hel.svg';
                     } else if (response.status === 304) {
                         message.innerHTML = 'Post already added';
+                        message.style.color = 'orange';
+                        sign.src = 'https://res.cloudinary.com/sapiangroup/image/upload/v1605736923/flash-group-news/warning_g7bcea.svg';
+                    } else if (response.status === 305) {
+                        message.innerHTML = 'Post limit reached';
                         message.style.color = 'orange';
                         sign.src = 'https://res.cloudinary.com/sapiangroup/image/upload/v1605736923/flash-group-news/warning_g7bcea.svg';
                     } else {
@@ -518,10 +526,10 @@
                         stat.style.opacity = '0';
                     }, 3500);
                 });
-                loadPosts();
+               
 
-            }, 2000);
-
+            }, 3000);
+            
         }
         async function removePost(id, topic) {
 
@@ -544,10 +552,9 @@
             let data = await fetch(url);
             return await data.json();
         }
-        let array = ['bitcoin', 'ethereum', 'litecoin', 'blockchain'];
+        let array = ['bitcoin', 'ethereum', 'litecoin', 'blockchain','defi','business','news'];
         function loadPosts() {
-
-
+            
             for (let index = 0; index < array.length; index++) {
                 const element = array[index];
                 getData('/getPosts?category=' + element + '_news').then((posts) => {
@@ -587,12 +594,17 @@
                         removebtn.setAttribute('onClick', 'removePost(' + post.id + ',"' + element + '_news")');
                         postcount++;
                     }
-                    document.getElementById('' + element + 'count').innerHTML = postcount;
+                    if(element==='bitcoin' || element==='ethereum' || element==='litecoin'){
+                        document.getElementById('' + element + 'count').innerHTML = postcount;
+                    }
+                   
 
                 });
 
             }
         }
+
+
         function smoothscroll(hash, topic) {
             for (let index = 0; index < array.length; index++) {
                 const element = array[index];

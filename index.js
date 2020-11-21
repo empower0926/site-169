@@ -1,5 +1,6 @@
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
+    
 }
 
 const express = require('express');
@@ -66,47 +67,74 @@ app.post('/addPost', (req, res) => {
     const id = req.body.id
     const category = req.body.category;
     console.log('id is :'+req.body.id);
-    let itemcount=0;
-    let canadd=true;
-    database.find({
-         category: category
-    }, (err, docs) => {
-        itemcount=docs.length;
-    });
+    let canaddnum=0;
+    
 
     if(category=='blockchain_news' || category=='news_news'){
         database.remove({ category: category}, { multi: true }, function (err, numRemoved) {});
     }else if(category=='defi_news'){
-        if(itemcount>=2){
-            console.log('post limitreached in the database');
-            canadd=false;
-            res.status(305).send();
-        }
-
+        canaddnum=2;
     }else if(category=='business_news'){
-        if(itemcount>=3){
-            console.log('post limitreached in the database');
-            canadd=false;
-            res.status(305).send();
-        }
+        canaddnum=3;
     }
-    if(canadd){
+ 
+ 
     database.find({
         id: id , category: category
     }, (err, docs) => {
         if(err){
             res.status(500).send();
         }
-        if (docs.length == 0) {
-            database.insert(req.body);
-            console.log('post added to the database');
-            res.status(200).send();
-        }else{
-            console.log('post already exists in the database');
-            res.status(304).send();
-        }
+        database.find({
+           category: category
+        }, (err, docsy) => {
+            if(err){
+                res.status(500).send();
+            }
+            if(canaddnum==2){
+                if(docsy.length>=2){
+                    console.log('post limit reached in the database');
+                    res.status(305).send();
+                }else{
+                    if (docs.length == 0) {
+                        database.insert(req.body);
+                        console.log('post added to the database');
+                        res.status(200).send();
+                    }else{
+                        console.log('post already exists in the database');
+                        res.status(304).send();
+                    }
+                }
+            }
+            else if(canaddnum==3){
+                if(docsy.length>=3){
+                    console.log('post limit reached in the database');
+                    res.status(305).send();
+                }else{
+                    if (docs.length == 0) {
+                        database.insert(req.body);
+                        console.log('post added to the database');
+                        res.status(200).send();
+                    }else{
+                        console.log('post already exists in the database');
+                        res.status(304).send();
+                    }
+                } 
+            }
+            else{
+                if (docs.length == 0) {
+                    database.insert(req.body);
+                    console.log('post added to the database');
+                    res.status(200).send();
+                }else{
+                    console.log('post already exists in the database');
+                    res.status(304).send();
+                }
+            }
+        });
+        
     });
-}
+
 });
 
 app.get('/getPosts', (req, res) => {

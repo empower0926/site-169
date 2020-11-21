@@ -35,7 +35,7 @@
         </div>
     </div>
     <!-- sec-2 -->
-    <section class="sec-2">
+    <section id="sec-2" class="sec-2">
         <div class="container">
             <div data-aos="fade-up" data-aos-duration="1000" class="row justify-content-center">
                 <!-- content -->
@@ -59,29 +59,29 @@
                             </div>
                             <div class="col-sm-12 p-0">
                                 <div class="coin-tokens mt-3">
-                                    <a id="SHA256btn" onclick="nextHeatMap('SHA256')" class="green ct "
+                                    <a id="SHA256btn" onclick="smoothscroll('#sec-2','SHA256')" class="green ct "
                                         style="display: none;">
                                         <span>SHA256</span>
                                     </a>
-                                    <a id="EtHashbtn" onclick="nextHeatMap('EtHash')" class="green ct ">
+                                    <a id="EtHashbtn" onclick="smoothscroll('#sec-2','EtHash')" class="green ct ">
                                         <span>EtHash</span>
                                     </a>
-                                    <a id="RPCAbtn" onclick="nextHeatMap('RPCA')" class="pink ct">
+                                    <a id="RPCAbtn" onclick="smoothscroll('#sec-2','RPCA')" class="pink ct">
                                         <span>RPCA</span>
                                     </a>
-                                    <a id="DBFTbtn" onclick="nextHeatMap('DBFT')" class="pink ct">
+                                    <a id="DBFTbtn" onclick="smoothscroll('#sec-2','DBFT')" class="pink ct">
                                         <span>DBFT</span>
                                     </a>
-                                    <a id="DPoSbtn" onclick="nextHeatMap('DPoS')" class="green ct">
+                                    <a id="DPoSbtn" onclick="smoothscroll('#sec-2','DPoS')" class="green ct">
                                         <span>DPoS</span>
                                     </a>
-                                    <a id="Scryptbtn" onclick="nextHeatMap('Scrypt')" class="pink ct">
+                                    <a id="Scryptbtn" onclick="smoothscroll('#sec-2','Scrypt')" class="pink ct">
                                         <span>Scrypt</span>
                                     </a>
-                                    <a id="Otherbtn" onclick="nextHeatMap('Other')" class="pink ct">
+                                    <a id="Otherbtn" onclick="smoothscroll('#sec-2','Other')" class="pink ct">
                                         <span>Other</span>
                                     </a>
-                                    <a id="PoSbtn" onclick="nextHeatMap('PoS')" class="green ct last">
+                                    <a id="PoSbtn" onclick="smoothscroll('#sec-2','PoS')" class="green ct last">
                                         <span>PoS</span>
                                     </a>
                                 </div>
@@ -626,17 +626,18 @@
                     <article class="col-sm-12 news-feed">
                         <div>
                             <input id="litecoin-counter" type="text" class="d-none" value="0">
-
-                            <h4 id="litecoin-title">Organic growth? Bitcoin SV activity up 761% ahead of BSV conference.
-                            </h4>
-                            <p id="litecoin-desc" class="mt-3 text-justify">
-                                In the two days leading up to the CoinGeek Live conference in New York this week, there
-                                has been an incredible increase in active addresses and transaction counts on the
-                                Bitcoin SV network.</p>
+                            <h4 id="litecoin-title"></h4>
+                            <p id="litecoin-desc" class="mt-3 text-justify"></p>
                         </div>
                     </article>
                 </div>
-                <div class="col-sm-6"></div>
+                <div class="col-sm-6 d-flex justify-content-center">
+                    <div class="slider-parent">
+                        <div id="litecoin-slider" class="slider">
+
+                        </div>
+                    </div>
+                </div>
                 <div class="col-sm-12 mt-3 ml-2">
                     <button onclick="nextArticle('litecoin')">Next Article</button>
                     <img class="arrow" src="assets/img/icon-navigation-arrow_forward_24px.svg" alt="">
