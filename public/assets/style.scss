@@ -36,6 +36,7 @@ body {
 
 a {
   text-decoration: none !important;
+  cursor:  pointer !important;
 }
 
 .sec-1 {
@@ -100,7 +101,7 @@ h5 {
 }
 
 .green-text {
-  color: $gaccent;
+  color: $gaccent !important;
 }
 
 .bottom-line {
@@ -161,7 +162,7 @@ h5 {
     a{
       display: inline;
       text-decoration: none;
-      cursor: pointer;
+      cursor: pointer !important;
       transition: .3s;
       &:hover{
         transform: scale(1.05);
@@ -176,7 +177,7 @@ h5 {
 
     a{
       text-decoration: none;
-      cursor: pointer;
+      cursor: pointer !important;
       transition: .3s;
       &:hover{
         transform: scale(1.05);

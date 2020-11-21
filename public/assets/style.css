@@ -27,6 +27,7 @@ body {
 
 a {
   text-decoration: none !important;
+  cursor: pointer !important;
 }
 
 .sec-1 {
@@ -93,7 +94,7 @@ h5::after {
 }
 
 .green-text {
-  color: #00fc15;
+  color: #00fc15 !important;
 }
 
 .bottom-line {
@@ -152,7 +153,7 @@ h5::after {
 .sec-2 .green-btns a {
   display: inline;
   text-decoration: none;
-  cursor: pointer;
+  cursor: pointer !important;
   -webkit-transition: .3s;
   transition: .3s;
 }
@@ -172,7 +173,7 @@ h5::after {
 
 .sec-2 .coin-tokens a {
   text-decoration: none;
-  cursor: pointer;
+  cursor: pointer !important;
   -webkit-transition: .3s;
   transition: .3s;
 }

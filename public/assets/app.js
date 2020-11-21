@@ -158,9 +158,9 @@ function setNewData() {
 function nextHeatMap(cointype) {
   
   if(isShowinAll){
-    document.getElementById('showall').className = "";
-    document.getElementById('prev').className = "d-none";
-    document.getElementById('next').className = "d-none";
+    document.getElementById('showall').className = "green-text";
+    document.getElementById('prev').className = "d-none green-text ";
+    document.getElementById('next').className = "d-none green-text ";
      }
      isShowinAll = false;
   setNewData();
@@ -500,13 +500,13 @@ function allHeatMap(start, end) {
     document.getElementById("heatmapContent").appendChild(smalldivs);
   }
   if (start == 0) {
-    document.getElementById("showall").className = "d-none";
-    document.getElementById("prev").className = "d-none";
-    document.getElementById("next").className = "";
+    document.getElementById("showall").className = "d-none green-text ";
+    document.getElementById("prev").className = "d-none green-text ";
+    document.getElementById("next").className = " green-text ";
   } else if (start == 4) {
-    document.getElementById("showall").className = "d-none";
-    document.getElementById("next").className = "d-none";
-    document.getElementById("prev").className = "";
+    document.getElementById("showall").className = "d-none green-text ";
+    document.getElementById("next").className = "d-none green-text ";
+    document.getElementById("prev").className = "green-text ";
   }
   smoothscroll('#sec-2');
 }
