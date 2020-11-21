@@ -15,8 +15,20 @@
             color: white;
         }
 
+        h2{
+            background-color: rgb(34, 2, 49);
+            color: white;
+            padding: 0.5rem;
+        }
+
+        section{
+            margin-bottom: 1rem;
+            background-color: rgba(49, 49, 49, 0.2);
+            border-radius: 4px;
+        }
+
         button {
-            background-color: blueviolet;
+            background-color: rgb(64, 0, 124);
             color: white;
             padding: 5px 16px;
             border-radius: 4px;
@@ -61,25 +73,34 @@
         }
 
         .currency-btn {
+            cursor: pointer;
             border-radius: 2px;
             padding: 1rem;
             color: white;
-            margin-top: 5px;
+            /* margin-top: 5px; */
             height: 75px;
             text-align: center;
+            transition: .3s;
+        }
+
+        .currency-btn:hover{
+            background-color: rgb(63, 0, 71);
         }
 
         .selected-btn {
-            background-color: gray;
+            background-color: rgb(42, 0, 48);
         }
-        .postimg{           
+
+        .postimg {
             background-size: cover;
             width: 100%;
             height: 100%;
         }
+
         .side {
+            border-radius: 0 4px 4px 0;
             position: fixed;
-            background-color: #111;;
+            background-color: rgb(80, 0, 133);
         }
 
         .main {
@@ -87,15 +108,18 @@
             right: 0px;
             z-index: 0;
         }
-        .ms{
+
+        .ms {
             min-height: 100vh;
-            padding-top: 50px; 
+            padding-top: 50px;
         }
-        .btn-icon{
+
+        .btn-icon {
             width: 20px;
-           margin: auto;
-           display: none;
+            margin: auto;
+            display: none;
         }
+
         @media only screen and (max-width: 576px) {
             .currency-btn {
                 width: 14%;
@@ -104,7 +128,7 @@
             }
 
             .side {
-               
+                border-radius: 0;
                 display: -ms-flexbox;
                 display: flex;
                 -ms-flex-wrap: wrap;
@@ -115,18 +139,21 @@
                 z-index: 2;
                 bottom: 0;
             }
-            
-            .ms{
-                margin-top: 20px;  
+
+            .ms {
+                margin-top: 20px;
                 padding-top: 20px;
             }
-            .postremovebtn{
+
+            .postremovebtn {
                 margin-top: 75px;
             }
-            .btn-icon{
+
+            .btn-icon {
                 display: block;
             }
-            .btn-text{
+
+            .btn-text {
                 display: none;
             }
         }
@@ -134,59 +161,71 @@
 </head>
 
 <body onload="loadPosts()">
-    <div class="container-fluid">
-        <div class="row " >
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <div>
+                <img src="https://res.cloudinary.com/sapiangroup/image/upload/v1605181681/flash-group-news/FGN_logo_flash-group-news.svg" alt="">
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="text-center mt-2">
+                <h3>FLASHGROUP NEWS MONTHLY NEWS REPORT</h3>
+            </div>
+        </div>
+
+        <div class="row mt-5">
             <div class="side col-sm-2 p-0 ">
-                <div id="bitcoin-mbtn" class="currency-btn selected-btn m-0 mt-2  pr-0 pl-0 "
+                <div id="bitcoin-mbtn" class="currency-btn selected-btn pr-0 pl-0 "
                     onclick="smoothscroll('#bitcoin-sec','bitcoin')">
-                   <div class="btn-text"> Bitcoins</div>  <div class="btn-icon"><img src="assets/img/dashboard/bitcoin.png" style="width: 100%;"></div>
-                
-                    </div>
-                <div id="ethereum-mbtn" class=" currency-btn m-0 mt-2  pr-0 pl-0 "
+                    <div class="btn-text"> Bitcoins</div>
+                    <div class="btn-icon"><img src="assets/img/dashboard/bitcoin.png" style="width: 100%;"></div>
+
+                </div>
+                <div id="ethereum-mbtn" class=" currency-btn   pr-0 pl-0 "
                     onclick="smoothscroll('#ethereum-sec','ethereum')">
                     <div class="btn-text"> Ethereum</div>
                     <div class="btn-icon"><img src="assets/img/dashboard/ethereum.png" style="width: 100%;"></div>
-                
+
                 </div>
-                <div id="litecoin-mbtn" class=" currency-btn m-0 mt-2  pr-0 pl-0 "
+                <div id="litecoin-mbtn" class=" currency-btn   pr-0 pl-0 "
                     onclick="smoothscroll('#litecoin-sec','litecoin')">
                     <div class="btn-text">Litecoin </div>
                     <div class="btn-icon"><img src="assets/img/dashboard/litecoin.png" style="width: 100%;"></div>
-              
+
                 </div>
-                <div id="blockchain-mbtn" class=" currency-btn m-0 mt-2  pr-0 pl-0 "
+                <div id="blockchain-mbtn" class=" currency-btn   pr-0 pl-0 "
                     onclick="smoothscroll('#blockchain-sec','blockchain')">
                     <div class="btn-text">Blockchain </div>
                     <div class="btn-icon"><img src="assets/img/dashboard/blockchain.png" style="width: 100%;"></div>
-              
+
                 </div>
-                <div id="defi-mbtn" class=" currency-btn m-0 mt-2  pr-0 pl-0 "
+                <div id="defi-mbtn" class=" currency-btn   pr-0 pl-0 "
                     onclick="smoothscroll('#defi-sec','defi')">
-                    <div class="btn-text"> Defi</div> 
+                    <div class="btn-text"> Defi</div>
                     <div class="btn-icon"><img src="assets/img/dashboard/defi.png" style="width: 100%;"></div>
-              
+
                 </div>
-                <div id="business-mbtn" class=" currency-btn m-0 mt-2  pr-0 pl-0 "
+                <div id="business-mbtn" class=" currency-btn   pr-0 pl-0 "
                     onclick="smoothscroll('#business-sec','business')">
                     <div class="btn-text">Business </div>
-                    <div class="btn-icon"><img src="assets/img/dashboard/international-business.png" style="width: 100%;"></div>
-              
+                    <div class="btn-icon"><img src="assets/img/dashboard/international-business.png"
+                            style="width: 100%;"></div>
+
                 </div>
-                <div id="news-mbtn" class=" currency-btn m-0 mt-2  pr-0 pl-0 "
+                <div id="news-mbtn" class=" currency-btn   pr-0 pl-0 "
                     onclick="smoothscroll('#news-sec','news')">
                     <div class="btn-text"> News</div>
                     <div class="btn-icon"><img src="assets/img/dashboard/newspaper.png" style="width: 100%;"></div>
-              
+
                 </div>
 
             </div>
-            <div class=" main col-sm-10 ">
+            <div class=" main col-sm-10">
                 <main>
-                    <section id="bitcoin-sec" class="bitcoin-sec ms  " >
+                    <section id="bitcoin-sec" class="bitcoin-sec ms  ">
                         <div class="container">
                             <h2>Bitcoins</h2>
-
-
                             <div class="row mt-5">
                                 <div class="col-sm-6">
                                     <h1> Post count <span id="bitcoincount" style="font-size: 5rem"></span></h1>
@@ -213,7 +252,7 @@
                         </div>
                     </section>
 
-                    <section id="ethereum-sec" class="ethereum-sec ms " >
+                    <section id="ethereum-sec" class="ethereum-sec ms ">
                         <div class="container">
                             <h2>Ethereum</h2>
                             <div class="row mt-5">
@@ -242,7 +281,7 @@
                         </div>
                     </section>
 
-                    <section id="litecoin-sec" class="litecoin-sec ms " >
+                    <section id="litecoin-sec" class="litecoin-sec ms ">
                         <div class="container">
                             <h2>Litecoin</h2>
                             <div class="row mt-5">
@@ -271,11 +310,11 @@
                         </div>
                     </section>
 
-                    <section id="blockchain-sec" class="blockchain-sec ms " >
+                    <section id="blockchain-sec" class="blockchain-sec ms ">
                         <div class="container">
                             <h2>Blockchain</h2>
                             <div class="row mt-5">
-                                
+
                                 <div class="col-sm-6">
                                     <h4>choose Blockchain news to show</h4>
                                     <select name="blockchain_news" id="blockchain_news">
@@ -298,11 +337,11 @@
                         </div>
                     </section>
 
-                    <section id="defi-sec" class="defi-sec ms " >
+                    <section id="defi-sec" class="defi-sec ms ">
                         <div class="container">
                             <h2>Defi</h2>
                             <div class="row mt-5">
-                                
+
                                 <div class="col-sm-6">
                                     <h4>choose Defi news to show</h4>
                                     <select name="defi_news" id="defi_news">
@@ -325,11 +364,11 @@
                         </div>
                     </section>
 
-                    <section id="business-sec" class="business-sec ms " >
+                    <section id="business-sec" class="business-sec ms ">
                         <div class="container">
                             <h2>Business</h2>
                             <div class="row mt-5">
-                               
+
                                 <div class="col-sm-6">
                                     <h4>choose business news to show</h4>
                                     <select name="business_news" id="business_news">
@@ -352,11 +391,11 @@
                         </div>
                     </section>
 
-                    <section id="news-sec" class="news-sec ms " >
+                    <section id="news-sec" class="news-sec ms ">
                         <div class="container">
                             <h2>News</h2>
                             <div class="row mt-5">
-                                
+
                                 <div class="col-sm-6">
                                     <h4>choose News news to show</h4>
                                     <select name="news_news" id="news_news">
@@ -521,10 +560,10 @@
                         stat.style.opacity = '0';
                     }, 3500);
                 });
-               
+
 
             }, 3000);
-            
+
         }
         async function removePost(id, topic) {
 
@@ -547,9 +586,8 @@
             let data = await fetch(url);
             return await data.json();
         }
-        let array = ['bitcoin', 'ethereum', 'litecoin', 'blockchain','defi','business','news'];
+        let array = ['bitcoin', 'ethereum', 'litecoin', 'blockchain', 'defi', 'business', 'news'];
         function loadPosts() {
-            
             for (let index = 0; index < array.length; index++) {
                 const element = array[index];
                 getData('/getPosts?category=' + element + '_news').then((posts) => {
@@ -564,7 +602,7 @@
 
                         const colDiv = document.createElement('div');
                         colDiv.className = 'row d-flex';
-                        colDiv.style.height = '100px';
+                        // colDiv.style.height = '100px';
                         Posts.appendChild(col);
                         col.appendChild(colDiv);
                         const titlepdiv = document.createElement('div');
@@ -575,10 +613,14 @@
                         titlep.innerHTML = post.title.rendered;
                         titlepdiv.appendChild(titlep);
                         colDiv.appendChild(titlepdiv);
-                        const postDiv = document.createElement('div');
+                        const postDiv = document.createElement('img');
+                        postDiv.src = posts[i].tmimg;
+                        postDiv.style.objectFit = 'cover';
+                        postDiv.style.width = '100%';
+                        postDiv.style.maxHeight = '150px';
                         postDiv.className = 'col-sm-3 postimg';
-                        postDiv.style.background = 'url(' + posts[i].tmimg + ')no-repeat center center / cover ';
-                         colDiv.appendChild(postDiv);
+                        // postDiv.style.background = 'url(' + posts[i].tmimg + ')no-repeat center center / cover ';
+                        colDiv.appendChild(postDiv);
                         const removebtn = document.createElement('button');
                         removebtn.className = 'btn btn-danger mt-0';
                         removebtn.innerHTML = "Remove"
@@ -589,10 +631,10 @@
                         removebtn.setAttribute('onClick', 'removePost(' + post.id + ',"' + element + '_news")');
                         postcount++;
                     }
-                    if(element==='bitcoin' || element==='ethereum' || element==='litecoin'){
+                    if (element === 'bitcoin' || element === 'ethereum' || element === 'litecoin') {
                         document.getElementById('' + element + 'count').innerHTML = postcount;
                     }
-                   
+
 
                 });
 
@@ -603,20 +645,15 @@
         function smoothscroll(hash, topic) {
             for (let index = 0; index < array.length; index++) {
                 const element = array[index];
-
                 if (element === topic) {
-
-                    document.getElementById(element + '-mbtn').className = "col-sm-12 currency-btn selected-btn mt-2  pr-0 pl-0 ";
+                    document.getElementById(element + '-mbtn').className = "col-sm-12 currency-btn selected-btn pr-0 pl-0 ";
                 } else {
-
-                    document.getElementById(element + '-mbtn').className = "col-sm-12 currency-btn mt-2  pr-0 pl-0 ";
+                    document.getElementById(element + '-mbtn').className = "col-sm-12 currency-btn pr-0 pl-0 ";
                 }
-
             }
-            $("html, body").animate(
-                {
-                    scrollTop: $(hash).offset().top,
-                },
+            $("html, body").animate({
+                scrollTop: $(hash).offset().top,
+            },
                 800,
                 function () {
                     window.location.hash = hash;

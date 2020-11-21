@@ -20,7 +20,7 @@ initializePassport(passport);
 const app = express();
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log('listining on port ${port}...'));
+app.listen(port, () => console.log(`listining on port ${port}...`));
 app.use(express.static('public'));
 
 app.use(express.urlencoded({

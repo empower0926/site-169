@@ -4,7 +4,8 @@
   "description": "the mini-server on the fgn-news report",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [
     "fgn",
