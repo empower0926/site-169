@@ -858,7 +858,6 @@ function nextArticle(topic) {
           slide.style.backgroundImage = "url('" + feed[si].limg + "')";
           document.getElementById("ethereum-slider").appendChild(slide);
           si++;
-<<<<<<< HEAD
         }
         es = false;
         let div = document.getElementById("ethereum-slider");
@@ -885,34 +884,6 @@ function nextArticle(topic) {
         if (feed[si] == undefined) {
           si = 0;
         }
-=======
-        }
-        es = false;
-        let div = document.getElementById("ethereum-slider");
-        div.removeChild(div.childNodes[0]);
-      } else {
-        let div = document.getElementById("ethereum-slider");
-        div.removeChild(div.childNodes[0]);
-        let si = counter;
-
-        let slide = document.createElement("div");
-        slide.className = "slide";
-        si++;
-
-        if (feed.length > 3) {
-          si++;
-
-          let feedplus = feed.length;
-          feedplus++;
-          if (si == feedplus) {
-            si = 1;
-          }
-        }
-
-        if (feed[si] == undefined) {
-          si = 0;
-        }
->>>>>>> 24ddb48dc36c13057b71d125a2191faf03269c46
 
         slide.id = si;
         slide.style.backgroundImage = "url('" + feed[si].limg + "')";
@@ -1065,8 +1036,4 @@ function smoothscroll(hash, topic) {
       window.location.hash = hash;
     }
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 24ddb48dc36c13057b71d125a2191faf03269c46
