@@ -8,8 +8,33 @@
 
 
     <style>
+        @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300&family=Montserrat:wght@200;300&display=swap");
+        body {
+            color:white;
+            font-family: "Heebo", sans-serif !important;
+            font-weight: 100;
+            background: rgb(144, 19, 254);
+            background: linear-gradient(180deg, rgba(144,19,254,1) 0%, rgba(9,9,9,1) 87%, rgba(9,9,9,1) 87%);
+        }
+
+        button{
+            border: none;
+            background: rgb(144, 19, 254);
+            color:white;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 2rem !important;
+            transition: .3s;
+        }
+
+        button:hover{
+            background: rgb(125, 16, 221);
+        }
+
         main {
+            text-align: center;
             display: flex;
+            flex-direction: column;
             width: 100%;
             height: 100vh;
             justify-content: center;
@@ -21,6 +46,9 @@
             margin-top: 5px;
             padding: 12px;
             font-size: 16px;
+            border: none;
+            font-size: 16px;
+            outline: none;
         }
 
         button {
@@ -34,6 +62,10 @@
 
 <body>
     <main>
+        <div>
+            <img src="https://res.cloudinary.com/sapiangroup/image/upload/v1605181681/flash-group-news/FGN_logo_flash-group-news.svg" alt="">
+        </div>
+        <h2>FLASHGROUP NEWS MONTHLY NEWS REPORT</h2>
         <form action="/auth" method="POST">
             <div>
                 <input type="text" name="username" id="username" placeholder="Username">

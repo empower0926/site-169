@@ -383,11 +383,6 @@ h5::after {
   height: 14px;
 }
 
-.sec-4 .market-overview {
-  -webkit-box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.08);
-          box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.08);
-}
-
 .sec-4 .market-overview .price {
   font-weight: 600;
 }
@@ -401,11 +396,6 @@ h5::after {
   color: black;
   font-weight: bold;
   margin-top: 5px;
-}
-
-.sec-4 .market-overview .currency-btn-set .selected-btn {
-  -webkit-box-shadow: inset 1px 1px 5px 0 rgba(0, 0, 0, 0.2), inset -1px -1px 5px 0 rgba(255, 255, 255, 0.5);
-          box-shadow: inset 1px 1px 5px 0 rgba(0, 0, 0, 0.2), inset -1px -1px 5px 0 rgba(255, 255, 255, 0.5);
 }
 
 .sec-4 .market-overview .main-content {
