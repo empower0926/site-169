@@ -66,6 +66,31 @@ app.post('/addPost', (req, res) => {
     const id = req.body.id
     const category = req.body.category;
     console.log('id is :'+req.body.id);
+    let itemcount=0;
+    let canadd=true;
+    database.find({
+         category: category
+    }, (err, docs) => {
+        itemcount=docs.length;
+    });
+
+    if(category=='blockchain_news' || category=='news_news'){
+        database.remove({ category: category}, { multi: true }, function (err, numRemoved) {});
+    }else if(category=='defi_news'){
+        if(itemcount>=2){
+            console.log('post limitreached in the database');
+            canadd=false;
+            res.status(305).send();
+        }
+
+    }else if(category=='business_news'){
+        if(itemcount>=3){
+            console.log('post limitreached in the database');
+            canadd=false;
+            res.status(305).send();
+        }
+    }
+    if(canadd){
     database.find({
         id: id , category: category
     }, (err, docs) => {
@@ -81,6 +106,7 @@ app.post('/addPost', (req, res) => {
             res.status(304).send();
         }
     });
+}
 });
 
 app.get('/getPosts', (req, res) => {
