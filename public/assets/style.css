@@ -31,7 +31,7 @@ a {
 }
 
 .sec-1 {
-  background-image: url("https://res.cloudinary.com/sapiangroup/image/upload/v1605181402/flash-group-news/BG_flash-group-news.png");
+  background-image: url("https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1600/v1605181402/flash-group-news/BG_flash-group-news.png");
   background-size: cover;
   min-height: 60vh;
   color: white;
@@ -286,7 +286,7 @@ h5::after {
 }
 
 .sec-3 .img-div {
-  background: url("https://res.cloudinary.com/sapiangroup/image/upload/v1605204988/flash-group-news/picture-c_flash-group-news.png") no-repeat;
+  background: url("https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png") no-repeat;
   background-size: cover;
   height: 600px;
 }
@@ -511,7 +511,6 @@ footer select {
 }
 
 .slider-parent .slider {
-  overflow: hidden;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
@@ -522,6 +521,12 @@ footer select {
           perspective: 100;
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
+}
+
+@media screen and (max-width: 576px) {
+  .slider-parent .slider {
+    overflow: hidden;
+  }
 }
 
 .slider-parent .slider .slide {
