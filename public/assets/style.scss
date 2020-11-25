@@ -509,6 +509,7 @@ footer {
 
     @include screen(small){
       overflow: hidden;
+      // strange scroll
     }
 
     .slide {
