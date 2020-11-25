@@ -511,7 +511,6 @@ footer select {
 }
 
 .slider-parent .slider {
-  overflow: hidden;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
