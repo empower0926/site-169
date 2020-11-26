@@ -26,7 +26,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({
     extended: false
 }));
-// app.use('view-engine', 'ejs');
+
 app.use(flash());
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -153,15 +153,17 @@ app.post('/removePost', (req, res) => {
     console.log('remove id is :'+id);
     
     database.remove({ id: id , category: category}, {}, function (err, numRemoved) {
-        // numRemoved = 1
+        console.log(`deleted ${id} post`);
       });
 });
 
 // auth
 function checkUser(req, res, next) {
     if (!req.isAuthenticated()) {
+        console.log('user need to login...')
         return next();
     }
+    console.log('user session found...')
     res.redirect('/dashboard');
 }
 
