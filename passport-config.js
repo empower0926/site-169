@@ -10,6 +10,7 @@ function initialize(passport) {
     const authenticateUser = async (username, password, done) => {
         try {
             const user = await geteUserByUsername(username);
+            console.log(user.password);
             if (user === undefined) {
                 return done(null, false, {
                     message: 'wrong username...!'
