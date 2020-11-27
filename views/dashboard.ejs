@@ -27,6 +27,14 @@
             border-radius: 4px;
         }
 
+        input {
+            margin-bottom: 1rem;
+            width: 100%;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
         button {
             background-color: rgb(64, 0, 124);
             color: white;
@@ -411,13 +419,47 @@
                                 </div>
                             </div>
 
-                            <div class="row ">
+                            <div class="row">
                                 <div id="news_posts" class="row w-100"></div>
                             </div>
                         </div>
                     </section>
 
+                    <section>
+                        <div class="container-fluid p-4">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h3>
+                                        Change Password
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-sm-3">
+                                    <div>
+                                        <label for="username">Username</label><br>
+                                        <input type="text" name="username" id="username">
+                                    </div>
+                                    <div>
+                                        <label for="currentPassword">Current Password</label><br>
+                                        <input type="password" name="currentPassword" id="currentPassword">
+                                    </div>
+                                    <div>
+                                        <label for="newPassword">New Password</label><br>
+                                        <input type="password" name="newPassword" id="newPassword">
+                                    </div>
+                                    <div>
+                                        <label for="confirm">Confirm</label><br>
+                                        <input type="password" name="confirm" id="confirm">
+                                    </div>
+                                    <div>
 
+                                        <button style="width: 100%;" onclick="changePassword()">Change Password</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </main>
 
             </div>
@@ -583,6 +625,7 @@
             let data = await fetch(url);
             return await data.json();
         }
+
         let array = ['bitcoin', 'ethereum', 'litecoin', 'blockchain', 'defi', 'business', 'news'];
         function loadPosts() {
             for (let index = 0; index < array.length; index++) {
@@ -638,7 +681,6 @@
             }
         }
 
-
         function smoothscroll(hash, topic) {
             for (let index = 0; index < array.length; index++) {
                 const element = array[index];
@@ -657,6 +699,28 @@
                 }
             );
         }
+
+        function changePassword() {
+            const username = document.querySelector('#username').value;
+            const currentPassword = document.querySelector('#currentPassword').value;
+            const newPassword = document.querySelector('#newPassword').value;
+            const confirm = document.querySelector('#confirm').value;
+
+
+            if (newPassword === confirm) {
+                const fields = { 'username': username, 'currentPassword': currentPassword, 'newPassword': newPassword };
+                const options = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(fields)
+                };
+                console.log('initiating password change...');
+                const response = fetch('/changePassword', options).then((response) => {
+                    console.log(`password change: ${response.status}`);
+                });
+            }
+        }
+
     </script>
 </body>
 
