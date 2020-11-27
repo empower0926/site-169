@@ -453,9 +453,21 @@
                                         <input type="password" name="confirm" id="confirm">
                                     </div>
                                     <div>
-
                                         <button style="width: 100%;" onclick="changePassword()">Change Password</button>
+                                        <span id="password-message" style="display: none;"></span>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 5rem;">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12 d-flex justify-content-end">
+                                    <form id="logout" action="/logout?_method=DELETE" method="POST">
+                                        <button style="background-color: red;" type="submit">Log Out</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -706,7 +718,8 @@
             const newPassword = document.querySelector('#newPassword').value;
             const confirm = document.querySelector('#confirm').value;
 
-
+            let message = document.querySelector('#password-message');
+            message.style.display = 'inline';
             if (newPassword === confirm) {
                 const fields = { 'username': username, 'currentPassword': currentPassword, 'newPassword': newPassword };
                 const options = {
@@ -717,10 +730,29 @@
                 console.log('initiating password change...');
                 const response = fetch('/changePassword', options).then((response) => {
                     console.log(`password change: ${response.status}`);
+                    if (response.status === 200) {
+                        message.innerHTML = 'Password successfully changed! redirecting to login...';
+                        message.style.color = 'green';
+
+                        setTimeout(() => {
+                            document.querySelector('#logout').submit();
+                        }, 3000);
+                    } else if (response.status === 304) {
+                        message.innerHTML = 'Current password is incorrect!';
+                        message.style.color = 'red';
+                    } else {
+                        message.innerHTML = 'Something went wrong! please check the inputs and try again...';
+                        message.style.color = 'red';
+                    }
+                    setTimeout(() => {
+                        message.style.display = 'none';
+                    }, 3000);
                 });
+            } else {
+                message.innerHTML = 'Passwords does not match...';
+                message.style.color = 'red';
             }
         }
-
     </script>
 </body>
 

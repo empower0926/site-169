@@ -10,6 +10,7 @@ const getUser = require('./passport-config').geteUserByUsername;
 const flash = require('express-flash');
 const session = require('express-session');
 const Database = require('nedb');
+const medthodOverride = require('method-override');
 const {
     response
 } = require('express');
@@ -26,6 +27,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`listining on port ${port}...`));
 app.use(express.static('public'));
+app.use(medthodOverride('_method'));
 
 app.use(express.urlencoded({
     extended: false
@@ -44,11 +46,16 @@ app.use(express.json({
     limit: '1mb'
 }));
 
+const database = new Database('posts.db');
+database.loadDatabase();
+
 app.get('/admin', checkUser, (req, res) => {
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
     return res.render('admin.ejs');
 });
 
 app.get('/dashboard', checkAuth, (req, res) => {
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
     return res.render('dashboard.ejs');
 });
 
@@ -62,10 +69,6 @@ app.post('/auth', passport.authenticate('local', {
 app.get('/news', (req, res) => {
     res('lol');
 });
-
-const database = new Database('posts.db');
-database.loadDatabase();
-
 app.post('/addPost', (req, res) => {
     const id = req.body.id
     const category = req.body.category;
@@ -168,10 +171,16 @@ app.post('/removePost', (req, res) => {
 });
 
 app.post('/changePassword', checkAuth, async (req, res) => {
+    process.env.password = 'this is the new password';
     const username = req.body.username;
     const currentPassowrd = req.body.currentPassword;
     const newPassword = req.body.newPassword;
 
+    const recordDB = new Database('auth.db');
+    recordDB.loadDatabase();
+    if(newPassword === undefined || newPassword === ''){
+        res.status(500).send();
+    }
     console.log(`user ${username} is about to change password...`);
 
     const user = await getUser(username);
@@ -179,9 +188,6 @@ app.post('/changePassword', checkAuth, async (req, res) => {
         console.log('password matched, initiating papssword changing steps...');
 
         const passwordHash = await bcrypt.hash(newPassword, 10);
-        const recordDB = new Database('auth.db');
-        recordDB.loadDatabase();
-
         recordDB.update({
             _id: user._id
         }, {
@@ -196,14 +202,21 @@ app.post('/changePassword', checkAuth, async (req, res) => {
             }
 
             if (numUpdated === 1) {
+                console.log('passwoerd changed...');
                 res.status(200).send();
             } else {
                 res.status(500).send();
             }
         });
     } else {
+        console.log('password is incorrect');
         res.status(304).send();
     }
+});
+
+app.delete('/logout', (req, res) => {
+    req.logOut();
+    res.redirect('/admin');
 });
 
 // auth
