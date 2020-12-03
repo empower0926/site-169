@@ -3,13 +3,11 @@ const bcrypt = require('bcrypt');
 require('dotenv').config();
 const Database = require('nedb');
 
-const database = new Database('auth.db');
-database.loadDatabase();
-
 function initialize(passport) {
     const authenticateUser = async (username, password, done) => {
         try {
             const user = await geteUserByUsername(username);
+            console.log(`user ${user.username} logged in...`);
             if (user === undefined) {
                 return done(null, false, {
                     message: 'wrong username...!'
@@ -37,6 +35,8 @@ function initialize(passport) {
 }
 
 function geteUserByUsername(username) {
+    const database = new Database('auth.db');
+    database.loadDatabase();
     let user;
     return new Promise((resolve, reject) => {
         database.find({
@@ -45,11 +45,14 @@ function geteUserByUsername(username) {
             if (docs !== undefined && docs.length === 1) {
                 user = docs[0];
                 resolve(user);
-            }else{
-                reject(user);
+            } else {
+                reject('Either there is no such user or too many records');
             }
         });
     });
 }
 
-module.exports = initialize;
+module.exports = {
+    initialize,
+    geteUserByUsername
+};

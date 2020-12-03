@@ -36,11 +36,11 @@ body {
 
 a {
   text-decoration: none !important;
-  cursor:  pointer !important;
+  cursor: pointer !important;
 }
 
 .sec-1 {
-  background-image: url("https://res.cloudinary.com/sapiangroup/image/upload/v1605181402/flash-group-news/BG_flash-group-news.png");
+  background-image: url("https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1600/v1605181402/flash-group-news/BG_flash-group-news.png");
   background-size: cover;
   min-height: 60vh;
   color: white;
@@ -110,7 +110,8 @@ h5 {
 
   height: 10px;
 }
-.line-green{
+
+.line-green {
   background-color: rgb(50, 255, 118);
 }
 
@@ -158,13 +159,14 @@ h5 {
     }
   }
 
-  .green-btns{
-    a{
+  .green-btns {
+    a {
       display: inline;
       text-decoration: none;
       cursor: pointer !important;
       transition: .3s;
-      &:hover{
+
+      &:hover {
         transform: scale(1.05);
       }
     }
@@ -175,11 +177,12 @@ h5 {
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
 
-    a{
+    a {
       text-decoration: none;
       cursor: pointer !important;
       transition: .3s;
-      &:hover{
+
+      &:hover {
         transform: scale(1.05);
       }
     }
@@ -197,7 +200,7 @@ h5 {
         text-align: center;
       }
     }
-    
+
     .green {
       background-color: rgb(50, 255, 118);
       color: black !important;
@@ -269,7 +272,7 @@ h5 {
   }
 
   .img-div {
-    background: url("https://res.cloudinary.com/sapiangroup/image/upload/v1605204988/flash-group-news/picture-c_flash-group-news.png") no-repeat;
+    background: url("https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png") no-repeat;
     background-size: cover;
     height: 600px;
 
@@ -368,11 +371,12 @@ h5 {
   }
 
   .market-overview {
-    // box-shadow: 1px 1px 10px 1px rgba($color: #000000, $alpha: 0.08);
+    box-shadow: 1px 1px 10px 1px rgba($color: #000000, $alpha: 0.08);
 
     .price {
       font-weight: 600;
     }
+
     .currency-btn-set {
 
       .currency-btn {
@@ -384,12 +388,11 @@ h5 {
         color: black;
         font-weight: bold;
         margin-top: 5px;
-
-        
       }
+
       .selected-btn {
-        // box-shadow: inset 1px 1px 5px 0 rgba(0, 0, 0, 0.2),
-        //   inset -1px -1px 5px 0 rgba(255, 255, 255, 0.5);
+        box-shadow: inset 1px 1px 5px 0 rgba(0, 0, 0, 0.2),
+          inset -1px -1px 5px 0 rgba(255, 255, 255, 0.5);
       }
     }
 
@@ -499,10 +502,13 @@ footer {
     align-self: center;
     width: 100%;
     height: 100%;
-    // background-color: #111;
     position: relative;
     perspective: 100;
     transform-style: preserve-3d;
+
+    @include screen(small){
+      overflow: hidden;
+    }
 
     .slide {
       position: absolute;
