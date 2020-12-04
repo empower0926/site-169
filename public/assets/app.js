@@ -63,8 +63,8 @@ let Scrypt = ["LTC", "DOGE"];
 let X11 = ["DASH", "ABBC"];
 let CryptoNight = ["XMR"];
 let Lyra2 = ["XZC", "VTC", "NIX"];
-let Other = ["XEM", "ONT"];
-let PoS = ["XTZ"];
+let Other = ["XEM", "ONT","FIL","VET","DGB"];
+let PoS = ["XTZ","ALGO"];
 
 let currentHMcointype;
 let HMisShowinAll = false;
@@ -160,18 +160,30 @@ function loadFlashMapFeeds() {
       if (val.name == "NEM") {
         FOtherFeed[0] = val;
         fmcoinbtncoloring(FOtherFeed,"Other");
-      }  else {
+      }  else if(val.name == "Ontology") {
         FOtherFeed[1] = val;
+      } else if(val.name=="Filecoin"){
+        FOtherFeed[2] = val;
+      } else if(val.name=="VeChain") {
+        FOtherFeed[3] = val;
+      }
+       else  {
+        FOtherFeed[4] = val;
       }
     });
   });
- 
-    setData(generateFlashGroupMapURL("XTZ")).then((val) => {
-      FPoSFeed[0]=(val);
+  PoS.forEach((element) => {
+   
+    setData(generateFlashGroupMapURL(element)).then((val) => {
+      if (val.name == "Tezos") {
+        FPoSFeed[0]=(val);
+        fmcoinbtncoloring(FPoSFeed,"PoS");
+      }else{
+        FPoSFeed[1]=(val);
+      }
       
-      fmcoinbtncoloring(FPoSFeed,"PoS");
     });
-  
+  });
   
 }
 function setNewFData() {
@@ -237,6 +249,7 @@ function devidingfeed() {
   DBFTFeed.push(coinsFeed["data"].ATOM.USD);
 
   DPoSFeed.push(coinsFeed["data"].EOS.USD);
+  DPoSFeed.push(coinsFeed["data"].TRX.USD);
 
   ScryptFeed.push(coinsFeed["data"].LTC.USD);
   ScryptFeed.push(coinsFeed["data"].DOGE.USD);
@@ -333,7 +346,7 @@ function nextHeatMap(cointype) {
       break;
     case "RPCA":
       feed = RPCAFeed;
-      coinName.push("XPR");
+      coinName.push("XRP");
       break;
     case "DBFT":
       feed = DBFTFeed;
@@ -342,7 +355,7 @@ function nextHeatMap(cointype) {
     case "DPoS":
       feed = DPoSFeed;
 
-      coinName.push("EOS");
+      coinName.push("EOS","TRX");
       break;
     case "Scrypt":
       feed = ScryptFeed;
@@ -350,7 +363,7 @@ function nextHeatMap(cointype) {
       break;
     case "Other":
       feed = OtherFeed;
-      coinName.push("XEM", "ONT");
+      coinName.push("XEM", "ONT","DGB");
       break;
     case "PoS":
       feed = PoSFeed;
@@ -502,7 +515,7 @@ function allHeatMap(start, end) {
         break;
       case 2:
         topic = "RPCA";
-        coinName.push("XPR");
+        coinName.push("XRP");
         break;
       case 3:
         topic = "DBFT";
@@ -510,7 +523,7 @@ function allHeatMap(start, end) {
         break;
       case 4:
         topic = "DPoS";
-        coinName.push("EOS");
+        coinName.push("EOS","TRX");
         break;
       case 5:
         topic = "Scrypt";
@@ -518,7 +531,7 @@ function allHeatMap(start, end) {
         break;
       case 6:
         topic = "Other";
-        coinName.push("XEM", "ONT");
+        coinName.push("XEM", "ONT","DGB");
         break;
       case 7:
         topic = "PoS";
