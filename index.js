@@ -67,7 +67,7 @@ app.post('/auth', passport.authenticate('local', {
 
 // API Endpoints
 app.get('/news', (req, res) => {
-    res('lol');
+    res('news');
 });
 app.post('/addPost', (req, res) => {
     const id = req.body.id

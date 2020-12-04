@@ -13,7 +13,7 @@ function initialize(passport) {
                     message: 'wrong username...!'
                 });
             }
-
+            
             if (await bcrypt.compare(password, user.password)) {
                 console.log('password matches')
                 return done(null, user);
@@ -43,7 +43,9 @@ function geteUserByUsername(username) {
             username: username
         }, (err, docs) => {
             if (docs !== undefined && docs.length === 1) {
+                console.log('retriving user data...')
                 user = docs[0];
+                console.log('found user: ' + user.username);
                 resolve(user);
             } else {
                 reject('Either there is no such user or too many records');
