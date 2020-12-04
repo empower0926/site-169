@@ -424,39 +424,39 @@ h5 {
 
 }
 
-.sec-5 {
-  .newsheader {
-    img {
-      width: 50%;
+// .sec-5 {
+//   .newsheader {
+//     img {
+//       width: 50%;
 
-      @include screen(small) {
-        width: 25% !important;
-      }
-    }
+//       @include screen(small) {
+//         width: 25% !important;
+//       }
+//     }
 
-    h5 {
-      font-weight: 300;
+//     h5 {
+//       font-weight: 300;
 
-      &::after {
-        background-color: $accent !important;
-      }
-    }
-  }
+//       &::after {
+//         background-color: $accent !important;
+//       }
+//     }
+//   }
 
-  .newsbody {
-    h6 {
-      font-weight: bolder;
-    }
+//   .newsbody {
+//     h6 {
+//       font-weight: bolder;
+//     }
 
-    img {
-      width: 75%;
+//     img {
+//       width: 75%;
 
-      @include screen(small) {
-        width: 100% !important;
-      }
-    }
-  }
-}
+//       @include screen(small) {
+//         width: 100% !important;
+//       }
+//     }
+//   }
+// }
 
 footer {
   background-color: $bg;

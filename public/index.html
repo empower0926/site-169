@@ -66,6 +66,72 @@
                     <div class="container pt-5">
                         <div data-aos="fade-up" data-aos-duration="1000" class="row">
                             <div class="col-sm-12 pl-0">
+                                <h5>Flash Group map</h5>
+                            </div>
+                        </div>
+                        <div id="fheatmapContent">
+                            <div id="fbig-d" data-aos="fade-up" data-aos-duration="1000" class="row big_d"> </div>
+                            <div id="fsmalldivs"> </div>
+                        </div>
+
+                        <div data-aos="fade-up" data-aos-duration="1000" class="row mt-5">
+                            <div class="col-sm-12 pl-0">
+                                Other Coins & Tokens
+                            </div>
+                            <div class="col-sm-12 p-0">
+                                <div class="coin-tokens mt-3">
+                                    <a id="fSHA256btn" onclick="fsmoothscroll('#fheatmapContent','SHA256')" class="green ct "
+                                        style="display: none;">
+                                        <span>SHA256 based</span>
+                                    </a>
+                                    
+                                    <a id="fEtHashbtn" onclick="fsmoothscroll('#fheatmapContent','EtHash')" class="green ct ">
+                                        <span>EtHash based</span>
+                                    </a>
+                                    <a id="fScryptbtn" onclick="fsmoothscroll('#fheatmapContent','Scrypt')" class="green ct ">
+                                        <span>Scrypt based</span>
+                                    </a>
+                                    <a id="fX11btn" onclick="fsmoothscroll('#fheatmapContent','X11')" class="pink ct">
+                                        <span>X11 based</span>
+                                    </a>
+                                    
+                                    <a id="fCryptobtn" onclick="fsmoothscroll('#fheatmapContent','Crypto')" class="green ct">
+                                        <span>Crypto Night based</span>
+                                    </a>
+                                    <a id="fLyra2btn" onclick="fsmoothscroll('#fheatmapContent','Lyra2')" class="pink ct">
+                                        <span>Lyra2 based</span>
+                                    </a>
+                                    <a id="fOtherbtn" onclick="fsmoothscroll('#fheatmapContent','Other')" class="pink ct">
+                                        <span>Other</span>
+                                    </a>
+                                    <a id="fPoSbtn" onclick="fsmoothscroll('#fheatmapContent','PoS')" class="green ct last">
+                                        <span>PoS</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-12  text-right mt-4">
+                                <div>
+                                    <a id="fshowall" class="green-text " onclick="allFlashMap(0,4)">
+                                        Show All
+                                    </a>
+                                    <a id="fnext" class="d-none green-text " onclick="allFlashMap(4,8)">
+                                        Next
+                                    </a>
+                                    <a id="fprev" class="d-none green-text " onclick="allFlashMap(0,4)">
+                                        Next
+                                    </a>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-10">
+                    <div class="container pt-5">
+                        <div data-aos="fade-up" data-aos-duration="1000" class="row">
+                            <div class="col-sm-12 pl-0">
                                 <h5>Heat map</h5>
                             </div>
                         </div>
@@ -82,29 +148,29 @@
                             </div>
                             <div class="col-sm-12 p-0">
                                 <div class="coin-tokens mt-3">
-                                    <a id="SHA256btn" onclick="smoothscroll('#sec-2','SHA256')" class="green ct "
+                                    <a id="SHA256btn" onclick="smoothscroll('#heatmapContent','SHA256')" class="green ct "
                                         style="display: none;">
                                         <span>SHA256</span>
                                     </a>
-                                    <a id="EtHashbtn" onclick="smoothscroll('#sec-2','EtHash')" class="green ct ">
+                                    <a id="EtHashbtn" onclick="smoothscroll('#heatmapContent','EtHash')" class="green ct ">
                                         <span>EtHash</span>
                                     </a>
-                                    <a id="RPCAbtn" onclick="smoothscroll('#sec-2','RPCA')" class="pink ct">
+                                    <a id="RPCAbtn" onclick="smoothscroll('#heatmapContent','RPCA')" class="pink ct">
                                         <span>RPCA</span>
                                     </a>
-                                    <a id="DBFTbtn" onclick="smoothscroll('#sec-2','DBFT')" class="pink ct">
+                                    <a id="DBFTbtn" onclick="smoothscroll('#heatmapContent','DBFT')" class="pink ct">
                                         <span>DBFT</span>
                                     </a>
-                                    <a id="DPoSbtn" onclick="smoothscroll('#sec-2','DPoS')" class="green ct">
+                                    <a id="DPoSbtn" onclick="smoothscroll('#heatmapContent','DPoS')" class="green ct">
                                         <span>DPoS</span>
                                     </a>
-                                    <a id="Scryptbtn" onclick="smoothscroll('#sec-2','Scrypt')" class="pink ct">
+                                    <a id="Scryptbtn" onclick="smoothscroll('#heatmapContent','Scrypt')" class="pink ct">
                                         <span>Scrypt</span>
                                     </a>
-                                    <a id="Otherbtn" onclick="smoothscroll('#sec-2','Other')" class="pink ct">
+                                    <a id="Otherbtn" onclick="smoothscroll('#heatmapContent','Other')" class="pink ct">
                                         <span>Other</span>
                                     </a>
-                                    <a id="PoSbtn" onclick="smoothscroll('#sec-2','PoS')" class="green ct last">
+                                    <a id="PoSbtn" onclick="smoothscroll('#heatmapContent','PoS')" class="green ct last">
                                         <span>PoS</span>
                                     </a>
                                 </div>
@@ -127,109 +193,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-10">
-                    <div class="container pt-5">
-                        <div data-aos="fade-up" data-aos-duration="1000" class="row">
-                            <div class="col-sm-12 pl-0">
-                                <h5>Flash Group map</h5>
-                            </div>
-                        </div>
-                        <div data-aos="fade-up" data-aos-duration="1000" class="row big_d">
-                            <div class="col-sm-12 pl-0">
-                                <div class="col-sm-2 p-0">
-                                    <div class="sha p-3 ">
-                                        <h4 class="text-center m-auto">SHA256</h4>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-sm-12 text-center my-5">
-                                <h1 class="btc">BTC</h1>
-                                <p>$13,624.67</p>
-                                <p class="pink-text">-0.67%</p>
-                                <h4 class="mt-5">Dominance: 65,45%</h4>
-                            </div>
-                            <div class="col-sm-12 p-0">
-                                <div id="big-bl" class="bottom-line line-pink">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div data-aos="fade-up" data-aos-duration="1000" class="row small-d  mt-4">
-                            <div class="col-sm-12 d-flex pt-3">
-                                <div class="col-sm-7">
-                                    <h4 class="ftext">BCH</h4>
-                                </div>
-                                <div class="col-sm-3">
-                                    <p>$268,63</p>
-                                </div>
-                                <div class="col-sm-2 green-text">
-                                    <p>+1,59%</p>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12 p-0">
-                                <div class="bottom-line line-green">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div data-aos="fade-up" data-aos-duration="1000" class="row small-d  mt-4">
-                            <div class="col-sm-12 d-flex pt-3">
-                                <div class="col-sm-7">
-                                    <h4 class="ftext">BSV</h4>
-                                </div>
-                                <div class="col-sm-3">
-                                    <p>$166,4</p>
-                                </div>
-                                <div class="col-sm-2 green-text">
-                                    <p>+0,87%</p>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12 p-0">
-                                <div class="bottom-line line-green">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div data-aos="fade-up" data-aos-duration="1000" class="row mt-5">
-                            <div class="col-sm-12 pl-0">
-                                Other Coins & Tokens
-                            </div>
-                            <div class="col-sm-12 p-0">
-                                <div class="coin-tokens mt-3">
-                                    <a class="green ct d-flex" href="#">
-                                        <span>EtHash based</span>
-                                    </a>
-                                    <a class="pink ct" href="#">
-                                        <span>Scrypt based</span>
-                                    </a>
-                                    <a class="pink ct" href="#">
-                                        <span>X11 based</span>
-                                    </a>
-                                    <a class="green ct" href="#">
-                                        <span>Crypto Note based</span>
-                                    </a>
-                                    <a class="pink ct" href="#">
-                                        <span>Other</span>
-                                    </a>
-                                    <a class="pink ct" href="#">
-                                        <span>Lyra2 based</span>
-                                    </a>
-                                    <a class="green ct last" href="#">
-                                        <span>PoS</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-sm-12  text-right mt-4">
-                                <a href="#">
-                                    <p class="green-text ">Show All</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 <!-- end content -->
 
             </div>
@@ -803,185 +767,165 @@
 
             </div>
         </div>
-    </section>
-    <!-- sec-5 -->
-    <section class="sec-5">
-        <div class="container">
-            <div data-aos="fade-up" data-aos-duration="1000" class="row justify-content-center pt-5 mb-5">
-                <div class="col-sm-10 mt-5">
+        
                     <!-- defi-news -->
-                    <div class="container">
+                    <div class="container mt-5">
                         <div data-aos="fade-up" data-aos-duration="1000" class="row">
-                            <div class="col-sm-12 d-flex p-0  newsheader">
-                                <div class="col-sm-11 p-0">
-                                    <h5>Defi Market NEWS</h5>
+                            <div class="col-sm-12 d-flex">
+                                <div class="coin-img mr-2">
+                                    
                                 </div>
-                                <div class="col-sm-1 p-0 text-right">
-                                    <img src="https://res.cloudinary.com/sapiangroup/image/upload/v1605182043/flash-group-news/FGN_logo_bis_flash-group-news.svg"
-                                        alt="FGN">
+                                <div class="topic px-3 my-auto d-flex ">
+                                    <div class="my-auto">
+                                        <img src="assets/img/news.svg" alt="">
+                                    </div>
+                                    <div class="topic-text my-auto pl-2">Defi NEWS</div>
                                 </div>
-
                             </div>
-                            <div class=" newsbody">
-                                <input id="defi-counter" type="text" class="d-none" value="0">
-
-                                <div id="defi0" class="col-sm-12  p-0 mt-4 ">
-                                    <h6 id="defi-title0"> </h6>
-                                    <p id="defi-desc0" class="text-justify mt-3"></p>
-                                </div>
-                                <div data-aos="fade-up" data-aos-duration="1000" class="row p-3 d-flex ">
-                                    <div id="defi-contentdiv" class="col-sm-5 p-0">
-                                        <h6 id="defi-title"> </h6>
-                                        <p id="defi-desc" class="text-justify mt-3"></p>
+            
+                        </div>
+                        <div data-aos="fade-up" data-aos-duration="1000" class="row mt-5">
+                            <div class="col-sm-6">
+                                <article class="col-sm-12 news-feed">
+                                    <div>
+                                        <input id="defi-counter" type="text" class="d-none" value="0">
+                                        <h4 id="defi-title"></h4>
+                                        <p id="defi-desc" class="mt-3 text-justify"></p>
                                     </div>
-
-                                    <div id="defi-imgdiv" class="col-sm-7 p-0 m-0 text-right ">
-                                        <div>
-                                            <img id="defi-img"
-                                                src="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_600/v1605204988/flash-group-news/picture-c_flash-group-news.png"
-                                                alt="">
-
-                                        </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-6 d-flex justify-content-center">
+                                <div class="slider-parent">
+                                    <div id="defi-slider" class="slider">
+            
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-sm-12 mt-3 ml-2">
+                                <button onclick="nextArticle('defi')">Next Article</button>
+                                <img class="arrow" src="assets/img/icon-navigation-arrow_forward_24px.svg" alt="">
                             </div>
                         </div>
                     </div>
                     <!-- general-blockchain-news -->
                     <div class="container mt-5">
-                        <div data-aos="fade-up" data-aos-duration="1000" class="row ">
-                            <div class="col-sm-12 d-flex p-0  mt-5 newsheader">
-                                <div class="col-sm-11 p-0">
-                                    <h5>General Blockchain NEWS</h5>
+                        <div data-aos="fade-up" data-aos-duration="1000" class="row">
+                            <div class="col-sm-12 d-flex">
+                                <div class="coin-img mr-2">
+                                    
                                 </div>
-                                <div class="col-sm-1 p-0 text-right">
-                                    <img src="https://res.cloudinary.com/sapiangroup/image/upload/v1605182043/flash-group-news/FGN_logo_bis_flash-group-news.svg"
-                                        alt="FGN">
+                                <div class="topic px-3 my-auto d-flex ">
+                                    <div class="my-auto">
+                                        <img src="assets/img/news.svg" alt="">
+                                    </div>
+                                    <div class="topic-text my-auto pl-2">Blockchain NEWS</div>
                                 </div>
-
                             </div>
-                            <div class="newsbody">
-                                <input id="blockchain-counter" type="text" class="d-none" value="0">
-
-                                <div id="blockchain-contentdiv" class="col-sm-12  p-0 mt-4 ">
-                                    <h6 id="blockchain-title"> </h6>
-                                    <p id="blockchain-desc" class="text-justify mt-3"></p>
+            
+                        </div>
+                        <div data-aos="fade-up" data-aos-duration="1000" class="row mt-5">
+                            <div class="col-sm-6">
+                                <article class="col-sm-12 news-feed">
+                                    <div>
+                                        <input id="blockchain-counter" type="text" class="d-none" value="0">
+                                        <h4 id="blockchain-title"></h4>
+                                        <p id="blockchain-desc" class="mt-3 text-justify"></p>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-6 d-flex justify-content-center">
+                                <div class="slider-parent">
+                                    <div id="blockchain-slider" class="slider">
+            
+                                    </div>
                                 </div>
-                                <div id="blockchain-imgdiv" class="col-sm-12 d-flex p-0 mt-5 ">
-
-
-                                    <img id="blockchain-img" style="width: 100%;"
-                                        src="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_600/v1605204988/flash-group-news/picture-c_flash-group-news.png"
-                                        alt="">
-
-
-
-                                </div>
+                            </div>
+                            <div class="col-sm-12 mt-3 ml-2">
+                                <button onclick="nextArticle('blockchain')">Next Article</button>
+                                <img class="arrow" src="assets/img/icon-navigation-arrow_forward_24px.svg" alt="">
                             </div>
                         </div>
                     </div>
                     <!-- hot-business-news -->
                     <div class="container mt-5">
                         <div data-aos="fade-up" data-aos-duration="1000" class="row">
-                            <div class="col-sm-12 d-flex p-0 mt-5 newsheader">
-                                <div class="col-sm-11 p-0">
-                                    <h5>Hot Business NEWS</h5>
+                            <div class="col-sm-12 d-flex">
+                                <div class="coin-img mr-2">
+                                    
                                 </div>
-                                <div class="col-sm-1 p-0 text-right">
-                                    <img src="https://res.cloudinary.com/sapiangroup/image/upload/v1605182043/flash-group-news/FGN_logo_bis_flash-group-news.svg"
-                                        alt="FGN">
+                                <div class="topic px-3 my-auto d-flex ">
+                                    <div class="my-auto">
+                                        <img src="assets/img/news.svg" alt="">
+                                    </div>
+                                    <div class="topic-text my-auto pl-2">Hot Business NEWS</div>
                                 </div>
-
                             </div>
-                            <div class=" newsbody mt-4">
-                                <input id="hotbusinessnews-counter" type="text" class="d-none" value="0">
-                                <div data-aos="fade-up" data-aos-duration="1000" class="row p-3 ">
-                                    <div id="hotbusinessnews-contentdiv" class="col-sm-5 p-0">
-                                        <h6 id="hotbusinessnews-title"></h6>
-
-                                        <p id="hotbusinessnews-desc" class="text-justify mt-3"></p>
+            
+                        </div>
+                        <div data-aos="fade-up" data-aos-duration="1000" class="row mt-5">
+                            <div class="col-sm-6">
+                                <article class="col-sm-12 news-feed">
+                                    <div>
+                                        <input id="hotbusinessnews-counter" type="text" class="d-none" value="0">
+                                        <h4 id="hotbusinessnews-title"></h4>
+                                        <p id="hotbusinessnews-desc" class="mt-3 text-justify"></p>
                                     </div>
-
-                                    <div id="hotbusinessnews-imgdiv" class="col-sm-7 p-0 m-0 text-right">
-                                        <div>
-                                            <img id="hotbusinessnews-img"
-                                                src="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_600/v1605204988/flash-group-news/picture-c_flash-group-news.png"
-                                                alt="">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="hotbusinessnews0" data-aos="fade-up" data-aos-duration="1000" class="row p-3 ">
-                                    <div id="hotbusinessnews0-contentdiv" class="col-sm-5 p-0">
-                                        <h6 id="hotbusinessnews-title0"> </h6>
-                                        <p id="hotbusinessnews-desc0" class="text-justify mt-3"></p>
-                                    </div>
-
-                                    <div id="hotbusinessnews0-imgdiv" class="col-sm-7 p-0 m-0 text-right">
-                                        <div>
-                                            <img id="hotbusinessnews-img0"
-                                                src="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_600/v1605204988/flash-group-news/picture-c_flash-group-news.png"
-                                                alt="">
-
-                                        </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-6 d-flex justify-content-center">
+                                <div class="slider-parent">
+                                    <div id="hotbusinessnews-slider" class="slider">
+            
                                     </div>
                                 </div>
-                                <div id="hotbusinessnews1" data-aos="fade-up" data-aos-duration="1000" class="row p-3 ">
-                                    <div id="hotbusinessnews1-contentdiv" class="col-sm-5 p-0">
-                                        <h6 id="hotbusinessnews-title1"></h6>
-                                        <p id="hotbusinessnews-desc1" class="text-justify mt-3"> </p>
-                                    </div>
-
-                                    <div id="hotbusinessnews1-imgdiv" class="col-sm-7 p-0 m-0 text-right">
-                                        <div>
-                                            <img id="hotbusinessnews-img1"
-                                                src="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_600/v1605204988/flash-group-news/picture-c_flash-group-news.png"
-                                                alt="">
-
-                                        </div>
-                                    </div>
-                                </div>
-
+                            </div>
+                            <div class="col-sm-12 mt-3 ml-2">
+                                <button onclick="nextArticle('hotbusinessnews')">Next Article</button>
+                                <img class="arrow" src="assets/img/icon-navigation-arrow_forward_24px.svg" alt="">
                             </div>
                         </div>
                     </div>
-                    <!-- exclusif-news -->
+                    <!-- exclusive-news -->
                     <div class="container mt-5">
                         <div data-aos="fade-up" data-aos-duration="1000" class="row">
-                            <div class="col-sm-12 d-flex p-0  mt-5 newsheader">
-                                <div class="col-sm-11 p-0">
-                                    <h5>Exclusif NEWS</h5>
+                            <div class="col-sm-12 d-flex">
+                                <div class="coin-img mr-2">
+                                    
                                 </div>
-                                <div class="col-sm-1 p-0 text-right">
-                                    <img src="https://res.cloudinary.com/sapiangroup/image/upload/v1605182043/flash-group-news/FGN_logo_bis_flash-group-news.svg"
-                                        alt="FGN">
-                                </div>
-
-                            </div>
-                            <div class="newsbody">
-                                <input id="news-counter" type="text" class="d-none" value="0">
-
-                                <div class="col-sm-12  p-0 mt-4 ">
-                                    <h6 id="news-title"> </h6>
-                                    <p id="news-desc" class="text-justify mt-3"></p>
-                                </div>
-                                <div id="news-imgdiv" class="col-sm-12 d-flex p-0 mt-5 ">
-                                    <div class="w-100">
-                                        <img id="news-img" style="width: 100%;"
-                                            src="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_600/v1605204988/flash-group-news/picture-c_flash-group-news.png"
-                                            alt="">
-
+                                <div class="topic px-3 my-auto d-flex ">
+                                    <div class="my-auto">
+                                        <img src="assets/img/news.svg" alt="">
                                     </div>
-
+                                    <div class="topic-text my-auto pl-2">Exclusive NEWS</div>
                                 </div>
+                            </div>
+            
+                        </div>
+                        <div data-aos="fade-up" data-aos-duration="1000" class="row mt-5">
+                            <div class="col-sm-6">
+                                <article class="col-sm-12 news-feed">
+                                    <div>
+                                        <input id="news-counter" type="text" class="d-none" value="0">
+                                        <h4 id="news-title"></h4>
+                                        <p id="news-desc" class="mt-3 text-justify"></p>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-6 d-flex justify-content-center">
+                                <div class="slider-parent">
+                                    <div id="news-slider" class="slider">
+            
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 mt-3 ml-2">
+                                <button onclick="nextArticle('news')">Next Article</button>
+                                <img class="arrow" src="assets/img/icon-navigation-arrow_forward_24px.svg" alt="">
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <footer>
+                
+    <footer class="mt-5">
         <div class="container">
             <div data-aos="fade-up" data-aos-duration="1000" class="row pt-5 text-center text-md-left">
 

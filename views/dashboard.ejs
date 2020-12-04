@@ -323,7 +323,9 @@
                         <div class="container">
                             <h2>Blockchain</h2>
                             <div class="row mt-5">
-
+                                <div class="col-sm-6">
+                                    <h1> Post count <span id="blockchaincount" style="font-size: 5rem"></span></h1>
+                                </div>
                                 <div class="col-sm-6">
                                     <h4>choose Blockchain news to show</h4>
                                     <select name="blockchain_news" id="blockchain_news">
@@ -350,7 +352,9 @@
                         <div class="container">
                             <h2>Defi</h2>
                             <div class="row mt-5">
-
+                                <div class="col-sm-6">
+                                    <h1> Post count <span id="deficount" style="font-size: 5rem"></span></h1>
+                                </div>
                                 <div class="col-sm-6">
                                     <h4>choose Defi news to show</h4>
                                     <select name="defi_news" id="defi_news">
@@ -377,7 +381,9 @@
                         <div class="container">
                             <h2>Business</h2>
                             <div class="row mt-5">
-
+                                <div class="col-sm-6">
+                                    <h1> Post count <span id="businesscount" style="font-size: 5rem"></span></h1>
+                                </div>
                                 <div class="col-sm-6">
                                     <h4>choose business news to show</h4>
                                     <select name="business_news" id="business_news">
@@ -404,7 +410,9 @@
                         <div class="container">
                             <h2>News</h2>
                             <div class="row mt-5">
-
+                                <div class="col-sm-6">
+                                    <h1> Post count <span id="newscount" style="font-size: 5rem"></span></h1>
+                                </div>
                                 <div class="col-sm-6">
                                     <h4>choose Exclusif news to show</h4>
                                     <select name="news_news" id="news_news">
@@ -684,10 +692,8 @@
                         btnDiv.appendChild(removebtn);
                         removebtn.setAttribute('onClick', 'removePost(' + post.id + ',"' + element + '_news")');
                         postcount++;
-                    }
-                    if (element === 'bitcoin' || element === 'ethereum' || element === 'litecoin') {
-                        document.getElementById('' + element + 'count').innerHTML = postcount;
-                    }
+                    } document.getElementById('' + element + 'count').innerHTML = postcount;
+                   
 
 
                 });

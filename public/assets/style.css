@@ -430,38 +430,6 @@ h5::after {
   background-color: rgba(142, 44, 249, 0.2);
 }
 
-.sec-5 .newsheader img {
-  width: 50%;
-}
-
-@media screen and (max-width: 576px) {
-  .sec-5 .newsheader img {
-    width: 25% !important;
-  }
-}
-
-.sec-5 .newsheader h5 {
-  font-weight: 300;
-}
-
-.sec-5 .newsheader h5::after {
-  background-color: #8e2cf9 !important;
-}
-
-.sec-5 .newsbody h6 {
-  font-weight: bolder;
-}
-
-.sec-5 .newsbody img {
-  width: 75%;
-}
-
-@media screen and (max-width: 576px) {
-  .sec-5 .newsbody img {
-    width: 100% !important;
-  }
-}
-
 footer {
   background-color: #080809;
   color: white;

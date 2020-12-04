@@ -73,20 +73,8 @@ app.post('/addPost', (req, res) => {
     const id = req.body.id
     const category = req.body.category;
     console.log('id is :' + req.body.id);
-    let canaddnum = 0;
-
-
-    if (category == 'blockchain_news' || category == 'news_news') {
-        database.remove({
-            category: category
-        }, {
-            multi: true
-        }, function (err, numRemoved) {});
-    } else if (category == 'defi_news') {
-        canaddnum = 2;
-    } else if (category == 'business_news') {
-        canaddnum = 3;
-    }
+    
+   
 
 
     database.find({
@@ -102,35 +90,6 @@ app.post('/addPost', (req, res) => {
             if (err) {
                 res.status(500).send();
             }
-            if (canaddnum == 2) {
-                if (docsy.length >= 2) {
-                    console.log('post limit reached in the database');
-                    res.status(305).send();
-                } else {
-                    if (docs.length == 0) {
-                        database.insert(req.body);
-                        console.log('post added to the database');
-                        res.status(200).send();
-                    } else {
-                        console.log('post already exists in the database');
-                        res.status(304).send();
-                    }
-                }
-            } else if (canaddnum == 3) {
-                if (docsy.length >= 3) {
-                    console.log('post limit reached in the database');
-                    res.status(305).send();
-                } else {
-                    if (docs.length == 0) {
-                        database.insert(req.body);
-                        console.log('post added to the database');
-                        res.status(200).send();
-                    } else {
-                        console.log('post already exists in the database');
-                        res.status(304).send();
-                    }
-                }
-            } else {
                 if (docs.length == 0) {
                     database.insert(req.body);
                     console.log('post added to the database');
@@ -139,7 +98,7 @@ app.post('/addPost', (req, res) => {
                     console.log('post already exists in the database');
                     res.status(304).send();
                 }
-            }
+           
         });
 
     });
