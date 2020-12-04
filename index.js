@@ -83,7 +83,7 @@ app.post('/addPost', (req, res) => {
         database.find({
             category: category
         }, (err, docsy) => {
-            if (err) {
+            if (err) {~
                 res.status(500).send();
             }
                 if (docs.length == 0) {
