@@ -1151,12 +1151,12 @@ function nextArticle(topic) {
           slide.className = "slide";
           slide.id = si;
           let limg;
-          if(feed[si].limg==undefined){
-            limg="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png";
-          }else{
-            limg=feed[si].limg ;
-          }
-          slide.style.backgroundImage = "url('" +limg + "')";
+        if(feed[si].limg==undefined){
+          limg="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png";
+        }else{
+          limg=feed[si].limg ;
+        }
+        slide.style.backgroundImage = "url('" +limg + "')";
           document.getElementById("defi-slider").appendChild(slide);
           si++;
         }
