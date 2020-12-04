@@ -73,10 +73,6 @@ app.post('/addPost', (req, res) => {
     const id = req.body.id
     const category = req.body.category;
     console.log('id is :' + req.body.id);
-    
-   
-
-
     database.find({
         id: id,
         category: category

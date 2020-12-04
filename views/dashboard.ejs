@@ -571,17 +571,20 @@
             let imageSrctm;
             setData(imgURL + JSON.parse(post).featured_media).then((val) => {
                 if (val.media_type == "image") {
-                    let src = val.media_details.sizes.large;
-                    if (src === undefined) {
-                        src = val.media_details.sizes.medium.source_url;
-                    } else {
+                    let src ;
+                    if ( val.media_details.sizes.large != undefined) {
                         src = val.media_details.sizes.large.source_url;
-                    }
-                    if (src === undefined) {
+                       
+                    } else if(val.media_details.sizes.medium != undefined){
+                        src = val.media_details.sizes.medium.source_url;
+                        
+                    }else if (val.media_details.sizes.thumbnail != undefined) {
                         src = val.media_details.sizes.thumbnail.source_url;
+                       
                     }
                     imageSrc = src;
                     imageSrctm = val.media_details.sizes.thumbnail.source_url;
+                   
                 }
             });
             setTimeout(function () {

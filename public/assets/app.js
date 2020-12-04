@@ -200,7 +200,7 @@ setData(coinsURL).then((val) => {
   
   setTimeout(function(){
     nextFlashMap(currentFMcointype);
-  },1000);
+  },2000);
  
 
   document.getElementById("SHA256btn").style.display = "none";
@@ -267,7 +267,7 @@ function coinbtncoloring() {
 
     if (feed[0].day == 0) {
       btn.style.backgroundColor = "#fff";
-      btn.style.color = "#000";
+      btn.style.color = "#000 !important";
       btn.className = "ct";
     } else if (feed[0].day > 0) {
       btn.className = "green ct";
@@ -957,7 +957,13 @@ function nextArticle(topic) {
           let slide = document.createElement("div");
           slide.className = "slide";
           slide.id = si;
-          slide.style.backgroundImage = "url('" + feed[si].limg + "')";
+          let limg;
+        if(feed[si].limg==undefined){
+          limg="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png";
+        }else{
+          limg=feed[si].limg ;
+        }
+        slide.style.backgroundImage = "url('" +limg + "')";
           document.getElementById("bitcoin-slider").appendChild(slide);
           si++;
         }
@@ -994,7 +1000,13 @@ function nextArticle(topic) {
         }
         console.log("counter="+counter+" si="+si);
         slide.id = si;
-        slide.style.backgroundImage = "url('" + feed[si].limg + "')";
+        let limg;
+        if(feed[si].limg==undefined){
+          limg="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png";
+        }else{
+          limg=feed[si].limg ;
+        }
+        slide.style.backgroundImage = "url('" +limg + "')";
         div.appendChild(slide);
       }
       break;
@@ -1009,7 +1021,13 @@ function nextArticle(topic) {
           let slide = document.createElement("div");
           slide.className = "slide";
           slide.id = si;
-          slide.style.backgroundImage = "url('" + feed[si].limg + "')";
+          let limg;
+        if(feed[si].limg==undefined){
+          limg="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png";
+        }else{
+          limg=feed[si].limg ;
+        }
+        slide.style.backgroundImage = "url('" +limg + "')";
           document.getElementById("ethereum-slider").appendChild(slide);
           si++;
         }
@@ -1031,7 +1049,7 @@ function nextArticle(topic) {
             si=0;
           }
         }
-        if (feed.length > 3) {
+        if (feed.length >=3) {
           si++;
 
           let feedplus = feed.length;
@@ -1046,7 +1064,13 @@ function nextArticle(topic) {
         }
 
         slide.id = si;
-        slide.style.backgroundImage = "url('" + feed[si].limg + "')";
+        let limg;
+        if(feed[si].limg==undefined){
+          limg="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png";
+        }else{
+          limg=feed[si].limg ;
+        }
+        slide.style.backgroundImage = "url('" +limg + "')";
         div.appendChild(slide);
       }
       break;
@@ -1062,7 +1086,13 @@ function nextArticle(topic) {
           let slide = document.createElement("div");
           slide.className = "slide";
           slide.id = si;
-          slide.style.backgroundImage = "url('" + feed[si].limg + "')";
+          let limg;
+        if(feed[si].limg==undefined){
+          limg="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png";
+        }else{
+          limg=feed[si].limg ;
+        }
+        slide.style.backgroundImage = "url('" +limg + "')";
           document.getElementById("litecoin-slider").appendChild(slide);
           si++;
         }
@@ -1084,7 +1114,7 @@ function nextArticle(topic) {
             si=0;
           }
         }
-        if (feed.length > 3) {
+        if (feed.length >=3) {
           si++;
 
           let feedplus = feed.length;
@@ -1099,7 +1129,13 @@ function nextArticle(topic) {
         }
 
         slide.id = si;
-        slide.style.backgroundImage = "url('" + feed[si].limg + "')";
+        let limg;
+        if(feed[si].limg==undefined){
+          limg="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png";
+        }else{
+          limg=feed[si].limg ;
+        }
+        slide.style.backgroundImage = "url('" +limg + "')";
         div.appendChild(slide);
       }
       break;
@@ -1114,7 +1150,13 @@ function nextArticle(topic) {
           let slide = document.createElement("div");
           slide.className = "slide";
           slide.id = si;
-          slide.style.backgroundImage = "url('" + feed[si].limg + "')";
+          let limg;
+          if(feed[si].limg==undefined){
+            limg="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png";
+          }else{
+            limg=feed[si].limg ;
+          }
+          slide.style.backgroundImage = "url('" +limg + "')";
           document.getElementById("defi-slider").appendChild(slide);
           si++;
         }
@@ -1136,7 +1178,7 @@ function nextArticle(topic) {
             si=0;
           }
         }
-        if (feed.length > 3) {
+        if (feed.length >=3) {
           si++;
 
           let feedplus = feed.length;
@@ -1151,7 +1193,13 @@ function nextArticle(topic) {
         }
 
         slide.id = si;
-        slide.style.backgroundImage = "url('" + feed[si].limg + "')";
+        let limg;
+        if(feed[si].limg==undefined){
+          limg="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png";
+        }else{
+          limg=feed[si].limg ;
+        }
+        slide.style.backgroundImage = "url('" +limg + "')";
         div.appendChild(slide);
       }
       break;
@@ -1166,7 +1214,13 @@ function nextArticle(topic) {
           let slide = document.createElement("div");
           slide.className = "slide";
           slide.id = si;
-          slide.style.backgroundImage = "url('" + feed[si].limg + "')";
+          let limg;
+        if(feed[si].limg==undefined){
+          limg="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png";
+        }else{
+          limg=feed[si].limg ;
+        }
+        slide.style.backgroundImage = "url('" +limg + "')";
           document.getElementById("blockchain-slider").appendChild(slide);
           si++;
         }
@@ -1188,7 +1242,7 @@ function nextArticle(topic) {
             si=0;
           }
         }
-        if (feed.length > 3) {
+        if (feed.length >=3) {
           si++;
 
           let feedplus = feed.length;
@@ -1203,7 +1257,13 @@ function nextArticle(topic) {
         }
 
         slide.id = si;
-        slide.style.backgroundImage = "url('" + feed[si].limg + "')";
+        let limg;
+        if(feed[si].limg==undefined){
+          limg="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png";
+        }else{
+          limg=feed[si].limg ;
+        }
+        slide.style.backgroundImage = "url('" +limg + "')";
         div.appendChild(slide);
       }
       break;
@@ -1218,7 +1278,13 @@ function nextArticle(topic) {
           let slide = document.createElement("div");
           slide.className = "slide";
           slide.id = si;
-          slide.style.backgroundImage = "url('" + feed[si].limg + "')";
+          let limg;
+        if(feed[si].limg==undefined){
+          limg="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png";
+        }else{
+          limg=feed[si].limg ;
+        }
+        slide.style.backgroundImage = "url('" +limg + "')";
           document.getElementById("hotbusinessnews-slider").appendChild(slide);
           si++;
         }
@@ -1240,7 +1306,7 @@ function nextArticle(topic) {
             si=0;
           }
         }
-        if (feed.length > 3) {
+        if (feed.length >=3) {
           si++;
 
           let feedplus = feed.length;
@@ -1255,7 +1321,13 @@ function nextArticle(topic) {
         }
 
         slide.id = si;
-        slide.style.backgroundImage = "url('" + feed[si].limg + "')";
+        let limg;
+        if(feed[si].limg==undefined){
+          limg="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png";
+        }else{
+          limg=feed[si].limg ;
+        }
+        slide.style.backgroundImage = "url('" +limg + "')";
         div.appendChild(slide);
       }
 
@@ -1271,7 +1343,13 @@ function nextArticle(topic) {
           let slide = document.createElement("div");
           slide.className = "slide";
           slide.id = si;
-          slide.style.backgroundImage = "url('" + feed[si].limg + "')";
+          let limg;
+        if(feed[si].limg==undefined){
+          limg="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png";
+        }else{
+          limg=feed[si].limg ;
+        }
+        slide.style.backgroundImage = "url('" +limg + "')";
           document.getElementById("news-slider").appendChild(slide);
           si++;
         }
@@ -1293,7 +1371,7 @@ function nextArticle(topic) {
             si=0;
           }
         }
-        if (feed.length > 3) {
+        if (feed.length >=3) {
           si++;
 
           let feedplus = feed.length;
@@ -1308,7 +1386,13 @@ function nextArticle(topic) {
         }
 
         slide.id = si;
-        slide.style.backgroundImage = "url('" + feed[si].limg + "')";
+        let limg;
+        if(feed[si].limg==undefined){
+          limg="https://res.cloudinary.com/sapiangroup/image/upload/f_auto,q_auto,w_1200/v1605204988/flash-group-news/picture-c_flash-group-news.png";
+        }else{
+          limg=feed[si].limg ;
+        }
+        slide.style.backgroundImage = "url('" +limg + "')";
         div.appendChild(slide);
       }
       break;
